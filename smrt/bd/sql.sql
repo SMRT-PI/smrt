@@ -56,3 +56,12 @@ drop table materia;
 select * from materia;
 select titulo, autor from materia;
 insert into materia (titulo, descricao, conteudo, autor, capa) values  ('Os Rios', 'Algo sobre os rios','Os rios são molhados!', 1, '../img/m1.jpg');
+
+create table publicacao(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    titulo varchar(100),
+    descricao varchar(100),
+    conteudo varchar(255),
+-------- localização -----------
+    capa blob not null
+);
