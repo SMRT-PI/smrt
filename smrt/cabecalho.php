@@ -87,23 +87,17 @@
                                 <!-- LINK5 -->
                             <?php } ?>
                         </ul>
-                           <!-- LINK2 -->
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <strong>Área Informativa</strong>
-                                    </a>
-                                    <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/informacao/area_info.php">Matérias</a>
-                                        <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/informacao/form_inserir.php">Criar Matéria</a>
-                                    </div>
-                                </li>
-                                <!-- /LINK2 -->
-                        <!-- LINK5 -->
-                        <a class="navbar-brand text-muted" href="http://localhost/smrt/usuario/logout.php">
-                            <strong>SAIR</strong>
-                        </a>
-                        <!-- /LINK5 -->
-
+                        <li class="navbar-brand navbar-nav ml-auto mr-5 dropdown">
+                            <a class="nav-link text-light dropdown-toggle mr-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <strong><?= $_SESSION['nome'] ?></strong>
+                            </a>
+                            <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/usuario/perfil.php">Perfil</a>
+                                <a class="navbar-brand text-muted dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/usuario/logout.php">
+                                    <strong>SAIR</strong>
+                                </a>
+                            </div>
+                        </li>
                     <?php } else { ?>   
                         <!-- LINK7 -->
                         <a class="navbar-brand ml-auto" href="http://localhost/smrt/usuario/entrar.php">                             

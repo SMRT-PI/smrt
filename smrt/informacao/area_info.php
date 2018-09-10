@@ -27,8 +27,4 @@ $resultado = mysqli_query($conexao, $sql);
     </div>
 </div>
 <?php
-if (estaLogado()) {
-    if (adm()) {
-        include_once './form_inserir.php';
-    }
-} include_once '../rodape.php';
+include_once '../rodape.php';
