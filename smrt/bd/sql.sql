@@ -10,7 +10,8 @@ create table usuario(
   senha varchar(100),
   email varchar(100) unique,
   adm boolean default FALSE,
-  bloqueado boolean default FALSE
+  bloqueado boolean default FALSE,
+  denuncias int
   );
 drop table usuario;
 select * from usuario;
@@ -55,7 +56,6 @@ create table materia(
 drop table materia;
 select * from materia;
 select titulo, autor from materia;
-insert into materia (titulo, descricao, conteudo, autor, capa) values  ('Os Rios', 'Algo sobre os rios','Os rios são molhados!', 1, '../img/m1.jpg');
 
 create table publicacao(
     id int PRIMARY KEY AUTO_INCREMENT,

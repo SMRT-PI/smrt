@@ -4,104 +4,34 @@ include '../bd/conectar.php';
 include_once '../cabecalho.php';
 
 if (adm()) {
-    $sql_pessoa = "select * from usuario where email != '$_SESSION[email]'";
+    $sql_pessoa = "select * from usuario where email != '$_SESSION[email]' order by nome";
     $resultado = mysqli_query($conexao, $sql_pessoa);
+    $n = 1;
     ?>
-
-
-
-    <div class="d-flex my-3">
-        <form class="container text-center" action="excluir_lote.php" method="post">
-            <table class="table table-striped table-responsive-sm table-responsive-md table-hover table-default">
-                <thead>
-                    <tr>
-                        <th>
-                            <button class="btn btn-danger btn-sm w-100" data-toggle="modal" data-target="#confirm" type="button" >Excluir</button>
-                            <div class="modal fade" id="confirm" role="dialog">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <p class="font-weight-bold"> Deseja realmente excluir ?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <input class="btn btn-danger float-right" type="submit" value="Excluir">
-                                            <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </th>
-                        <th>Nome</th>
-                        <th>Sobrenome</th>
-                        <th>Email</th>
-                        <th>Bloqueado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($linha = mysqli_fetch_array($resultado)) { ?>
-                        <tr>
-                            <td>
-                                <div class="checkbox justify-content-center text-center align-middle">
-                                    <label>
-                                        <input type="checkbox" name="id[]" value="<?= $linha['id'] ?>" >
-                                        <span class="cr align-middle text-center "><i class="cr-icon fa fa-check"></i></span>
-                                    </label>
-                                </div>
-                            </td>
-                            <td><?= $linha['nome'] ?></td>
-                            <td><?= $linha['sobrenome'] ?></td>
-                            <td><?= $linha['email'] ?></td>
-                            <td class="w-25">
-
-                                <button type="button" id="bloq" onclick="bloquear(<?= $linha['id'] ?>)"
-                                        class="<?php if ($linha['bloqueado'] == FALSE) { ?>
-                                            btn-secondary
-                                        <?php } else { ?>
-                                            btn-danger <?php } ?> btn btn-sm text-center">
-
-                                    <?php if ($linha['bloqueado'] == FALSE) { ?>
-                                        BLOQUEAR<?php } else { ?>
-                                        DESBLOQUEAR<?php } ?>
-
-                                </button>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-                <thead>
-                    <tr>
-                        <th>
-                            <button class="btn btn-danger btn-sm w-100" data-toggle="modal" data-target="#confirm" type="button" >Excluir</button>
-                            <div class="modal fade" id="confirm" role="dialog">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <p class="font-weight-bold"> Deseja realmente excluir ?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <input class="btn btn-danger float-right" type="submit" value="Excluir">
-                                            <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </th>
-                        <th>Nome</th>
-                        <th>Sobrenome</th>
-                        <th>Email</th>
-                        <th>Bloqueado</th>
-                    </tr>
-                </thead>
-            </table>
-            <?php
-        } else {
-            header('Location: ../index.php');
-        }
-        ?>
-    </form>
-</div>
+    <div class="d-flex my-3 justify-content-center">
+        <div id="accordion" class="container">  
+            <?php while ($linha = mysqli_fetch_array($resultado)) {
+                ?>
+                <div class="card bg-light">
+                    <div class="card-header py-3">
+                        <a class="card-link float-right" data-toggle="collapse" href="#collapse<?= $n ?>">
+                            <strong class="">...</strong>
+                        </a>
+                    </div>
+                    <div id="collapse<?= $n ?>" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            <?= $linha["denuncias"] ?>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                $n++;
+            }
+            ?>
+        </div>
+    </div>
+<?php }
+?>
 
 <script>
     function bloquear(id) {
