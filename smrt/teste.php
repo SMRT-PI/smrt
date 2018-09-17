@@ -1,7 +1,7 @@
 <?php
 
 /* 
- * Teste do Prof. Thiago.
+ * Teste do Prof. Thiago e da Lara.
  */
 
 ?>
