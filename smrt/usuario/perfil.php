@@ -1,5 +1,4 @@
 <?php
-
 include '../usuario/autenticacao.php';
 include '../bd/conectar.php';
 include '../cabecalho.php';
@@ -10,10 +9,56 @@ if (estaLogado()) {
     $linha = mysqli_fetch_array($resultado)
 ?>
 
-<h1><?= $linha['nome'] ?></h1>
-<h1><?= $linha['sobrenome'] ?></h1>
-<h1><?= $linha['email'] ?></h1>
-<h1><?= $linha['adm'] ?></h1>
+<!--LINKS-->
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<!--LINKS-->
+
+<div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+	<div class="row panel">
+		<div class="col-md-4 bg_blur ">
+		</div>
+        <div class="col-md-8  col-xs-12">
+            <img src="http://portalcreci.org.br/resource/frontend/slices/img_perfil_corretor.jpg" class="img-thumbnail picture hidden-xs" />
+            <img src="http://portalcreci.org.br/resource/frontend/slices/img_perfil_corretor.jpg" class="img-thumbnail visible-xs picture_mob" />
+           <div class="header">
+                
+<!--                DADOS SOBRE O USUARIO-->
+
+                <h1><?= $linha['nome'] ?></h1>
+                <h4><?= $linha['email'] ?></h4>
+                <span>Informações sobre o usuário cadastrado</span>
+                
+<!--                DADOS SOBRE O USUARIO-->
+           
+           </div>
+        </div>
+    </div>   
+    
+	<div class="row nav">    
+        <div class="col-md-4"></div>
+        <div class="col-md-8 col-xs-12" style="margin: 0px;padding: 0px;">
+            
+            
+            
+            <div class="col-md-6 col-xs-6 well"><i class="fa fa-thumbs-o-up fa-lg"></i> Publicações </div>
+            <div class="col-md-6 col-xs-6 well"><i class="fa fa-weixin fa-lg"></i> Alertas </div>
+           
+            
+        </div>
+    </div>
+</div>
+
+<!--
+<form method="get" action="http://localhost/smrt/publicacao/area_publicacao.php">
+    <button type="submit">Publicações</button>
+</form>
+<form method="get" action="http://localhost/smrt/publicacao/alertas.php">
+    <button type="submit">Alertas</button>
+</form>-->
 
 <?php
 
