@@ -64,27 +64,8 @@ include '../cabecalho.php';
             form.style.display = "none";
         }
     }
-//    $(function () {
-//
-//        $('logar').on('submit', function (e) {
-//
-//            e.preventDefault();
-//
-//            $.ajax({
-//                type: 'post',
-//                url: 'logar.php',
-//                data: $('logar').serialize(),
-//                success: function () {
-//                    alert('form was submitted');
-//                }
-//            });
-//
-//        });
-//
-//    });
 
 </script>
-
 
 <?php
 include '../rodape.php';

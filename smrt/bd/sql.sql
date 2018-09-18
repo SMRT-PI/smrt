@@ -3,20 +3,65 @@ CREATE DATABASE smrt DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 use smrt;
 drop database smrt;
 
+<!-- USUÁRIO -->
 create table usuario(
-  id int PRIMARY KEY AUTO_INCREMENT,
-  nome varchar(100),
-  sobrenome varchar(100),
-  senha varchar(100),
-  email varchar(100) unique,
-  adm boolean default FALSE,
-  bloqueado boolean default FALSE,
-  denuncias int
+    id int PRIMARY KEY AUTO_INCREMENT,
+    nome varchar(100),
+    sobrenome varchar(100),
+    senha varchar(100),
+    email varchar(100) unique
   );
+<!-- /USUÁRIO -->
+
+<!-- ADMNISTRADOR -->
+create table administrador(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    adm int REFERENCES usuario(id) 
+);
+<!-- /ADMNISTRADOR -->
+
+<!-- DENUNCIA -->
+create table denuncia(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    denunciador int REFERENCES usuario(id),
+    denunciado int REFERENCES usuario(id),
+    data date
+);
+<!-- /DENUNCIA -->
+
+<!-- BLOQUEIO -->
+create table bloqueio(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    bloqueador int REFERENCES adm(id),
+    bloqueado int REFERENCES usuario(id),
+    data date
+);
+<!-- /BLOQUEIO -->
+
 drop table usuario;
+drop table administrador;
+drop table denuncia;
+drop table bloqueio;
+
 select * from usuario;
-select nome,adm,bloqueado from usuario;
-insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admin', 'admin@admin','123', TRUE);
+select administrador.id as adm, usuario.id as usuario,usuario.nome from administrador inner join usuario on usuario.id = administrador.adm;
+select denuncia.denunciador, denuncia.denunciado, usuario.nome from ;
+select * from bloqueio;
+
+insert into usuario (nome, sobrenome ,email, senha) values  ('admin', 'admin', 'admin@admin','123');
+insert into usuario (nome, sobrenome ,email, senha) values  ('admin', 'admin', 'admin1@admin','123');
+insert into usuario (nome, sobrenome ,email, senha) values  ('admin', 'admin', 'admin2@admin','123');
+insert into usuario (nome, sobrenome ,email, senha) values  ('admin', 'admin', 'admin3@admin','123');
+insert into administrador (adm) values (1);
+insert into administrador (adm) values (2);
+insert into administrador (adm) values (3);
+insert into administrador (adm) values (4);
+
+insert into denuncia(denunciador, denunciado) values (1,2);
+insert into denuncia(denunciador, denunciado) values (1,3);
+insert into denuncia(denunciador, denunciado) values (1,4);
+
+
 insert into usuario (nome, sobrenome ,email, senha) values  ('a', 'a', 'a@a','123');
 insert into usuario (nome, sobrenome ,email, senha) values  ('b', 'b', 'b@b','123');
 insert into usuario (nome, sobrenome ,email, senha) values  ('c', 'c', 'c@c','123');
@@ -44,7 +89,7 @@ insert into usuario (nome, sobrenome ,email, senha) values  ('x', 'x', 'x@x','12
 insert into usuario (nome, sobrenome ,email, senha) values  ('y', 'y', 'y@y','123');
 insert into usuario (nome, sobrenome ,email, senha) values  ('z', 'z', 'z@z','123');
 
-
+<!-- MATÉRIA -->
 create table materia(
     id int PRIMARY KEY AUTO_INCREMENT,
     titulo varchar(100),
