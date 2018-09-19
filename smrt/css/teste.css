@@ -1,0 +1,93 @@
+.erros, .ok{
+    width: 390px;
+    padding: 5px;
+    background: Red;
+    margin: 20px auto 0 auto;
+    border: 1px solid Brown;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+}
+.ok {
+    background: #32CD32;
+    border-color: green;
+    color: white;
+}
+
+#formulario{
+    width: 500px;
+    margin: 50px auto;
+    text-align: center;
+    position: relative;
+    
+}
+
+#formulario h2, #formulario h3{
+    font: 22px "Trebuchet MS", tahoma, arial;
+    color: #090;
+    width: 100%;
+    float: left;
+    text-align: left;
+    margin-bottom: 4%;
+}
+#formulario h3{
+    color: #333; 
+    font-size: 17px;
+}
+
+#formulario fieldset:not(:first-of-type){
+    display: none;
+    
+}
+
+#formulario fieldset{
+    position: absolute; 
+}
+#formulario #progress{
+    margin-bottom: 30px;
+    overflow: hidden;
+    
+    counter-reset: step;
+}
+#formulario #progress li{
+    list-style-type: none;
+    color: gray;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 11px;
+    float: left;
+    width: 33.33%;
+    position: relative;
+}
+#formulario #progress li:before{
+    content: counter(step);
+    counter-increment: step;
+    width: 20px;
+    display: block;
+    line-height: 20px;
+    background: lightgray;
+    color: gray;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    
+    margin: 0 auto 10px auto;
+}
+#formulario #progress li:after{
+    content: '';
+    width: 94%;
+    background: lightgray;
+    height: 2px;
+    position: absolute;
+    top: 9px;
+    left: -48%;
+    
+}
+
+#formulario #progress li:first-child:after{
+    content: none;
+}
+#formulario #progress li.ativo:before, #formulario #progress li.ativo:after{
+    background-color: lightgrey;
+    color: white;
+}
