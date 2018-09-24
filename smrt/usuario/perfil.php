@@ -2,6 +2,7 @@
 include '../usuario/autenticacao.php';
 include '../bd/conectar.php';
 include '../cabecalho.php';
+include '../publicacao.php';
 
 if (estaLogado()) {
     $sql = "select * from usuario where email = '$_SESSION[email]'";
@@ -43,14 +44,17 @@ if (estaLogado()) {
         <div class="col-md-8 col-xs-12" style="margin: 0px;padding: 0px;">
             
             
-            
-            <div class="col-md-6 col-xs-6 well"><i class="fa fa-thumbs-o-up fa-lg"></i> Publicações </div>
-            <div class="col-md-6 col-xs-6 well"><i class="fa fa-weixin fa-lg"></i> Alertas </div>
+            <div class="col-md-6 col-xs-6 well"><a href="../publicacao/area_publicacao.php" >Publicações</a><i class="fa fa-thumbs-o-up fa-lg"></i>  </div>
+            <div class="col-md-6 col-xs-6 well"><a href="../usuario/alerta.php" >Alertas</a><i class="fa fa-weixin fa-lg"></i>  </div>
            
             
         </div>
     </div>
 </div>
+
+<?php
+   require("scripts/funcao-altera-pagina.php");
+?>
 
 <!--
 <form method="get" action="http://localhost/smrt/publicacao/area_publicacao.php">
