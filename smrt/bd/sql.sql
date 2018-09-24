@@ -44,9 +44,11 @@ drop table denuncia;
 drop table bloqueio;
 
 select * from usuario;
-select administrador.id as adm, usuario.id as usuario,usuario.nome from administrador inner join usuario on usuario.id = administrador.adm;
+select administrador.id as adm, usuario.id as usuario from administrador inner join usuario on usuario.id = administrador.adm;
 select denuncia.denunciador, denuncia.denunciado, usuario.nome from ;
 select * from bloqueio;
+
+select administrador.id as adm, usuario.id as usuario from administrador inner join usuario on administrador.adm = 1;
 
 insert into usuario (nome, sobrenome ,email, senha) values  ('admin', 'admin', 'admin@admin','123');
 insert into usuario (nome, sobrenome ,email, senha) values  ('admin', 'admin', 'admin1@admin','123');

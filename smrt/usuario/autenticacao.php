@@ -2,11 +2,10 @@
 
 session_start();
 
-function logar($nome, $sobrenome, $email, $adm) {
+function logar($nome, $sobrenome, $email) {
     $_SESSION['nome'] = $nome;
     $_SESSION['sobrenome'] = $sobrenome;
     $_SESSION['email'] = $email;
-    $_SESSION['adm'] = $adm;
     iniciarTempoSessao();
 }
 

@@ -1,48 +1,4 @@
-.erros, .ok{
-    width: 390px;
-    padding: 5px;
-    background: Red;
-    margin: 20px auto 0 auto;
-    border: 1px solid Brown;
-    border-radius: 4px;
-    color: white;
-    text-align: center;
-}
-.ok {
-    background: #32CD32;
-    border-color: green;
-    color: white;
-}
 
-#formulario{
-    width: 500px;
-    margin: 50px auto;
-    text-align: center;
-    position: relative;
-    
-}
-
-#formulario h2, #formulario h3{
-    font: 22px "Trebuchet MS", tahoma, arial;
-    color: #090;
-    width: 100%;
-    float: left;
-    text-align: left;
-    margin-bottom: 4%;
-}
-#formulario h3{
-    color: #333; 
-    font-size: 17px;
-}
-
-#formulario fieldset:not(:first-of-type){
-    display: none;
-    
-}
-
-#formulario fieldset{
-    position: absolute; 
-}
 #formulario #progress{
     margin-bottom: 30px;
     overflow: hidden;

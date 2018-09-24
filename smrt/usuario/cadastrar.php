@@ -1,22 +1,34 @@
+
 <?php
 
-ini_set("display_errors", true);
+sleep(1);
+include_once '../bd/conectar.php';
+if (isset($_POST['cadastrar']) && $_POST['cadastrar'] == 'sim'):
+    $novos_campos = array();
+    $campos_post = $_POST['campos'];
 
-$nome = $_POST['nome'];
-$sobrenome = $_POST['sobrenome'];
-$email = $_POST['email'];
-$senha = $_POST['senha'];
+    $respostas = array();
+    foreach ($campos_post as $indice => $valor) {
+        $novos_campos[$valor['name']] = $valor['value'];
+    }
 
-include '../bd/conectar.php';
+    if (!strstr($novos_campos['email'], '@')) {
+        $respostas['erro'] = 'sim';
+        $respostas['getErro'] = 'E-mail Inválido, Preencha com E-mail Válido';
+    } elseif ($novos_campos['senha'] != $novos_campos['csenha']) {
+        $respostas['erro'] = 'sim';
+        $respostas['getErro'] = 'As Senhas não Correspondem!';
+    } elseif (strlen($novos_campos['nome']) < 2) {
+        $respostas['erro'] = 'sim';
+        $respostas['getErro'] = 'Preencha com um Nome Válido';
+    } else {
+        $respostas['erro'] = 'nao';
+        $respostas['msg'] = 'Cadastrado com Sucesso!';
+    }
 
-$sql = "insert into usuario (nome,sobrenome,senha,email) values ('$nome','$sobrenome','$senha','$email')";
 
-if (@mysqli_query($conexao, $sql)) {
-    header('Location: index.php');
-} else {
-    echo 'Usuário ou e-mail já cadastrados <br> <a href=entrar.php>OK</a>';
-}
+    echo json_encode($respostas);
+
+
+endif;
 ?>
-
-
-
