@@ -2,10 +2,11 @@
 
 session_start();
 
-function logar($nome, $sobrenome, $email) {
+function logar($nome, $sobrenome, $email, $adm) {
     $_SESSION['nome'] = $nome;
     $_SESSION['sobrenome'] = $sobrenome;
     $_SESSION['email'] = $email;
+     $_SESSION['adm'] = $adm;
     iniciarTempoSessao();
 }
 
@@ -38,11 +39,11 @@ function estaLogado() {
 }
 
 function adm() {
-    if ($_SESSION['adm'] == TRUE) {
-        return TRUE;
-    } else {
-        return FALSE;
-    }
+ if(isset($_SESSION['adm']) === TRUE){
+     return TRUE;
+ } else {
+     return FALSE;    
+ }
 }
 
 function iniciarTempoSessao() {

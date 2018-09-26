@@ -47,6 +47,7 @@
 
                 <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
                     <?php if (estaLogado()) { ?>
+                    
                         <ul class="navbar-nav text-center">
                             <?php if (adm()) { ?>
                                 <!-- LINK2 -->
@@ -77,7 +78,7 @@
                                 <!-- LINK4 -->
                                 <li class="nav-item">
                                     <a class="nav-link text-light" href="http://localhost/smrt/informacao/area_info.php">
-                                        <strong>Área Informativa</strong>
+                                        <strong>Área Informativa </strong>
                                     </a>
                                 </li>
                                 <!-- /LINK4 --> 

@@ -17,10 +17,13 @@ if (adm()) {
                         <a class="card-link float-right" data-toggle="collapse" href="#collapse<?= $n ?>">
                             <strong class="">...</strong>
                         </a>
+                        <a class="card-link float-left" data-toggle="collapse" href="#collapse<?= $n ?>">
+                            <strong class=""><?= $linha["nome"] ?> <?= $linha["sobrenome"] ?></strong>
+                        </a>
                     </div>
                     <div id="collapse<?= $n ?>" class="collapse" data-parent="#accordion">
                         <div class="card-body">
-                            <?= $linha["denuncias"] ?>
+                            <?= $linha["nome"] ?>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ $(function () {
 
     var cadastrar = $('form[name=cadastrar]');
 
-    $('input[type=submit]').click(function (evento) {
+    $('input[name=next]').click(function (evento) {
         var array = cadastrar.serializeArray();
         if (array[3].value == '' || array[4].value == '') {
             $('.resp').html('<p class="m-0">Preencha Todos os Dados!</p>');
