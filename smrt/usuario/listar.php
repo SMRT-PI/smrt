@@ -4,40 +4,41 @@ include '../bd/conectar.php';
 include_once '../cabecalho.php';
 
 if (adm()) {
-    $sql_pessoa = "select * from usuario where email != '$_SESSION[email]' order by nome";
-    $resultado = mysqli_query($conexao, $sql_pessoa);
-    $n = 1;
+    $sql_denunciado = "select distinct denuncia.denunciado, denuncia.data, usuario.nome, usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on denuncia.denunciado= usuario.id;";
+    $retorno = mysqli_query($conexao, $sql_denunciado);
+    $resultado = mysqli_fetch_array($retorno);
+    $adm = mysqli_query($conexao, "select id from usuario where email = $_SESSION[email]");
     ?>
     <div class="d-flex my-3 justify-content-center">
         <div id="accordion" class="container">  
-            <?php while ($linha = mysqli_fetch_array($resultado)) {
+            <?php while ($denunciado = mysqli_fetch_array($retorno)) {
                 ?>
-                <div class="card bg-light">
+                <div class="card border-radius">
                     <div class="card-header py-3">
-                        <a class="card-link float-right" data-toggle="collapse" href="#collapse<?= $n ?>">
-                            <strong class="">...</strong>
+                        <button type="button" id="bloq" onclick="bloquear(<?= $denunciado['id'] ?><?= $adm ?>)"
+                                class="<?php if ($denunciado['bloqueado'] == FALSE) { ?>
+                                    btn-light
+                                <?php } else { ?>
+                                    btn-danger <?php } ?> btn btn-sm text-center float-right">
+
+                            <?php if ($linha['bloqueado'] == FALSE) { ?>
+                                BLOQUEAR<?php } else { ?>
+                                DESBLOQUEAR<?php } ?>
+                        </button>
+
+                        <a class="card-link float-left text-dark">
+                            <strong class=""><?= $denunciado["nome"] ?> <?= $denunciado["sobrenome"] ?></strong>
                         </a>
-                        <a class="card-link float-left" data-toggle="collapse" href="#collapse<?= $n ?>">
-                            <strong class=""><?= $linha["nome"] ?> <?= $linha["sobrenome"] ?></strong>
-                        </a>
-                    </div>
-                    <div id="collapse<?= $n ?>" class="collapse" data-parent="#accordion">
-                        <div class="card-body">
-                            <?= $linha["nome"] ?>
-                        </div>
                     </div>
                 </div>
-                <?php
-                $n++;
-            }
-            ?>
+            <?php } ?>
         </div>
     </div>
-<?php }
-?>
+<?php } ?>
 
 <script>
-    function bloquear(id) {
+
+    function bloquear(id,adm) {
         var xhttp;
         if (window.XMLHttpRequest) {
             // codigo para browsers modernos
@@ -54,9 +55,6 @@ if (adm()) {
         xhttp.open("POST", "bloquear.php?id=" + id, true);
         xhttp.send();
     }
-
-
-
 
     function excluir(id) {
         var xhttp;
@@ -75,6 +73,7 @@ if (adm()) {
         xhttp.open("POST", "bloquear.php?id=" + id, true);
         xhttp.send();
     }
+
 </script>
 <?php
 include '../rodape.php';
