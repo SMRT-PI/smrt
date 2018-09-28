@@ -21,7 +21,7 @@ if (estaLogado()) {
 
 
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7xO0yzbGdqeO7caYCe1PDDwzMw6TphtU&callback=initMap"
+<!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7xO0yzbGdqeO7caYCe1PDDwzMw6TphtU&callback=initMap"
   type="text/javascript"></script>
   
 <script>
@@ -129,7 +129,7 @@ function showError(error)
         </div>
         </form>
     </div>
-</div>
+</div>-->
 
     <?php
     }

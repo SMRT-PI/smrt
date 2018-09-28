@@ -1,7 +1,8 @@
 
-CREATE DATABASE smrt DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE teste DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 use smrt;
 drop database smrt;
+
 
 <!-- USUÁRIO -->
 create table usuario(
@@ -38,12 +39,38 @@ create table bloqueio(
 );
 <!-- /BLOQUEIO -->
 
+<!-- MATÉRIA -->
+create table materia(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    titulo varchar(100),
+    descricao varchar(100),
+    conteudo varchar(255),
+    capa blob not null,
+    autor int REFERENCES usuario(id)
+);
+drop table materia;
+select * from materia;
+select titulo, autor from materia;
+
+<!-- MATÉRIA -->
+
+<!-- PUBLICAÇÃO -->
+create table publicacao(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    titulo varchar(100),
+    descricao varchar(100),
+    conteudo varchar(255),
+-------- localização -----------
+    capa blob not null
+);
+<!-- PUBLICAÇÃO -->
+
 drop table usuario;
 drop table administrador;
 drop table denuncia;
 drop table bloqueio;
 
-select * from usuario;
+select id, nome from usuario;
 select administrador.id as adm, usuario.id as usuario from administrador inner join usuario on usuario.id = administrador.adm;
 select denuncia.denunciador, denuncia.denunciado, usuario.nome from ;
 select * from bloqueio;
@@ -92,24 +119,3 @@ insert into usuario (nome, sobrenome ,email, senha) values  ('x', 'x', 'x@x','12
 insert into usuario (nome, sobrenome ,email, senha) values  ('y', 'y', 'y@y','123');
 insert into usuario (nome, sobrenome ,email, senha) values  ('z', 'z', 'z@z','123');
 
-<!-- MATÉRIA -->
-create table materia(
-    id int PRIMARY KEY AUTO_INCREMENT,
-    titulo varchar(100),
-    descricao varchar(100),
-    conteudo varchar(255),
-    capa blob not null,
-    autor int REFERENCES usuario(id)
-);
-drop table materia;
-select * from materia;
-select titulo, autor from materia;
-
-create table publicacao(
-    id int PRIMARY KEY AUTO_INCREMENT,
-    titulo varchar(100),
-    descricao varchar(100),
-    conteudo varchar(255),
--------- localização -----------
-    capa blob not null
-);
