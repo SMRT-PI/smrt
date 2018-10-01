@@ -1,8 +1,8 @@
-<div id="form_cadastrar" class="container-fluid mb-4">
+<div id="form_cadastrar" class="container-fluid mb-4" style="display: none;" >
     <div class="jumbotron jumbotron-fluid text-center m-0 h2" style="background-color: whitesmoke;">Cadastre-se Gratuitamente!</div>
     <div class="container-fluid text-center">
         <div class="row justify-content-center">
-            
+
             <form id="formulario" class="col-lg-6" method="post" enctype="multipart/form-data" name="cadastrar" ><br>
                 <div class="resp container-fluid text-center m-0 bg-danger text-light rounded"></div>
                 <input class="form-control py-3" type="text" name="nome" placeholder="Nome">

@@ -4,11 +4,9 @@ include '../usuario/autenticacao.php';
 include '../bd/conectar.php';
 include '../cabecalho.php';
 
-require_once './form_logar.php';
-
-require_once './form_cadastrar.php';
+require_once './form_logar.php'; //FORMULÁRIO DE LOGIN
+require_once './form_cadastrar.php'; //FORMULÁRIO DE CADASTRO
 ?>
-
 
 <script type="text/javascript">
 
@@ -23,7 +21,6 @@ require_once './form_cadastrar.php';
             form.style.display = "none";
         }
     }
-
 </script>
 
 <?php

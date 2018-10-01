@@ -51,7 +51,6 @@ create table materia(
 drop table materia;
 select * from materia;
 select titulo, autor from materia;
-
 <!-- MATÉRIA -->
 
 <!-- PUBLICAÇÃO -->
@@ -65,10 +64,12 @@ create table publicacao(
 );
 <!-- PUBLICAÇÃO -->
 
+<!-- DROP TABLES -->
 drop table usuario;
 drop table administrador;
 drop table denuncia;
 drop table bloqueio;
+<!-- /DROP TABLES -->
 
 select id, nome from usuario;
 select administrador.id as adm, usuario.id as usuario from administrador inner join usuario on usuario.id = administrador.adm;
@@ -83,7 +84,7 @@ select distinct usuario from usuario inner join usuario on usuario.id = denuncia
 
 select administrador.id as adm_id, usuario.id as usuario_id, usuario.nome from administrador inner join usuario on administrador.adm = 1;
 select administrador.id from administrador where adm = 1;
-select distinct denuncia.denunciado, denuncia.data, usuario.nome, usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on denuncia.denunciado= usuario.id;
+select distinct denuncia.denunciado, denuncia.data, usuario.nome, usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on denuncia.denunciado= usuario.id order by nome;
 
 select usuario.nome, usuario.sobrenome, usuario.email, 
 
@@ -100,9 +101,9 @@ insert into administrador (adm) values (2);
 insert into administrador (adm) values (3);
 insert into administrador (adm) values (4);
 
-insert into denuncia(denunciador, denunciado,data) values (1,7,'2018-09-28');
-insert into denuncia(denunciador, denunciado,data) values (2,7,'2018-09-28');
-insert into denuncia(denunciador, denunciado,data) values (3,7,'2018-09-28');
+insert into denuncia(denunciador, denunciado,data) values (1,6,'2018-09-28');
+insert into denuncia(denunciador, denunciado,data) values (2,6,'2018-09-28');
+insert into denuncia(denunciador, denunciado,data) values (3,6,'2018-09-28');
 
 
 insert into usuario (nome, sobrenome ,email, senha) values  ('a', 'a', 'a@a','123');

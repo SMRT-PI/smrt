@@ -4,9 +4,8 @@ include '../bd/conectar.php';
 include_once '../cabecalho.php';
 
 if (adm()) {
-    $sql_denunciado = "select distinct denuncia.denunciado, denuncia.data, usuario.nome, usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on denuncia.denunciado= usuario.id;";
+    $sql_denunciado = "select distinct denuncia.denunciado, denuncia.data, usuario.nome, usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on denuncia.denunciado= usuario.id order by nome";
     $retorno = mysqli_query($conexao, $sql_denunciado);
-    $resultado = mysqli_fetch_array($retorno);
     $adm = mysqli_query($conexao, "select id from usuario where email = $_SESSION[email]");
     ?>
     <div class="d-flex my-3 justify-content-center">

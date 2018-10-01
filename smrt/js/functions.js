@@ -1,7 +1,5 @@
 $(function () {
-
     var cadastrar = $('form[name=cadastrar]');
-
     $('input[name=next]').click(function (evento) {
         var array = cadastrar.serializeArray();
         if (array[3].value == '' || array[4].value == '') {
@@ -23,7 +21,6 @@ $(function () {
                     }
                 }
             });
-
         }
         evento.preventDefault();
     });

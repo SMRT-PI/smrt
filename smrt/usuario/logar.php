@@ -1,5 +1,5 @@
-<?php
-
+<?php  
+ 
 require_once './autenticacao.php';
 ini_set("display_errors", true);
 require_once '../bd/conectar.php';

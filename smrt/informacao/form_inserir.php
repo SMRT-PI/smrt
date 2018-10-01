@@ -10,10 +10,10 @@ $linha = mysqli_fetch_array($resultado);
 if (estaLogado()) {
     if (adm()) {
         ?>
-        <div class="justify-content-center d-flex text-center my-4">
+        <div class="justify-content-center d-flex text-center my-3">
             <form class="col-lg-6" method="post" action="inserir.php">
                 <input type="hidden" name="autor" value="<?= $linha['id'] ?>"> 
-                <div class="custom-file my-2">
+                <div class="custom-file">
                     <label class="custom-file-label" for="customFile">Capa</label>>
                     <input type="file" name="capa" class="custom-file-input" lang="pt-br" id="capa">
                 </div>
