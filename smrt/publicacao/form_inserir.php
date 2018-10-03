@@ -2,29 +2,22 @@
 include_once '../usuario/autenticacao.php';
 include '../bd/conectar.php';
 include_once '../cabecalho.php';
-//include_once './localizacao.php';
 
 $sql_pessoa = "select * from usuario where email = '$_SESSION[email]'";
 $resultado = mysqli_query($conexao, $sql_pessoa);
 $linha = mysqli_fetch_array($resultado);
-$lon;
-if (estaLogado()) {
-    if (adm()) {
-        ?>
 
-<!--
-<div class="d-flex justify-content-center text-center my-4">-->
-  
-<!--LOCALIZAÇAO-->
-                
-<!--<p id="demo">Localização:</p>-->
+?>
 
 
-
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7xO0yzbGdqeO7caYCe1PDDwzMw6TphtU&callback=initMap"
-  type="text/javascript"></script>
-  
-<script>
+     
+<script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7xO0yzbGdqeO7caYCe1PDDwzMw6TphtU&callback=initMap">
+</script>
+<script> 
+    
+    
+    
 var x=document.getElementById("demo");
 function getLocation()
   {
@@ -43,7 +36,7 @@ function showPosition(position)
   mapholder=document.getElementById('mapholder')
   mapholder.style.height='250px';
   mapholder.style.width='500px';
-//  $lon = lon;
+
 
   var myOptions={
   center:latlon,zoom:14,
@@ -52,7 +45,7 @@ function showPosition(position)
   navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
   };
   var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
-  var marker=new google.maps.Marker({position:latlon,map:map,title:"Você está Aqui!"});
+  var marker=new google.maps.Marker({position:latlon,map:map,title:"Minha localização!"});
   }
  
 function showError(error)
@@ -77,11 +70,12 @@ function showError(error)
 
 //CHAVE API GOOGLE MAPS - AIzaSyC7xO0yzbGdqeO7caYCe1PDDwzMw6TphtU
 
-//Pegar os valores de longitude e latitude, jogar em uma variável php para poder armazenar no banco de dados junto à área de publicação.
-
 </script>
                 
-
+            <script type="text/javascript">
+               var lat = 'teste';
+               var lon = 'teste'; 
+            </script>
 
 <div class="container">
    
@@ -94,10 +88,25 @@ function showError(error)
                 <button class="btn btn-primary float-right" onclick="getLocation()">Obtenha a localização aqui!</button>
             </div>
             
+            <?php 
+                $lat = "<script>document.write(lat)</script>";
+                echo "$lat"; 
+                $lon = "<script>document.write(lon)</script>";
+                echo "$lon";
+            ?>
+
         </div>
         <form action="action" method="post" action="inserir.php">
           <input type="hidden" name="autor" value="<?= $linha['id'] ?>"/>   
-            
+           
+          <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Coordenadas:</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" name="titulo" value="<?= $lat?>" placeholder="Latitude"/>
+                <input class="form-control" type="text" name="titulo" value="<?= $lon?>" placeholder="Longitude"/>
+            </div>
+          </div>
+          
           <div class="form-group row">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Capa:</label>
             <div class="col-sm-10">
@@ -133,5 +142,5 @@ function showError(error)
 </div>
 
     <?php
-    }
-} include '../rodape.php';
+
+    include '../rodape.php';
