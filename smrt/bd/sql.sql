@@ -1,5 +1,5 @@
 
-CREATE DATABASE teste DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE smrt DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 use smrt;
 drop database smrt;
 
