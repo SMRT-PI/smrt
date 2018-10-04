@@ -6,7 +6,7 @@ function logar($nome, $sobrenome, $email, $adm) {
     $_SESSION['nome'] = $nome;
     $_SESSION['sobrenome'] = $sobrenome;
     $_SESSION['email'] = $email;
-     $_SESSION['adm'] = $adm;
+    $_SESSION['adm'] = $adm;
     iniciarTempoSessao();
 }
 

@@ -4,10 +4,12 @@ ini_set("display_errors", true);
 
 include '../bd/conectar.php';
 
-$id = $_REQUEST['id'];
-$adm = $_REQUEST['adm'];
 
-$sql = "insert into bloqueio (bloqueador, bloqueado, data) values($adm,$id, 2018-09-28)";
+$id = $_REQUEST['id'];
+$adm = $_SESSION['adm'];
+$data = getdate();
+
+$sql = "insert into bloqueio (bloqueador, bloqueado, dataa) values($adm,$id,$data)";
 $resultado = mysqli_query($conexao, $sql);
 
 //$linha = mysqli_fetch_array($resultado);

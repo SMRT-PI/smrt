@@ -35,8 +35,12 @@ create table bloqueio(
     id int PRIMARY KEY AUTO_INCREMENT,
     bloqueador int REFERENCES adm(id),
     bloqueado int REFERENCES usuario(id),
-    data date
+    dataa date
 );
+
+select * from bloqueio;
+insert into bloqueio (bloqueador,bloqueado,dataa) values (1,5,'2018-10-04'); 
+
 <!-- /BLOQUEIO -->
 
 <!-- MATÉRIA -->
@@ -88,6 +92,7 @@ select distinct denuncia.denunciado, denuncia.data, usuario.nome, usuario.id, us
 
 select usuario.nome, usuario.sobrenome, usuario.email, 
 
+select * from bloqueio;
 
 select * from denuncia order by denunciador;
 update denuncia set data = '2018-09-28' where id = 3;
