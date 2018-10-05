@@ -47,25 +47,28 @@
 
 
                 <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
-                    <?php if (estaLogado()) { ?>
-                    
-                        <ul class="navbar-nav text-center">
-                            <?php if (adm()) { ?>
-                                <!-- LINK2 -->
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <strong>Área Informativa</strong>
-                                    </a>
-                                    <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/informacao/area_info.php">Matérias</a>
-                                        <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/informacao/form_inserir.php">Criar Matéria</a>
-                                    </div>
-                                </li>
-                                <!-- /LINK2 -->
-                                <li class="nav-item">
-                                    <a class="nav-link" href="http://localhost/smrt/publicacao/area_publicacao.php">Publicações</a>
-                                </li>
-
+                    <ul class="navbar-nav text-center py-2">
+                        <!-- LINK4 -->
+                        <li class="nav-item <?php if (admin()) { ?>dropdown <?php } ?>">
+                            <a class="nav-link text-light <?php if (admin()) { ?>dropdown-toggle <?php } ?>" <?php if (admin()) { ?>href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php } else { ?>href="http://localhost/smrt/informacao/area_info.php" <?php } ?> >
+                                <strong>Área Informativa </strong>
+                            </a>
+                            <?php if (admin()) { ?>  
+                                <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/informacao/area_info.php">Matérias</a>
+                                    <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/informacao/form_inserir.php">Criar Matéria</a>
+                                </div> 
+                            <?php } ?>
+                        </li>
+                        <!-- /LINK4 --> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://localhost/smrt/publicacao/area_publicacao.php">Publicações</a>
+                        </li>
+                        <!-- LINK5 -->
+                        <?php
+                        if (estaLogado()) {
+                            if (adm()) {
+                                ?>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <strong>Gerenciar</strong>
@@ -74,21 +77,12 @@
                                         <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/usuario/listar.php">Usuários</a>
                                     </div>
                                 </li>
-                            <?php } else {
-                                ?>
-                                <!-- LINK4 -->
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" href="http://localhost/smrt/informacao/area_info.php">
-                                        <strong>Área Informativa </strong>
-                                    </a>
-                                </li>
-                                <!-- /LINK4 --> 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="http://localhost/smrt/publicacao/area_publicacao.php">Publicações</a>
-                                </li>
-                                <!-- LINK5 -->
-                            <?php } ?>
-                        </ul>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </ul>
+                    <?php if (estaLogado()) { ?>
                         <li class="navbar-brand navbar-nav ml-auto mr-5 dropdown">
                             <a class="nav-link text-light dropdown-toggle mr-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <strong><?= $_SESSION['nome'] ?></strong>

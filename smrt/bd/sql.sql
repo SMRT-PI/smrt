@@ -10,6 +10,7 @@ create table usuario(
     nome varchar(100),
     sobrenome varchar(100),
     senha varchar(100),
+    adm boolean default FALSE,
     email varchar(100) unique
   );
 <!-- /USUÁRIO -->
@@ -19,6 +20,9 @@ create table administrador(
     id int PRIMARY KEY AUTO_INCREMENT,
     adm int REFERENCES usuario(id) 
 );
+
+select count(*) from administrador where adm = 5;
+
 <!-- /ADMNISTRADOR -->
 
 <!-- DENUNCIA -->
@@ -33,7 +37,7 @@ create table denuncia(
 <!-- BLOQUEIO -->
 create table bloqueio(
     id int PRIMARY KEY AUTO_INCREMENT,
-    bloqueador int REFERENCES adm(id),
+    bloqueador int REFERENCES administrador(id),
     bloqueado int REFERENCES usuario(id),
     dataa date
 );
@@ -97,14 +101,10 @@ select * from bloqueio;
 select * from denuncia order by denunciador;
 update denuncia set data = '2018-09-28' where id = 3;
 
-insert into usuario (nome, sobrenome ,email, senha) values  ('admin', 'admin', 'admin@admin','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('admin', 'admin', 'admin1@admin','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('admin', 'admin', 'admin2@admin','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('admin', 'admin', 'admin3@admin','123');
-insert into administrador (adm) values (1);
-insert into administrador (adm) values (2);
-insert into administrador (adm) values (3);
-insert into administrador (adm) values (4);
+insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admin', 'admin@admin','123', TRUE);
+insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admin', 'admin1@admin','123', TRUE);
+insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admin', 'admin2@admin','123', TRUE);
+insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admin', 'admin3@admin','123', TRUE);
 
 insert into denuncia(denunciador, denunciado,data) values (1,6,'2018-09-28');
 insert into denuncia(denunciador, denunciado,data) values (2,6,'2018-09-28');
