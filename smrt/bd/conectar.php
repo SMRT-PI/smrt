@@ -1,3 +1,3 @@
 <?php
 
-$conexao = mysqli_connect("localhost", "root", "", "smrt");
+$conexao = mysqli_connect("localhost", "root", "ifsc", "smrt");

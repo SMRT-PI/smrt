@@ -1,11 +1,12 @@
 <?php
 
 session_start();
+date_default_timezone_set("America/Sao_Paulo");
 
 function logar($nome, $sobrenome, $email, $adm) {
     $_SESSION['nome'] = $nome;
     $_SESSION['sobrenome'] = $sobrenome;
-    $_SESSION['email'] = $email;    
+    $_SESSION['email'] = $email;
     $_SESSION['adm'] = $adm;
     iniciarTempoSessao();
 }
@@ -46,9 +47,9 @@ function adm() {
     }
 }
 
-function admin(){
-    if (estaLogado()){
-        if (adm()){
+function admin() {
+    if (estaLogado()) {
+        if (adm()) {
             return TRUE;
         } else {
             return FALSE;
@@ -57,6 +58,7 @@ function admin(){
         return FALSE;
     }
 }
+
 function iniciarTempoSessao() {
     $_SESSION['tempo'] = time() + 500;
 }

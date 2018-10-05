@@ -47,7 +47,7 @@
 
 
                 <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
-                    <ul class="navbar-nav text-center py-2">
+                    <ul class="navbar-nav text-center py-2 px-3">
                         <!-- LINK4 -->
                         <li class="nav-item <?php if (admin()) { ?>dropdown <?php } ?>">
                             <a class="nav-link text-light <?php if (admin()) { ?>dropdown-toggle <?php } ?>" <?php if (admin()) { ?>href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php } else { ?>href="http://localhost/smrt/informacao/area_info.php" <?php } ?> >
@@ -83,13 +83,15 @@
                         ?>
                     </ul>
                     <?php if (estaLogado()) { ?>
-                        <li class="navbar-brand navbar-nav ml-auto mr-5 dropdown">
-                            <a class="nav-link text-light dropdown-toggle mr-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <strong><?= $_SESSION['nome'] ?></strong>
+
+                        <li class="navbar-nav dropdown ml-auto">
+                            <a href="#" class="text-light nav-link m-0" data-toggle="dropdown">
+                                <img class="rounded-circle img-fluid" src="http://localhost/smrt/img/m1.jpg" width="40" height="40"> 
+                                <strong><?= $_SESSION['nome'] ?> <?= $_SESSION['sobrenome'] ?> </strong>
                             </a>
-                            <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/usuario/perfil.php">Perfil</a>
-                                <a class="navbar-brand text-muted dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/usuario/logout.php">
+                            <div class="dropdown-menu dropdown-menu-left m-0 bg-light py-1 text-center" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item bg-light text-dark py-2 m-0" href="http://localhost/smrt/usuario/perfil.php">Perfil</a>
+                                <a class="m-0 text-muted dropdown-item bg-light py-2" href="http://localhost/smrt/usuario/logout.php">
                                     <strong>SAIR</strong>
                                 </a>
                             </div>

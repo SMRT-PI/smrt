@@ -4,7 +4,7 @@ use smrt;
 drop database smrt;
 
 
-<!-- USUÁRIO -->
+-- USUÁRIO --
 create table usuario(
     id int PRIMARY KEY AUTO_INCREMENT,
     nome varchar(100),
@@ -13,9 +13,9 @@ create table usuario(
     adm boolean default FALSE,
     email varchar(100) unique
   );
-<!-- /USUÁRIO -->
+-- /USUÁRIO --
 
-<!-- ADMNISTRADOR -->
+-- ADMNISTRADOR --
 create table administrador(
     id int PRIMARY KEY AUTO_INCREMENT,
     adm int REFERENCES usuario(id) 
@@ -23,18 +23,18 @@ create table administrador(
 
 select count(*) from administrador where adm = 5;
 
-<!-- /ADMNISTRADOR -->
+-- /ADMNISTRADOR --
 
-<!-- DENUNCIA -->
+-- DENUNCIA --
 create table denuncia(
     id int PRIMARY KEY AUTO_INCREMENT,
     denunciador int REFERENCES usuario(id),
     denunciado int REFERENCES usuario(id),
     data date
 );
-<!-- /DENUNCIA -->
+-- /DENUNCIA --
 
-<!-- BLOQUEIO -->
+-- BLOQUEIO --
 create table bloqueio(
     id int PRIMARY KEY AUTO_INCREMENT,
     bloqueador int REFERENCES administrador(id),
@@ -42,12 +42,13 @@ create table bloqueio(
     dataa date
 );
 
+select id from usuario where email = "admin@admin";
 select * from bloqueio;
-insert into bloqueio (bloqueador,bloqueado,dataa) values (1,5,'2018-10-04'); 
+insert into bloqueio (bloqueador,bloqueado,dataa) values (1,6,'2018-10-04'); 
+delete from bloqueio where bloqueado = 6;
+-- /BLOQUEIO --
 
-<!-- /BLOQUEIO -->
-
-<!-- MATÉRIA -->
+-- MATÉRIA --
 create table materia(
     id int PRIMARY KEY AUTO_INCREMENT,
     titulo varchar(100),
@@ -59,9 +60,9 @@ create table materia(
 drop table materia;
 select * from materia;
 select titulo, autor from materia;
-<!-- MATÉRIA -->
+-- /MATÉRIA --
 
-<!-- PUBLICAÇÃO -->
+-- PUBLICAÇÃO --
 create table publicacao(
     id int PRIMARY KEY AUTO_INCREMENT,
     titulo varchar(100),
@@ -70,14 +71,14 @@ create table publicacao(
 -------- localização -----------
     capa blob not null
 );
-<!-- PUBLICAÇÃO -->
+-- /PUBLICAÇÃO --
 
-<!-- DROP TABLES -->
+-- DROP TABLES --
 drop table usuario;
 drop table administrador;
 drop table denuncia;
 drop table bloqueio;
-<!-- /DROP TABLES -->
+-- /DROP TABLES --
 
 select id, nome from usuario;
 select administrador.id as adm, usuario.id as usuario from administrador inner join usuario on usuario.id = administrador.adm;

@@ -1,25 +1,24 @@
 <?php
 
-ini_set("display_errors", true);
+require_once './autenticacao.php';
+require_once '../bd/conectar.php';
 
-include '../bd/conectar.php';
+$id = $_REQUEST['denunciado'];
+$data = (idate("Y") . "-" . idate("m") . "-" . idate("d"));
 
+$retorno_adm = mysqli_query($conexao, "select * from usuario where email = $_SESSION[email]"); //PEGA O USUÁRIO QUE ESTÁ REALIZANDO A OPERAÇÃO (ADMINISTRADOR);
+$adm_array = mysqli_fetch_array($retorno_adm);
+$adm = $adm_array[id];
 
-$id = $_REQUEST['id'];
-$adm = $_SESSION['adm'];
-$data = getdate();
+$retorno_usuario = mysqli_query($conexao, "select * from usuario where id = $id"); //PEGA O USUÁRIO A SER BLOQUEADO/DESBLOQUEADO;
+$usuario = mysqli_fetch_array($retorno_usuario);
 
-$sql = "insert into bloqueio (bloqueador, bloqueado, dataa) values($adm,$id,$data)";
-$resultado = mysqli_query($conexao, $sql);
-
-//$linha = mysqli_fetch_array($resultado);
+//$retorno_bloqueados = mysqli_query($conexao, "select * from bloqueio");
+//while ($bloqueados = mysqli_fetch_array($retorno_bloqueados)) {
 //
-//if ($linha['bloqueado'] == TRUE) {
-//
-//    $sql_desbloquear = "update usuario set bloqueado = FALSE where id = $id";
-//    mysqli_query($conexao, $sql_desbloquear);
-//} else {
-//
-//    $sql_bloquear = "update usuario set bloqueado = TRUE where id = $id";
-//    mysqli_query($conexao, $sql_bloquear);
+//    if ($bloqueados['bloqueado'] == $linha[id]) {
+//        $desbloquear = mysqli_query($conexao, "delete from bloqueio where bloqueado = $id");
+//    } else {
+$bloquear = mysqli_query($conexao, "insert into bloqueio (bloqueador, bloqueado, dataa) values ($adm,$id,'$data')");
+//    }
 //}
