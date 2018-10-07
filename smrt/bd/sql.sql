@@ -32,20 +32,30 @@ create table denuncia(
     denunciado int REFERENCES usuario(id),
     data date
 );
+select distinct denuncia.denunciado, denuncia.data, usuario.nome, 
+usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on 
+denuncia.denunciado= usuario.id order by nome;
 -- /DENUNCIA --
 
 -- BLOQUEIO --
 create table bloqueio(
     id int PRIMARY KEY AUTO_INCREMENT,
     bloqueador int REFERENCES administrador(id),
-    bloqueado int REFERENCES usuario(id),
+    bloqueado int unique REFERENCES usuario(id),
     dataa date
 );
 
+
+select distinct denuncia.denunciado, denuncia.data, usuario.nome, 
+usuario.id, usuario.sobrenome, usuario.email, bloqueio.bloqueado from usuario 
+inner join denuncia on denuncia.denunciado = usuario.id inner join bloqueio on denuncia.denunciado = bloqueio.bloqueado order by nome;
+
+
 select id from usuario where email = "admin@admin";
 select * from bloqueio;
+select bloqueado from bloqueio;
 insert into bloqueio (bloqueador,bloqueado,dataa) values (1,6,'2018-10-04'); 
-delete from bloqueio where bloqueado = 6;
+delete from bloqueio where bloqueado = 0;
 -- /BLOQUEIO --
 
 -- MATÉRIA --
@@ -53,24 +63,26 @@ create table materia(
     id int PRIMARY KEY AUTO_INCREMENT,
     titulo varchar(100),
     descricao varchar(100),
-    conteudo varchar(255),
+    conteudo varchar(10000),
     capa blob not null,
     autor int REFERENCES usuario(id)
 );
 drop table materia;
 select * from materia;
+
+insert into materia (titulo,descricao,conteudo,autor,capa) values ('Os Rios são Molhados','Algo sobre os Rios','Rio é um curso de água que 
+corre naturalmente de uma área mais alta para uma mais baixa do relevo, geralmente deságua em outro rio, lago ou no mar.
+Esses cursos de água se formam a partir da chuva, que é absorvida pelo solo até atingir áreas impermeáveis no subsolo 
+onde se acumula, constituindo o que chamamos de lençol freático. 
+Quando o lençol freático aflora na superfície dá origem à nascente de um rio. Apesar dessa definição, há rios que se formam de outras maneiras, como por exemplo, a partir do degelo em picos montanhosos, além de alguns originarem de águas de lagos.
+Os rios apresentam características diversas, podendo ser perene, ou seja, que não seca em nenhum período do ano, nem mesmo com severas secas. Além disso, podem ser também temporários ou intermitentes, neste caso, se trata de rios que secam em determinado período do ano, quase sempre na época da seca ou estiagem.
+', 1, 'm1.jpg');
+
 select titulo, autor from materia;
 -- /MATÉRIA --
 
 -- PUBLICAÇÃO --
-create table publicacao(
-    id int PRIMARY KEY AUTO_INCREMENT,
-    titulo varchar(100),
-    descricao varchar(100),
-    conteudo varchar(255),
--------- localização -----------
-    capa blob not null
-);
+
 -- /PUBLICAÇÃO --
 
 -- DROP TABLES --
@@ -107,9 +119,10 @@ insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admi
 insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admin', 'admin2@admin','123', TRUE);
 insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admin', 'admin3@admin','123', TRUE);
 
-insert into denuncia(denunciador, denunciado,data) values (1,6,'2018-09-28');
-insert into denuncia(denunciador, denunciado,data) values (2,6,'2018-09-28');
-insert into denuncia(denunciador, denunciado,data) values (3,6,'2018-09-28');
+insert into denuncia(denunciador, denunciado,data) values (1,7,'2018-09-28');
+insert into denuncia(denunciador, denunciado,data) values (2,7,'2018-09-28');
+insert into denuncia(denunciador, denunciado,data) values (3,7,'2018-09-28');
+
 
 
 insert into usuario (nome, sobrenome ,email, senha) values  ('a', 'a', 'a@a','123');
@@ -138,4 +151,4 @@ insert into usuario (nome, sobrenome ,email, senha) values  ('w', 'w', 'w@w','12
 insert into usuario (nome, sobrenome ,email, senha) values  ('x', 'x', 'x@x','123');
 insert into usuario (nome, sobrenome ,email, senha) values  ('y', 'y', 'y@y','123');
 insert into usuario (nome, sobrenome ,email, senha) values  ('z', 'z', 'z@z','123');
-
+insert into usuario (nome, sobrenome ,email, senha) values  ('Luca', 'Biagi', 'luca@luca','123');

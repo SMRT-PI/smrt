@@ -30,10 +30,10 @@
         <div class="content2">
 
             <!-- MENU -->
-            <nav class="navbar navbar-expand-lg navbar-dark d-flex p-3">
+            <nav class="navbar navbar-expand-lg navbar-dark d-flex py-2 px-5">
 
                 <!-- BRAND -->
-                <a class="navbar-brand text-muted mr-5" href="http://localhost/smrt/index.php">
+                <a class="navbar-brand text-muted" href="http://localhost/smrt/index.php">
                     <img class="img-fluid d-inline-block align-top" src="http://localhost/smrt/img/logo.png" width="30" height="30">
                     <strong>SMRT</strong>
                 </a>
@@ -50,7 +50,7 @@
                     <ul class="navbar-nav text-center py-2 px-3">
                         <!-- LINK4 -->
                         <li class="nav-item <?php if (admin()) { ?>dropdown <?php } ?>">
-                            <a class="nav-link text-light <?php if (admin()) { ?>dropdown-toggle <?php } ?>" <?php if (admin()) { ?>href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php } else { ?>href="http://localhost/smrt/informacao/area_info.php" <?php } ?> >
+                            <a class="nav-link text-light" <?php if (admin()) { ?>href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php } else { ?>href="http://localhost/smrt/informacao/area_info.php" <?php } ?> >
                                 <strong>Área Informativa </strong>
                             </a>
                             <?php if (admin()) { ?>  
@@ -70,7 +70,7 @@
                             if (adm()) {
                                 ?>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <strong>Gerenciar</strong>
                                     </a>
                                     <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
@@ -86,7 +86,7 @@
 
                         <li class="navbar-nav dropdown ml-auto">
                             <a href="#" class="text-light nav-link m-0" data-toggle="dropdown">
-                                <img class="rounded-circle img-fluid" src="http://localhost/smrt/img/m1.jpg" width="40" height="40"> 
+                                <img class="rounded-circle" src="http://localhost/smrt/img/m1.jpg" width="40" height="40"> 
                                 <strong><?= $_SESSION['nome'] ?> <?= $_SESSION['sobrenome'] ?> </strong>
                             </a>
                             <div class="dropdown-menu dropdown-menu-left m-0 bg-light py-1 text-center" aria-labelledby="navbarDropdown">
