@@ -4,6 +4,8 @@ use smrt;
 drop database smrt;
 
 
+-- disgraça ta bugada!
+
 -- USUÁRIO --
 create table usuario(
     id int PRIMARY KEY AUTO_INCREMENT,
