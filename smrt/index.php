@@ -15,13 +15,13 @@ require_once 'bd/conectar.php';
   <!-- The slideshow -->
   <div class="carousel-inner">
     <div class="carousel-item active">
-        <div style="background-image: url(http://localhost/smrt/img/m1.jpg); min-height: 40vh;height: 100%;max-height: 40vh;background-position: center; background-size: cover;"></div>
+        <div style="background-image: url(http://localhost/smrt/img/m1.jpg); min-height: 80vh;height: 100%;max-height: 40vh;background-position: center; background-size: cover;"></div>
     </div>
     <div class="carousel-item">
-        <div style="background-image: url(http://localhost/smrt/img/m2.jpg); min-height: 40vh;height: 100%;max-height: 40vh;background-position: center; background-size: cover;"></div>
+        <div style="background-image: url(http://localhost/smrt/img/m2.jpg); min-height: 80vh;height: 100%;max-height: 40vh;background-position: center; background-size: cover;"></div>
     </div>
     <div class="carousel-item">
-      <div style="background-image: url(http://localhost/smrt/img/m3.jpg); min-height: 40vh;height: 100%;max-height: 40vh;background-position: center; background-size: cover;"></div>
+      <div style="background-image: url(http://localhost/smrt/img/m3.jpg); min-height: 8 0vh;height: 100%;max-height: 40vh;background-position: center; background-size: cover;"></div>
     </div>
   </div>
   
