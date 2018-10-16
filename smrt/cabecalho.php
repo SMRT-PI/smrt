@@ -61,8 +61,17 @@
                             <?php } ?>
                         </li>
                         <!-- /LINK4 --> 
-                        <li class="nav-item">
-                            <a class="nav-link" href="http://localhost/smrt/publicacao/area_publicacao.php">Publicações</a>
+                        <!--                        <li class="nav-item">
+                                                    <a class="nav-link" href="http://localhost/smrt/publicacao/area_publicacao.php">Publicações</a>
+                                                </li>-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <strong>Feed de Noticias</strong>
+                            </a>
+                            <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/pub/form_pub.php">Publicar</a>
+                                <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/pub/teste.php">Publicações</a>
+                            </div>
                         </li>
                         <!-- LINK5 -->
                         <?php
