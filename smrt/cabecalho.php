@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <title>SMRT</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <link rel="stylesheet" href="http://localhost/smrt/css/css.css">   
+        <link rel="stylesheet" href="/smrt/css/css.css">   
         <!-- ICONES FONTAWESOME -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
         <!-- BOOTSTRAP 4 CSS -->
@@ -33,8 +33,8 @@
             <nav class="navbar navbar-expand-lg navbar-dark d-flex py-2 px-5">
 
                 <!-- BRAND -->
-                <a class="navbar-brand text-muted" href="http://localhost/smrt/index.php">
-                    <img class="img-fluid d-inline-block align-top" src="http://localhost/smrt/img/logo.png" width="30" height="30">
+                <a class="navbar-brand text-muted" href="/smrt/index.php">
+                    <img class="img-fluid d-inline-block align-top" src="/smrt/img/logo.png" width="30" height="30">
                     <strong>SMRT</strong>
                 </a>
                 <!-- /BRAND -->
@@ -55,8 +55,8 @@
                             </a>
                             <?php if (admin()) { ?>  
                                 <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/informacao/area_info.php">Matérias</a>
-                                    <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/informacao/form_inserir.php">Criar Matéria</a>
+                                    <a class="dropdown-item bg-light text-dark py-2" href="/smrt/informacao/area_info.php">Matérias</a>
+                                    <a class="dropdown-item bg-light text-dark py-2" href="/smrt/informacao/form_inserir.php">Criar Matéria</a>
                                 </div> 
                             <?php } ?>
                         </li>
@@ -68,10 +68,15 @@
                             <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <strong>Feed de Noticias</strong>
                             </a>
-                            <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/pub/form_pub.php">Publicar</a>
-                                <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/pub/teste.php">Publicações</a>
-                            </div>
+                            <?php if (estaLogado()) { ?>
+                                <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item bg-light text-dark py-2" href="/smrt/pub/form_pub.php">Publicar</a>
+                                    <a class="dropdown-item bg-light text-dark py-2" href="/smrt/pub/teste.php">Publicações</a>
+                                </div>
+                            <?php } else { ?>
+                                <a class="dropdown-item bg-light text-dark py-2" href="/smrt/pub/teste.php">Publicações</a>
+                            <?php } ?>
+                        </li>
                         </li>
                         <!-- LINK5 -->
                         <?php
@@ -83,7 +88,7 @@
                                         <strong>Gerenciar</strong>
                                     </a>
                                     <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item bg-light text-dark py-2" href="http://localhost/smrt/usuario/listar.php">Usuários</a>
+                                        <a class="dropdown-item bg-light text-dark py-2" href="/smrt/usuario/listar.php">Usuários</a>
                                     </div>
                                 </li>
                                 <?php
@@ -95,19 +100,19 @@
 
                         <li class="navbar-nav dropdown ml-auto">
                             <a href="#" class="text-light nav-link m-0" data-toggle="dropdown">
-                                <img class="rounded-circle" src="http://localhost/smrt/img/m1.jpg" width="40" height="40"> 
+                                <img class="rounded-circle" src="/smrt/img/m1.jpg" width="40" height="40"> 
                                 <strong><?= $_SESSION['nome'] ?> <?= $_SESSION['sobrenome'] ?> </strong>
                             </a>
                             <div class="dropdown-menu dropdown-menu-left m-0 bg-light py-1 text-center" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item bg-light text-dark py-2 m-0" href="http://localhost/smrt/usuario/perfil.php">Perfil</a>
-                                <a class="m-0 text-muted dropdown-item bg-light py-2" href="http://localhost/smrt/usuario/logout.php">
+                                <a class="dropdown-item bg-light text-dark py-2 m-0" href="/smrt/usuario/perfil.php">Perfil</a>
+                                <a class="m-0 text-muted dropdown-item bg-light py-2" href="/smrt/usuario/logout.php">
                                     <strong>SAIR</strong>
                                 </a>
                             </div>
                         </li>
                     <?php } else { ?>   
                         <!-- LINK7 -->
-                        <a class="navbar-brand ml-auto" href="http://localhost/smrt/usuario/entrar.php">                             
+                        <a class="navbar-brand ml-auto" href="/smrt/usuario/entrar.php">                             
                             <strong>ENTRAR</strong>
                         </a>
                         <!-- /LINK7 -->
