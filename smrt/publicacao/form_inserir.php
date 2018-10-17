@@ -78,8 +78,6 @@ function showPosition(position)
 
 <div class="container">
 
-    
-    
 <!--    Mapa-->    
     <div class="col-md-6 offset-md-3 mt-5 mb-5">  
         <div class="row mt-3 mb-3">

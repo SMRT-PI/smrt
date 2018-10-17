@@ -43,7 +43,6 @@ require_once 'cabecalho.php';
                                         Neste meio tempo, e depois de diversas desavensas, concluímos assim o tão esperado site de monitiramento, como vcs estão vendo.</p>
                         </div>
                     </div>
-
                 </div>
 </html>
 <?php

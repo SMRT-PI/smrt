@@ -33,6 +33,7 @@ require_once 'bd/conectar.php';
     <span class="carousel-control-next-icon"></span>
   </a>
 </div>
+
 <?php
 require_once 'rodape.php';
 ?>
