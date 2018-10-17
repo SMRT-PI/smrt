@@ -64,6 +64,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="http://localhost/smrt/publicacao/area_publicacao.php">Publicações</a>
                         </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="http://localhost/smrt/sobre.php">Sobre nós</a>
+                        </li>
                         <!-- LINK5 -->
                         <?php
                         if (estaLogado()) {

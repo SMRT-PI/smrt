@@ -77,11 +77,6 @@ function showPosition(position)
 
 
 <div class="container">
-   
-<!--    Mapa-->
-<!--O mapa ta em um ponto fixo. Como fazer com que ele pegue a localização do próprio usuario? 
-Por variarél ali no lugar das coordenadas?
-Pelo menos o mapa ta funcionando agora hsahsuahu -->
 
     
     
