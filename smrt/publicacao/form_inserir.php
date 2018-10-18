@@ -112,13 +112,13 @@ $Name_autor = $_SESSION['nome'];
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Título:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="text" name="titulo" placeholder="Informe o título de publicação"/>
+                    <input class="form-control" type="text" name="legenda" placeholder="Informe o título de publicação"/>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Legenda:</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" rows="5" placeholder="Informe a legenda de Publicação" name="legenda"></textarea>
+                    <textarea class="form-control" rows="5" placeholder="Informe a legenda de Publicação" name="titulo"></textarea>
                 </div>
             </div>
 
