@@ -83,9 +83,24 @@ Os rios apresentam características diversas, podendo ser perene, ou seja, que n
 select titulo, autor from materia;
 -- /MATÉRIA --
 
--- PUBLICAÇÃO --
+-- PUBLICACAO --
+create table pub(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    legenda varchar(400),
+    comentarios varchar(400),
+    imagem varchar(400),
+    autor varchar(200),
+    titulo varchar(800)
+);
+drop table pub;
+SELECT * FROM pub
+insert into pub values (default, 'adasd', 'asdasdasd');
+INSERT INTO pub (comentarios, imagem)
+VALUES ('teste legenda', 'este.png'); 
 
--- /PUBLICAÇÃO --
+INSERT INTO pub (legenda, imagem, nametest) VALUES ('asdasd', 'iasdasdmagem','adada');
+-- /PUBLICACAO --
+
 
 -- DROP TABLES --
 drop table usuario;
