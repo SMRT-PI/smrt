@@ -3,6 +3,8 @@
 session_start();
 date_default_timezone_set("America/Sao_Paulo");
 
+$btnclick = 0;
+
 function logar($nome, $sobrenome, $email, $adm) {
     $_SESSION['nome'] = $nome;
     $_SESSION['sobrenome'] = $sobrenome;

@@ -22,6 +22,8 @@
         <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
         <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
         <script type="text/javascript" src="../js/functions.js"></script>
+        <!-- Botão de Like-->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
 
 
@@ -61,17 +63,6 @@
                             <?php } ?>
                         </li>
                         <!-- /LINK4 --> 
-
-                        <li class="nav-item dropdown">
-
-                            <?php if (estaLogado()) { ?>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-light" href="http://localhost/smrt/publicacao/area_publicacao.php"><strong>Publicações</strong></a>
-                            </li>
-
-                        <?php } ?>
-
                         <!--Feed de Noticias-->
 
                         <li class="nav-item dropdown">
@@ -80,11 +71,14 @@
                             </a>
                             <?php if (estaLogado()) { ?>
                                 <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item bg-light text-dark py-2" href="/smrt/pub/form_pub.php">Publicar</a>
+                                    <a class="dropdown-item bg-light text-dark py-2" href="/smrt/publicacao/form_inserir.php">Publicar</a>
                                     <a class="dropdown-item bg-light text-dark py-2" href="/smrt/pub/teste.php">Publicações</a>
                                 </div>
                             <?php } else { ?>
-                                <a class="dropdown-item bg-light text-dark py-2" href="/smrt/pub/index.php">Publicações</a>
+
+                                <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item bg-light text-dark py-2" href="/smrt/publicacao/teste.php">Publicações</a>
+                                </div>
                             <?php } ?>
                         </li>
 

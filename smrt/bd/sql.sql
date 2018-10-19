@@ -90,7 +90,8 @@ create table pub(
     comentarios varchar(400),
     imagem varchar(400),
     autor varchar(200),
-    titulo varchar(800)
+    titulo varchar(800),
+    dataa date
 );
 drop table pub;
 SELECT * FROM pub
