@@ -32,8 +32,11 @@ create table denuncia(
     id int PRIMARY KEY AUTO_INCREMENT,
     denunciador int REFERENCES usuario(id),
     denunciado int REFERENCES usuario(id),
-    data date
+    dataa date
 );
+
+drop table denuncia;
+
 select distinct denuncia.denunciado, denuncia.data, usuario.nome, 
 usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on 
 denuncia.denunciado= usuario.id order by nome;
@@ -88,13 +91,16 @@ create table pub(
     id int PRIMARY KEY AUTO_INCREMENT,
     legenda varchar(400),
     comentarios varchar(400),
-    imagem varchar(400),
+    imagem varchar(220),
     autor varchar(200),
-    titulo varchar(800),
     dataa date
 );
 drop table pub;
-SELECT * FROM pub
+
+SELECT pub.id,pub.legenda,pub.comentarios,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
+FROM pub inner join usuario on pub.autor = usuario.id order by dataa DESC;
+
+
 insert into pub values (default, 'adasd', 'asdasdasd');
 INSERT INTO pub (comentarios, imagem)
 VALUES ('teste legenda', 'este.png'); 

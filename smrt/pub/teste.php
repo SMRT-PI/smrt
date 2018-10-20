@@ -3,21 +3,24 @@ include_once '../cabecalho.php';
 include_once '../bd/conectar.php';
 include_once '../publicacao/jvBotaoLike.php';
 include_once '../usuario/autenticacao.php';
-?>
 
-<?php
 $sql = "SELECT * FROM pub";
 $resultado = mysqli_query($conexao, $sql);
-?>
-<!--<link rel="stylesheet" href="css/style.css">-->
-<?php
+
+
 if (mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
-        ?>  
+        ?>
 
-        <link rel="stylesheet" href="css/style.css">
 
-        <div class="row">
+        <div class="d-flex justify-content-center text-center my-4 mx-5 conteudo p-5" style="border-radius: 60px;">
+            <h1><?php echo $linha["titulo"]; ?></h1>
+            <h4><?php echo $linha["legenda"]; ?></h4>
+            <p><?php echo $linha["dataa"]; ?></p>
+
+        </div>
+
+<!--        <div class="row">
             <div class="col-sm-6 offset-md-3">
 
                 <div class="post-content">
@@ -30,12 +33,12 @@ if (mysqli_num_rows($resultado) > 0) {
                         </div>
 
 
-                        <div class="facebook-reaction"><!-- container div for reaction system --> 
-                            <span class="like-btn"> <!-- Default like button --> 
-                                <span class="fa like-btn-emo fa-thumbs-o-up"></span> <!-- Default like button emotion--> 
-                                <span class="like-btn-text">Like</span>  <!-- Default like button text,(Like, wow, sad..) default:Like  -->
+                        <div class="facebook-reaction"> container div for reaction system  
+                            <span class="like-btn">  Default like button  
+                                <span class="fa like-btn-emo fa-thumbs-o-up"></span>  Default like button emotion 
+                                <span class="like-btn-text">Like</span>   Default like button text,(Like, wow, sad..) default:Like  
                                 <ul class="reactions-box">
-                                    <!-- Reaction buttons container-->
+                                     Reaction buttons container
                                     <li class="reaction reaction-like" data-reaction="Like"></li>
                                     <li class="reaction reaction-love" data-reaction="Love"></li>
                                     <li class="reaction reaction-haha" data-reaction="HaHa"></li>
@@ -44,16 +47,16 @@ if (mysqli_num_rows($resultado) > 0) {
                                     <li class="reaction reaction-angry" data-reaction="Angry"></li>
                                 </ul>
                             </span>
-                            <div class="like-stat"> <!-- Like statistic container--> 
+                            <div class="like-stat">  Like statistic container 
                             </div>
-                            
+
 
                         </div>
-                        
+
                     </div>
-                </div>
+                </div>-->
                 <?php
             }
-        } else {
-            echo '<h1>Nenhuma publicacao encontrada!</h1>';
         }
+        require_once '../rodape.php';
+        

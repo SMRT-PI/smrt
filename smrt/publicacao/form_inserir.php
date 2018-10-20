@@ -2,7 +2,9 @@
 include_once '../bd/conectar.php';
 include '../cabecalho.php';
 
-$Name_autor = $_SESSION['nome'];
+$sql_pessoa = "select * from usuario where email = '$_SESSION[email]'";
+$resultado = mysqli_query($conexao, $sql_pessoa);
+$linha = mysqli_fetch_array($resultado);
 ?>
 
 <!--Google Maps Localização-->
@@ -77,9 +79,9 @@ $Name_autor = $_SESSION['nome'];
 
 
 
-<div class="container">
+<!--<div class="container">
 
-    <!--    Mapa-->    
+        Mapa    
     <div class="col-md-6 offset-md-3 mt-5 mb-5">  
         <div class="row mt-3 mb-3">
             <div id="mapholder" style="margin:0 auto;"></div>
@@ -99,9 +101,9 @@ $Name_autor = $_SESSION['nome'];
                 <input class="form-control" type="text" id="lon" name="lon" value="" placeholder="Longitude"/>
             </div>
         </div>
-        <!--    Mapa--> 
+            Mapa 
 
-        <!--    Formulario--> 
+            Formulario 
         <form method="post" action="inserir.php">
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Imagem:</label>
@@ -129,12 +131,22 @@ $Name_autor = $_SESSION['nome'];
                 </div>
             </div>
         </form>
-        <!--    Formulario-->
+            Formulario
     </div>
+</div>-->
+
+<div class="justify-content-center d-flex text-center my-3">
+    <form class="col-lg-6" method="post" action="inserir.php" enctype="multipart/form-data">
+        <input type="hidden" name="autor" value="<?= $linha['id'] ?>"> 
+        <textarea class="form-control" rows="2" placeholder="Legenda" name="legenda"></textarea>
+        <div class="custom-file my-2">
+            <label class="custom-file-label" for="imagem" style="cursor: pointer;">Selecionar Imagem</label>
+            <input type="file" name="imagem" class="custom-file-input" lang="pt-br" id="imagem" style="cursor: pointer;">
+        </div>
+
+        <input type="submit" value="Publicar" class="btn btn-lg btn-success small mt-3">
+    </form>   
 </div>
-
-
-
 
 <?php
 include '../rodape.php';

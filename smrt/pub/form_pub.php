@@ -1,21 +1,23 @@
 <?php
-include '../cabecalho.php';
-include_once '../bd/conectar.php';
+include_once '../usuario/autenticacao.php';
+include '../bd/conectar.php';
+include_once '../cabecalho.php';
 
-$Name_autor = $_SESSION['nome'];
+$sql_pessoa = "select * from usuario where email = '$_SESSION[email]'";
+$resultado = mysqli_query($conexao, $sql_pessoa);
+$linha = mysqli_fetch_array($resultado);
 ?>
 
-<form method="post" action="inserir.php">
-    <fieldset>
-        <h2>Publicar</h2>
-        <h3>Informe os dados</h3>
+<form method="post" action="inserir.php" enctype="multipart/form-data">
+
+        <input type="hidden" name="autor" value="<?= $linha['id'] ?>"> 
         <input type="text" name="legenda" class="form-control py-2 my-3" placeholder="Titulo da publicação" />
         <input type="text" name="imagem" class="form-control py-2 " placeholder="Selecione a imagem" />
         <input type="text" name="titulo" class="form-control py-2 my-3" placeholder="Legenda da publicacao" />
         <input type="submit" name="enviar" class="acao btn btn-lg btn-success small mt-3" value="Enviar" />
-    </fieldset>
+
 </form>
 
 <?php
-echo $Name_autor ;
+require_once '../rodape.php';
 ?>

@@ -32,7 +32,7 @@
         <div class="content2">
 
             <!-- MENU -->
-            <nav class="navbar navbar-expand-lg navbar-dark d-flex py-2 px-5">
+            <nav class="navbar navbar-expand-lg navbar-dark d-flex py-2 px-5" style="min-height: 12vh" >
 
                 <!-- BRAND -->
                 <a class="navbar-brand text-muted" href="/smrt/index.php">
@@ -72,7 +72,7 @@
                             <?php if (estaLogado()) { ?>
                                 <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item bg-light text-dark py-2" href="/smrt/publicacao/form_inserir.php">Publicar</a>
-                                    <a class="dropdown-item bg-light text-dark py-2" href="/smrt/pub/teste.php">Publicações</a>
+                                    <a class="dropdown-item bg-light text-dark py-2" href="/smrt/publicacao/teste.php">Publicações</a>
                                 </div>
                             <?php } else { ?>
 
