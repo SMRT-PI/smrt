@@ -138,13 +138,13 @@ $linha = mysqli_fetch_array($resultado);
 <div class="justify-content-center d-flex text-center my-3">
     <form class="col-lg-6" method="post" action="inserir.php" enctype="multipart/form-data">
         <input type="hidden" name="autor" value="<?= $linha['id'] ?>"> 
-        <textarea class="form-control" rows="2" placeholder="Legenda" name="legenda"></textarea>
+        <textarea class="form-control" rows="1" placeholder="Legenda" name="legenda"></textarea>
         <div class="custom-file my-2">
             <label class="custom-file-label" for="imagem" style="cursor: pointer;">Selecionar Imagem</label>
-            <input type="file" name="imagem" class="custom-file-input" lang="pt-br" id="imagem" style="cursor: pointer;">
+            <input type="file" name="imagem" class="custom-file-input" style="cursor: pointer;" multiple="true">
         </div>
 
-        <input type="submit" value="Publicar" class="btn btn-lg btn-success small mt-3">
+        <input type="submit" value="Publicar" class="btn btn-lg btn-success small mt-3" formenctype="multipart/form-data">
     </form>   
 </div>
 

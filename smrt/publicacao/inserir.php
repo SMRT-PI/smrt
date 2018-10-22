@@ -1,21 +1,15 @@
 <?php
-
-include '../bd/conectar.php';
+require_once '../bd/conectar.php';
 
 $legenda = $_POST['legenda'];
 $imagem = $_FILES['imagem']['name'];
 $autor = $_POST['autor'];
 $data = (idate("Y") . "-" . idate("m") . "-" . idate("d"));
 
-$_UP['pasta'] = '../img/';
-
-//Tamanho máximo do arquivo em Bytes
-$_UP['tamanho'] = 1024 * 1024 * 100; //5mb
-//Array com a extensões permitidas
-$_UP['extensoes'] = array('png', 'jpg', 'jpeg', 'gif');
-
-//Renomeiar
-$_UP['renomeia'] = false;
+$_UP['pasta'] = '../img/'; //PASTA ONDE A IMAGEM VAI SER ARMAZENADA
+$_UP['tamanho'] = 1024 * 1024 * 100; //Tamanho MÁXIMO do arquivo em BYTES (FICA 5mB)
+$_UP['extensoes'] = array('png','jpg','jpeg','gif'); //Array com a EXTENÇÕES PERMITIDAS
+$_UP['renomeia'] = FALSE; //Renomeiar
 
 //Array com os tipos de erros de upload do PHP
 $_UP['erros'][0] = 'Não houve erro';
@@ -25,20 +19,18 @@ $_UP['erros'][3] = 'O upload do arquivo foi feito parcialmente';
 $_UP['erros'][4] = 'Não foi feito o upload do arquivo';
 
 //Verifica se houve algum erro com o upload. Sem sim, exibe a mensagem do erro
-if ($_FILES['imagem']['error'] != 0) {
+if ($_FILES['imagem']['error'] !== 0) {
     die("Não foi possivel fazer o upload, erro: <br />" . $_UP['erros'][$_FILES['imagem']['error']]);
     exit; //Para a execução do script
 }
 
 //Faz a verificação da extensao do arquivo
 $extensao = strtolower(end(explode('.', $_FILES['imagem']['name'])));
-if (array_search($extensao, $_UP['extensoes']) === false) {
-    echo "
-					<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/form_inserir.php'>
+if (array_search($extensao, $_UP['extensoes']) === FALSE) {
+    echo "                              <META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/form_inserir.php'>
 					<script type=\"text/javascript\">
 						alert(\"A imagem não foi cadastrada extesão inválida.\");
-					</script>
-				";
+					</script>";
 }
 
 //Faz a verificação do tamanho do arquivo
@@ -54,7 +46,7 @@ else if ($_UP['tamanho'] < $_FILES['imagem']['size']) {
 //O arquivo passou em todas as verificações, hora de tentar move-lo para a pasta foto
 else {
     //Primeiro verifica se deve trocar o nome do arquivo
-    if ($UP['renomeia'] == true) {
+    if ($UP['renomeia'] === true) {
         //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão .jpg
         $nome_final = time() . '.jpg';
     } else {

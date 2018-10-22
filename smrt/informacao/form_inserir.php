@@ -17,9 +17,9 @@ if (estaLogado()) {
                     <label class="custom-file-label" for="customFile">Capa</label>>
                     <input type="file" name="capa" class="custom-file-input" lang="pt-br" id="capa">
                 </div>
-                <input class="form-control py-3" type="text" name="titulo" placeholder="Título">
-                <textarea class="form-control py-3 my-2" rows="2" type="text" name="descricao" placeholder="Descrição"></textarea>
-                <textarea class="form-control p-3" rows="15" placeholder="Conteúdo" name="conteudo"></textarea>
+                <textarea class="form-control py-2" type="text" rows="1" name="titulo" wrap="hard" placeholder="Título"></textarea>
+                <textarea class="form-control py-2 my-2" rows="3" type="text" name="descricao" placeholder="Descrição"></textarea>
+                <textarea class="form-control p-2" rows="16" placeholder="Conteúdo" name="conteudo"></textarea>
                 <input type="submit" value="Publicar" class="btn btn-lg btn-success small mt-3">
             </form>   
         </div>

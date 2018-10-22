@@ -4,7 +4,7 @@ require_once '../bd/conectar.php';
 require_once '../cabecalho.php';
 
 if (adm()) {
-    $sql_denunciado = "select distinct denuncia.denunciado, denuncia.data, usuario.nome, usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on denuncia.denunciado= usuario.id order by nome";
+    $sql_denunciado = "select distinct denuncia.denunciado, denuncia.dataa, usuario.nome, usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on denuncia.denunciado= usuario.id order by nome";
     $retorno = mysqli_query($conexao, $sql_denunciado);
     ?>
     <div class="d-flex my-3 justify-content-center">
