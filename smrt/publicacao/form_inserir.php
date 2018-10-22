@@ -1,10 +1,10 @@
 <?php
-include_once '../bd/conectar.php';
-include '../cabecalho.php';
+//include_once '../bd/conectar.php';
+//include '../cabecalho.php';
 
-$sql_pessoa = "select * from usuario where email = '$_SESSION[email]'";
-$resultado = mysqli_query($conexao, $sql_pessoa);
-$linha = mysqli_fetch_array($resultado);
+$sql_form = "select * from usuario where email = '$_SESSION[email]'";
+$retorno_form = mysqli_query($conexao, $sql_form);
+$linha_form = mysqli_fetch_array($retorno_form);
 ?>
 
 <!--Google Maps Localização-->
@@ -92,7 +92,7 @@ $linha = mysqli_fetch_array($resultado);
                 <p id="demo"></p>
             </div>
         </div>
-        <input type="hidden" name="autor" value="<?= $linha['id'] ?>"/>   
+        <input type="hidden" name="autor" value="<?= $linha_form['id'] ?>"/>   
 
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-2 col-form-label"></label>
@@ -137,16 +137,16 @@ $linha = mysqli_fetch_array($resultado);
 
 <div class="justify-content-center d-flex text-center my-3">
     <form class="col-lg-6" method="post" action="inserir.php" enctype="multipart/form-data">
-        <input type="hidden" name="autor" value="<?= $linha['id'] ?>"> 
-        <textarea class="form-control" rows="1" placeholder="Legenda" name="legenda"></textarea>
-        <div class="custom-file my-2">
-            <label class="custom-file-label" for="imagem" style="cursor: pointer;">Selecionar Imagem</label>
-            <input type="file" name="imagem" class="custom-file-input" style="cursor: pointer;" multiple="true">
+        <input type="hidden" name="autor" value="<?= $linha_form['id'] ?>"> 
+        <div class="input-group">
+            <textarea class="form-control" rows="1" placeholder="Legenda" name="legenda"></textarea>
+            <div class="input-group-append">
+                <span class="input-group-text">
+                    <input type="file" id="imagem" name="imagem" style="cursor: pointer;display: inline-block;opacity: 0;position: absolute;" multiple="true">
+                    <i for="imagem" style="cursor: pointer;" class="fas fa-image"></i>
+                </span>
+                <input type="submit" value="Publicar" class="btn btn-lg btn-success small" formenctype="multipart/form-data">
+            </div>
         </div>
-
-        <input type="submit" value="Publicar" class="btn btn-lg btn-success small mt-3" formenctype="multipart/form-data">
-    </form>   
+    </form>
 </div>
-
-<?php
-include '../rodape.php';

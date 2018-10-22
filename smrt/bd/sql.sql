@@ -18,7 +18,8 @@ create table usuario(
     sobrenome varchar(100),
     senha varchar(100),
     adm boolean default FALSE,
-    email varchar(100) unique
+    email varchar(100) unique,
+    foto varchar(220)
   );
 -- /USUÁRIO --
 
@@ -66,9 +67,21 @@ create table pub(
     autor varchar(200),
     dataa date
 );
+
+select * from pub;
 -- SELECT pub.id,pub.legenda,pub.comentarios,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
 -- FROM pub inner join usuario on pub.autor = usuario.id order by dataa DESC;
 -- /PUBLICACAO --
+
+-- PUBLICACAO --
+create table comentario(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    publicacao int references pub(id),
+    publicador int references usuario(id),
+    dataa date
+);
+-- /PUBLICACAO --
+
 
 -- select id, nome from usuario;
 -- select administrador.id as adm, usuario.id as usuario from administrador inner join usuario on usuario.id = administrador.adm;

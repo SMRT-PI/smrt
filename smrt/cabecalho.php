@@ -65,21 +65,8 @@
                         <!-- /LINK4 --> 
                         <!--Feed de Noticias-->
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <strong>Feed de Noticias</strong>
-                            </a>
-                            <?php if (estaLogado()) { ?>
-                                <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item bg-light text-dark py-2" href="/smrt/publicacao/form_inserir.php">Publicar</a>
-                                    <a class="dropdown-item bg-light text-dark py-2" href="/smrt/publicacao/teste.php">Publicações</a>
-                                </div>
-                            <?php } else { ?>
-
-                                <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item bg-light text-dark py-2" href="/smrt/publicacao/teste.php">Publicações</a>
-                                </div>
-                            <?php } ?>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/smrt/publicacao/teste.php"><strong>Feed de Notícias</strong></a>
                         </li>
 
                         <!--Feed de Noticias-->

@@ -4,8 +4,8 @@ include_once '../bd/conectar.php';
 include_once '../publicacao/jvBotaoLike.php';
 include_once '../usuario/autenticacao.php';
 
-$sql = "SELECT pub.id,pub.legenda,pub.comentarios,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
-FROM pub inner join usuario on pub.autor = usuario.id order by dataa DESC;";
+$sql = "SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
+FROM pub inner join usuario on pub.autor = usuario.id order by pub.id DESC;";
 $resultado = mysqli_query($conexao, $sql);
 ?>
 <link rel="stylesheet" href="css/style.css">
@@ -14,6 +14,7 @@ if (mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
         $retorno_denunciados = mysqli_query($conexao, "select * from denuncia where denunciado = $linha[id]");
         $denunciado = mysqli_fetch_array($retorno_denunciados);
+        require_once './form_inserir.php';
         ?>
 
         <div class="row my-3">
@@ -45,7 +46,7 @@ if (mysqli_num_rows($resultado) > 0) {
                     <div class="card-footer bg-light">
 
                         <div class="row text-center">
-                            <div class="float-right col" style="border-right: threedshadow">
+<!--                            <div class="float-right col" style="border-right: threedshadow">
                                 <span class="like-btn"> 
                                     <span class="fa like-btn-emo fa-thumbs-o-up"></span> 
                                     <span class="like-btn-text">Like</span>   
@@ -58,8 +59,10 @@ if (mysqli_num_rows($resultado) > 0) {
                                         <li class="reaction reaction-angry" data-reaction="Angry"></li>
                                     </ul>
                                 </span>
-                            </div>
-                            <div class="col"> Cometar </div>
+                            </div>-->
+                            <div class="col"> Curtir </div>
+                            <div class="col"> Compartilhar </div>
+                            <div class="col"> Comentar </div>
                         </div>
                     </div>
                 </div>
