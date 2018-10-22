@@ -1,13 +1,13 @@
 <?php
-include '../usuario/autenticacao.php';
-include '../bd/conectar.php';
-include '../cabecalho.php';
+include_once '../usuario/autenticacao.php';
+include_once '../bd/conectar.php';
+include_once '../cabecalho.php';
 
 if (!estaLogado()) {
 	header('Location: entrar.php');
 }
 
-$sql = "SELECT * FROM usuario WHERE email = '$_SESSION[email]'";
+$sql = sprintf("SELECT * FROM usuario WHERE email = '%s'", $_SESSION['email']);
 $resultado = mysqli_query($conexao, $sql);
 $linha = mysqli_fetch_array($resultado);
 
@@ -62,8 +62,11 @@ $retorno_publicacoes = mysqli_query($conexao, $sql_publicacoes);
 				<!-- INFORMACOES -->
 <!--				 BOTOES -->
 				<div class="profile-userbuttons">
-					<button type="button" class="btn btn-success btn-sm">Seguir</button>
-					<button type="button" class="btn btn-danger btn-sm">Mensagem</button>
+					<button type="button" class="btn btn-success btn-sm" onClick="alert('Você seguiu <?= $linha['nome'] . ' ' . $linha['sobrenome'] ?>')">Seguir</button>
+					<a href="editar.php">
+						<button type="button" class="btn btn-danger btn-sm">Editar</button>
+					</a>
+		
 				</div><!--  BOTOES	MENU -->
 				<div class="profile-usermenu">
 					<ul class="nav">
@@ -79,7 +82,8 @@ $retorno_publicacoes = mysqli_query($conexao, $sql_publicacoes);
 							<i class="glyphicon glyphicon-ok"></i>
 							Publicações </a>
 						</li>
-						<!-- Qual a tabela de alertas? -->
+						<!-- tabela de alertas -->
+                                                <!-- ainda não feita -->
 						<li>
 							<a href="#">
 							<i class="glyphicon glyphicon-flag"></i>
