@@ -1,10 +1,8 @@
 <?php
-//include_once '../bd/conectar.php';
-//include '../cabecalho.php';
+include_once '../bd/conectar.php';
+include '../cabecalho.php';
 
-$sql_form = "select * from usuario where email = '$_SESSION[email]'";
-$retorno_form = mysqli_query($conexao, $sql_form);
-$linha_form = mysqli_fetch_array($retorno_form);
+$Name_autor = $_SESSION['nome'];
 ?>
 
 <!--Google Maps Localização-->
@@ -79,9 +77,9 @@ $linha_form = mysqli_fetch_array($retorno_form);
 
 
 
-<!--<div class="container">
+<div class="container">
 
-        Mapa    
+    <!--    Mapa-->    
     <div class="col-md-6 offset-md-3 mt-5 mb-5">  
         <div class="row mt-3 mb-3">
             <div id="mapholder" style="margin:0 auto;"></div>
@@ -92,7 +90,7 @@ $linha_form = mysqli_fetch_array($retorno_form);
                 <p id="demo"></p>
             </div>
         </div>
-        <input type="hidden" name="autor" value="<?= $linha_form['id'] ?>"/>   
+        <input type="hidden" name="autor" value="<?= $linha['id'] ?>"/>   
 
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-2 col-form-label"></label>
@@ -101,9 +99,9 @@ $linha_form = mysqli_fetch_array($retorno_form);
                 <input class="form-control" type="text" id="lon" name="lon" value="" placeholder="Longitude"/>
             </div>
         </div>
-            Mapa 
+        <!--    Mapa--> 
 
-            Formulario 
+        <!--    Formulario--> 
         <form method="post" action="inserir.php">
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Imagem:</label>
@@ -131,22 +129,12 @@ $linha_form = mysqli_fetch_array($retorno_form);
                 </div>
             </div>
         </form>
-            Formulario
+        <!--    Formulario-->
     </div>
-</div>-->
-
-<div class="justify-content-center d-flex text-center my-3">
-    <form class="col-lg-6" method="post" action="inserir.php" enctype="multipart/form-data">
-        <input type="hidden" name="autor" value="<?= $linha_form['id'] ?>"> 
-        <div class="input-group">
-            <textarea class="form-control" rows="1" placeholder="Legenda" name="legenda"></textarea>
-            <div class="input-group-append">
-                <span class="input-group-text">
-                    <input type="file" id="imagem" name="imagem" style="cursor: pointer;display: inline-block;opacity: 0;position: absolute;" multiple="true">
-                    <i for="imagem" style="cursor: pointer;" class="fas fa-image"></i>
-                </span>
-                <input type="submit" value="Publicar" class="btn btn-lg btn-success small" formenctype="multipart/form-data">
-            </div>
-        </div>
-    </form>
 </div>
+
+
+
+
+<?php
+include '../rodape.php';
