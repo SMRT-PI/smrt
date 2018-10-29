@@ -22,7 +22,7 @@ create table usuario(
     foto varchar(220)
   );
 -- /USUÁRIO --
-
+select * from usuario;
 -- ADMNISTRADOR --
 create table administrador(
     id int PRIMARY KEY AUTO_INCREMENT,
@@ -38,7 +38,7 @@ create table denuncia(
     dataa date
 );
 -- /DENUNCIA --
-
+select * from denuncia;
 -- BLOQUEIO --
 create table bloqueio(
     id int PRIMARY KEY AUTO_INCREMENT,
@@ -46,6 +46,8 @@ create table bloqueio(
     bloqueado int unique REFERENCES usuario(id),
     dataa date
 );
+select distinct denuncia.denunciado, denuncia.dataa, usuario.nome, usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on denuncia.denunciado= usuario.id order by nome;
+select * from bloqueio;
 -- /BLOQUEIO --
 
 -- MATÉRIA --
