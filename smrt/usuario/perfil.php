@@ -34,6 +34,16 @@ $sql_publicacoes = "SELECT
     ORDER BY titulo";
 $retorno_publicacoes = mysqli_query($conexao, $sql_publicacoes);
 
+$sql_alertas = "SELECT
+        id,
+        titulo,
+        email
+    FROM 
+		alerta u 
+	WHERE id != ".$linha['id']."
+    ORDER BY titulo";
+$retorno_alertas = mysqli_query($conexao, $sql_alertas);
+
 ?>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -85,8 +95,8 @@ $retorno_publicacoes = mysqli_query($conexao, $sql_publicacoes);
 						<!-- tabela de alertas -->
                                                 <!-- ainda não feita -->
 						<li>
-							<a href="#">
-							<i class="glyphicon glyphicon-flag"></i>
+							<a href="#" onclick="mostrarAlertas()" >
+							<i class="glyphicon glyphicon-ok"></i>
 							Alertas </a>
 						</li>
 					</ul>
@@ -134,6 +144,11 @@ $retorno_publicacoes = mysqli_query($conexao, $sql_publicacoes);
 	function mostrarPublicacoes(){
 		document.getElementById('usuarios').hidden = true;
 		e = document.getElementById('publicacoes');
+		e.hidden = !e.hidden;
+	}
+        function mostrarAlertas(){
+		document.getElementById('alertas').hidden = true;
+		e = document.getElementById('alertas');
 		e.hidden = !e.hidden;
 	}
 </script>

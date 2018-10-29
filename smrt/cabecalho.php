@@ -68,11 +68,14 @@
                         <!--Feed de Noticias-->
 
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="/smrt/publicacao/teste.php"><strong>Feed de Notícias</strong></a>
+                            <a class="nav-link text-light" href="/smrt/publicacao/form_inserir.php"><strong>Feed de Notícias</strong></a>
                         </li>
 
-                        <!--Feed de Noticias-->
 
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="http://localhost/smrt/alerta/alerta.php"><strong>Alertas</strong></a>
+                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link text-light" href="http://localhost/smrt/sobre.php"><strong>Sobre nós</strong></a>
                         </li>
