@@ -1,14 +1,13 @@
-<div id="form_cadastrar" class="container-fluid mb-4" style="display: none;" >
+<div id="form_cadastrar" class="container-fluid mb-4" style="display: none;">
     <div class="jumbotron jumbotron-fluid text-center m-0 h2" style="background-color: whitesmoke;">Cadastre-se Gratuitamente!</div>
     <div class="container-fluid text-center">
         <div class="row justify-content-center">
 
-            <form method="post" action="" id="ajax_form" class="col-lg-6"><br>
-                <div class="resp container-fluid text-center m-0 bg-danger text-light rounded"></div>
-                <input class="form-control py-3" type="text" name="nome" placeholder="Nome">
-                <input class="form-control py-3 my-3" type="text" name="sobrenome" placeholder="Sobrenome">
-                <input class="form-control py-3" type="text" name="email" placeholder="E-mail">
-                <input class="form-control py-3 my-3" type="password" name="senha" placeholder="Senha">
+            <form method="POST" action="" id="ajax_form" class="col-lg-6"><br>
+                <input class="form-control py-3" type="text" name="nome" placeholder="Nome" value="">
+                <input class="form-control py-3 my-3" type="text" name="sobrenome" placeholder="Sobrenome" value="">
+                <input class="form-control py-3" type="text" name="email" placeholder="E-mail" value="">
+                <input class="form-control py-3 my-3" type="password" name="senha" placeholder="Senha" value="">
                 <div class="btn-group w-100 justify-content-center">
                     <button class="btn btn-default mr-2 rounded" type="button" onclick="mudar(form_cadastrar)">Já é Cadastrado?</button>
                     <input class="next acao btn btn-success rounded" name="enviar" type="submit" value="CADASTRAR">
