@@ -15,16 +15,6 @@ if (mysqli_num_rows($resultado) > 0) {
         $id = $linha['id'];
         ?>  
 
-        <div id="comentario" id="<?php echo $id; ?>">
-            <form action="inserir_comentario.php" method="post" name="form_comentario" id="form_comentario">
-                <input type="text" name="comentario" size="50" value="Digite seu comentario" class="campo"/>
-                <input type="hidden" name="id_postagem" value="<?php echo $id ?>"
-                       <input type="submit" name="enviar" class="btn btn-success float-left" value="Enviar" />
-            </form>
-        </div>
-
-
-
         <div class="row">
             <div class="col-sm-6 offset-md-3">
 
@@ -38,6 +28,14 @@ if (mysqli_num_rows($resultado) > 0) {
 
                         </div>
                     </div>
+                    <div id="comentario" id="<?php echo $id; ?>">
+                        <form action="inserir_comentario.php" method="post" name="form_comentario" id="form_comentario"><br>
+                            <input type="text" name="comentario" size="50" value="Digite seu comentario!" class="form-control campo"/>
+                            <input type="hidden" name="id_postagem" value="<?php echo $id ?>"
+                                   <input type="submit" name="enviar" class="btn btn-success float-left" value="Enviar" />
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -46,5 +44,4 @@ if (mysqli_num_rows($resultado) > 0) {
 } else {
     echo '<h1>Nenhuma publicacao encontrada!</h1>';
 }
-header("Location: ../smrt/publicacao/teste.php?id=$id#$id");
 include_once '../rodape.php';
