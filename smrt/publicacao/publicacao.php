@@ -1,6 +1,7 @@
 <?php
 include_once '../cabecalho.php';
 include_once '../bd/conectar.php';
+error_reporting(0);
 ?>
 
 <?php
@@ -11,7 +12,16 @@ $resultado = mysqli_query($conexao, $sql);
 <?php
 if (mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
+        $id = $linha['id'];
         ?>  
+
+        <div id="comentario" id="<?php echo $id; ?>">
+            <form action="inserir_comentario.php" method="post" name="form_comentario" id="form_comentario">
+                <input type="text" name="comentario" size="50" value="Digite seu comentario" class="campo"/>
+                <input type="hidden" name="id_postagem" value="<?php echo $id ?>"
+                       <input type="submit" name="enviar" class="btn btn-success float-left" value="Enviar" />
+            </form>
+        </div>
 
 
 
@@ -29,8 +39,12 @@ if (mysqli_num_rows($resultado) > 0) {
                         </div>
                     </div>
                 </div>
-                <?php
-            }
-        } else {
-            echo '<h1>Nenhuma publicacao encontrada!</h1>';
-        }
+            </div>
+        </div>
+        <?php
+    }
+} else {
+    echo '<h1>Nenhuma publicacao encontrada!</h1>';
+}
+header("Location: ../smrt/publicacao/teste.php?id=$id#$id");
+include_once '../rodape.php';

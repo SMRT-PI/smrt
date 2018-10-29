@@ -75,14 +75,18 @@ select * from pub;
 -- FROM pub inner join usuario on pub.autor = usuario.id order by dataa DESC;
 -- /PUBLICACAO --
 
--- PUBLICACAO --
+-- COMENTARIO --
 create table comentario(
     id int PRIMARY KEY AUTO_INCREMENT,
-    publicacao int references pub(id),
-    publicador int references usuario(id),
+    id_postagem int references pub(id),
+    comentario varchar(500),
+    autor varchar(200),
     dataa date
 );
--- /PUBLICACAO --
+INSERT INTO comentario (publicacao ,conteudo, autor, dataa) VALUES ('1','asd','a','2018/05/03')
+select * from comentario
+drop table comentario
+-- /COMENTARIO --
 
 
 -- select id, nome from usuario;
