@@ -70,6 +70,15 @@ create table pub(
     dataa date
 );
 
+-- ALERTAS --
+create table alertas(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    titulo varchar(400),
+    lat varchar(220),
+    lon varchar(200),
+    dataa date
+);
+
 select * from pub;
 -- SELECT pub.id,pub.legenda,pub.comentarios,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
 -- FROM pub inner join usuario on pub.autor = usuario.id order by dataa DESC;
