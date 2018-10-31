@@ -185,3 +185,6 @@ insert into denuncia(denunciador, denunciado,dataa) values (3,14,'2018-09-28');
 insert into denuncia(denunciador, denunciado,dataa) values (1,15,'2018-09-28');
 insert into denuncia(denunciador, denunciado,dataa) values (2,15,'2018-09-28');
 insert into denuncia(denunciador, denunciado,dataa) values (3,15,'2018-09-28');
+insert into denuncia(denunciador, denunciado,dataa) values (1,16,'2018-09-28');
+insert into denuncia(denunciador, denunciado,dataa) values (2,16,'2018-09-28');
+insert into denuncia(denunciador, denunciado,dataa) values (3,16,'2018-09-28');

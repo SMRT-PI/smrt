@@ -51,11 +51,11 @@ if (isset($_POST['nome'])) {
     $query = "
  INSERT INTO usuario 
  (nome, sobrenome, email, senha) 
- VALUES (:nome, :sobrenome, :email, :senha)
+ VALUES (:nome, :sobrenome, :email, md5(:senha))
  ";
     $statement = $connect->prepare($query);
     if ($statement->execute($data)) {
-        echo 'Registration Completed Successfully...';
+        echo 'Cadastrado com Sucesso!';
     }
 }
 ?>

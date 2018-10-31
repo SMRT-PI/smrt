@@ -1,8 +1,3 @@
-<?php
-include_once '../bd/conectar.php';
-include '../cabecalho.php';
-?>
-
 <div id="form_logar" class="container-fluid mb-4">
     <div class="jumbotron jumbotron-fluid text-center m-0 h2" style="background-color: whitesmoke;">Entre com sua Conta!</div>
     <div class="container-fluid text-center">
@@ -18,7 +13,3 @@ include '../cabecalho.php';
         </div>
     </div>
 </div>
-
-<?php
-include '../rodape.php';
-?>

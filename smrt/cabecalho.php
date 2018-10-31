@@ -113,7 +113,7 @@
                         </li>
                     <?php } else { ?>   
                         <!-- LINK7 -->
-                        <a class="navbar-brand ml-auto" href="/smrt/usuario/form_logar.php">                             
+                        <a class="navbar-brand ml-auto" href="/smrt/usuario/entrar.php">                             
                             <strong>ENTRAR</strong>
                         </a>
                         <!-- /LINK7 -->
