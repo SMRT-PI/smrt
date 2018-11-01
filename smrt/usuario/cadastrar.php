@@ -1,9 +1,9 @@
 <?php
 
+require_once '../bd/conectar.php';
 sleep(2);
-
 if (isset($_POST['nome'])) {
-    $connect = new PDO("mysql:host=localhost;dbname=smrt", "root", "");
+    $connect = new PDO("mysql:host=localhost;dbname=smrt", "root", "ifsc");
 
     $data = array(
         ':nome' => $_POST['nome'],
