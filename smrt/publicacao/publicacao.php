@@ -5,7 +5,7 @@ error_reporting(0);
 ?>
 
 <?php
-$sql = "SELECT * FROM pub";
+$sql = "SELECT * FROM pub, comentario";
 $resultado = mysqli_query($conexao, $sql);
 ?>
 <link rel="stylesheet" href="css/style.css">
@@ -30,7 +30,11 @@ if (mysqli_num_rows($resultado) > 0) {
                         </div>
                     </div>
                     
-                    <div id="comentario" id="<?php echo $id; ?>">
+                    <div class="comentario">
+                        
+                    </div>
+
+                    <div id="box_comentario" id="<?php echo $id; ?>">
                         <form action="inserir_comentario.php" method="post" name="form_comentario" id="form_comentario"><br>
                             <input type="text" name="comentario" size="50" placeholder="Digite seu comentario!" class="form-control campo"/>
                             <input type="hidden" name="id_postagem" value="<?php echo $id ?>"
@@ -41,7 +45,7 @@ if (mysqli_num_rows($resultado) > 0) {
                 </div>
             </div>
         </div>
-        
+
         <?php
     }
 } else {
