@@ -66,9 +66,12 @@ create table pub(
     id int PRIMARY KEY AUTO_INCREMENT,
     legenda varchar(400),
     imagem varchar(220),
+    titulo varchar(500),
     autor varchar(200),
     dataa date
 );
+drop table pub
+select * from pub
 
 -- ALERTAS --
 create table alertas(
@@ -92,6 +95,8 @@ create table comentario(
     autor varchar(200),
     dataa date
 );
+
+select *from comentario
 INSERT INTO comentario (publicacao ,conteudo, autor, dataa) VALUES ('1','asd','a','2018/05/03')
 select * from comentario
 drop table comentario
