@@ -106,32 +106,34 @@ $Name_autor = $_SESSION['nome'];
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Imagem:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="file" name="imagem" />
+<!--                    <form enctype="multipart/form-data" method="POST" action="uploadTeste.php">-->
+                        <input type="file" name="arquivo[]" multiple="multiple"/><br><br>
+<!--                    </form>    -->
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Legenda:</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="5" placeholder="Informe a legenda de Publicação" name="legenda"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <input type="submit" name="enviar" class="btn btn-success float-left" value="Enviar" />
+
+                            </div>
+                        </div>
+                    </form>
+                    <!--    Formulario-->
                 </div>
             </div>
-            <div class="form-group row">
-            </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Legenda:</label>
-                <div class="col-sm-10">
-                    <textarea class="form-control" rows="5" placeholder="Informe a legenda de Publicação" name="legenda"></textarea>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 mb-4">
-                    <input type="submit" name="enviar" class="btn btn-success float-left" value="Enviar" />
-
-                </div>
-            </div>
-        </form>
-        <!--    Formulario-->
-    </div>
-</div>
 
 
 
 
-<?php
-
-include '../rodape.php';
+            <?php
+            include '../rodape.php';
+            

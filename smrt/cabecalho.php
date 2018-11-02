@@ -54,13 +54,13 @@
                     <ul class="navbar-nav text-center py-2 px-3">
                         <!-- LINK4 -->
                         <li class="nav-item <?php if (admin()) { ?>dropdown <?php } ?>">
-                            <a class="nav-link text-light" <?php if (admin()) { ?>href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php } else { ?>href="http://localhost/smrt/informacao/area_info.php" <?php } ?> >
+                            <a class="nav-link text-light" <?php if (admin()) { ?>href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php } else { ?>href="../smrt/informacao/area_info.php" <?php } ?> >
                                 <strong>Área Informativa </strong>
                             </a>
                             <?php if (admin()) { ?>  
                                 <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item bg-light text-dark py-2" href="/smrt/informacao/area_info.php">Matérias</a>
-                                    <a class="dropdown-item bg-light text-dark py-2" href="/smrt/informacao/form_inserir.php">Criar Matéria</a>
+                                    <a class="dropdown-item bg-light text-dark py-2" href="../smrt/informacao/area_info.php">Matérias</a>
+                                    <a class="dropdown-item bg-light text-dark py-2" href="../smrt/informacao/form_inserir.php">Criar Matéria</a>
                                 </div> 
                             <?php } ?>
                         </li>
@@ -83,11 +83,11 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="http://localhost/smrt/alerta/alerta.php"><strong>Alertas</strong></a>
+                            <a class="nav-link text-light" href="../smrt/alerta/alerta.php"><strong>Alertas</strong></a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="http://localhost/smrt/sobre.php"><strong>Sobre nós</strong></a>
+                            <a class="nav-link text-light" href="../smrt/sobre.php"><strong>Sobre nós</strong></a>
                         </li>
                         <!-- LINK5 -->
                         <?php
