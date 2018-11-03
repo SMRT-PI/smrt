@@ -5,8 +5,10 @@ error_reporting(0);
 ?>
 
 <?php
-$sql = "SELECT * FROM pub, comentario";
+$sql = "SELECT * FROM pub";
+$sql2 = "SELECT * FROM comentario";
 $resultado = mysqli_query($conexao, $sql);
+$resultado2 = mysqli_query($conexao, $sql2);
 ?>
 <link rel="stylesheet" href="css/style.css">
 <?php
@@ -29,10 +31,6 @@ if (mysqli_num_rows($resultado) > 0) {
 
                         </div>
                     </div>
-                    
-                    <div class="comentario">
-                        
-                    </div>
 
                     <div id="box_comentario" id="<?php echo $id; ?>">
                         <form action="inserir_comentario.php" method="post" name="form_comentario" id="form_comentario"><br>
@@ -46,6 +44,23 @@ if (mysqli_num_rows($resultado) > 0) {
             </div>
         </div>
 
+
+        <div class="row">
+            <div class="col-sm-6 offset-md-3">
+
+                <div class="post-content">
+                    <i class="fas fa-user"> </i> <?php echo $linha["autor"]; ?>
+                    <span class="text-muted small"><i class="far fa-clock"></i > <?php echo $linha["dataa"]; ?> </span>
+                    <div class="media">
+                        <img class="mr-3" src="../img/rio1.jpg">
+                        <div class="media-body">
+                            <?php echo $linha["legenda"]; ?>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <?php
     }
 } else {

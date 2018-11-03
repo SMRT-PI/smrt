@@ -106,8 +106,9 @@ $Name_autor = $_SESSION['nome'];
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Imagem:</label>
                 <div class="col-sm-10">
+                    <input class="form-control" type="file" name="imagem" />
 <!--                    <form enctype="multipart/form-data" method="POST" action="uploadTeste.php">-->
-                        <input type="file" name="arquivo[]" multiple="multiple"/><br><br>
+<!--                        <input type="file" name="arquivo[]" multiple="multiple"/><br><br>-->
 <!--                    </form>    -->
                         </div>
                         </div>

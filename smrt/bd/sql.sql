@@ -89,12 +89,13 @@ select * from pub;
 
 -- COMENTARIO --
 create table comentario(
-    id int PRIMARY KEY AUTO_INCREMENT,
+    idc int PRIMARY KEY AUTO_INCREMENT,
     id_postagem int references pub(id),
     comentario varchar(500),
     autor varchar(200),
     dataa date
 );
+drop table comentario
 
 select *from comentario
 INSERT INTO comentario (publicacao ,conteudo, autor, dataa) VALUES ('1','asd','a','2018/05/03')
