@@ -154,6 +154,8 @@ insert into usuario (nome, sobrenome ,email, senha) values  ('w', 'w', 'w@w','12
 insert into usuario (nome, sobrenome ,email, senha) values  ('x', 'x', 'x@x','123');
 insert into usuario (nome, sobrenome ,email, senha) values  ('y', 'y', 'y@y','123');
 insert into usuario (nome, sobrenome ,email, senha) values  ('z', 'z', 'z@z','123');
+insert into usuario (nome, sobrenome ,email, senha) values  ('Ezequias', 'Serafim', 'serafimezequias@gmail.com','123');
+
 
 insert into denuncia(denunciador, denunciado,dataa) values (1,4,'2018-09-28');
 insert into denuncia(denunciador, denunciado,dataa) values (2,4,'2018-09-28');
