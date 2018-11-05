@@ -9,6 +9,7 @@ $sql = "SELECT * FROM pub";
 $sql2 = "SELECT * FROM comentario";
 $resultado = mysqli_query($conexao, $sql);
 $resultado2 = mysqli_query($conexao, $sql2);
+require_once './form_inserir.php';
 ?>
 <link rel="stylesheet" href="css/style.css">
 <?php

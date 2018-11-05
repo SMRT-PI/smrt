@@ -17,19 +17,29 @@ include '../cabecalho.php';
                 <input class="form-control py-2" id="email_login" type="email" required name="email" placeholder="E-mail">
                 <input class="form-control py-2 mt-2" id="senha_login" required type="password" name="senha" placeholder="Senha">
                 <div class="btn-group w-100 justify-content-center mt-3">
-                    <a class="btn btn-default mr-2 rounded" href="#first_name" onclick="mudar(form_logar)">Não é Cadastrado?</a>
+                    <a class="btn btn-default mr-2 rounded" href="#primeiro_nome" onclick="mudar(form_logar)">Não é Cadastrado?</a>
                     <input class="btn btn-success rounded" type="submit" name="logar" value="ENTRAR">
                 </div>
             </form>
 
-            <form id="form_cadastrar" class="col-lg-6" novalidate="true" style="display: none;">              
+            <form id="form_cadastrar" class="col-lg-6" style="display: none;">              
                 <div class="jumbotron jumbotron-fluid text-center m-0 h2" style="background-color: whitesmoke;">Cadastre-se Gratuitamente!</div>
-                <input class="form-control py-2" type="text" name="nome" id="first_name" placeholder="Nome" required data-parsley-pattern="^[a-zA-Z]+$" data-parsley-trigger="keyup" data-parsley-required-message="Informe seu nome!" data-parsley-length="[2, 25]" data-parsley-validation-threshold="0" data-parsley-length-message="Nome muito curto!">
-                <input class="form-control py-2 my-2" type="text" name="sobrenome" id="last_name" placeholder="Sobrenome" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup" data-parsley-required-message="Informe seu sobrenome!" data-parsley-length="[2, 25]" data-parsley-validation-threshold="0" data-parsley-length-message="Sobrenome muito curto!">
-                <input class="form-control py-2" type="text" name="email" id="email" placeholder="Email" data-parsley-type="email" data-parsley-trigger="keyup" data-parsley-required-message="Informe seu email!" data-parsley-type-message="Email inválido!" required data-parsley-validation-threshold="1">
-                <input class="form-control py-2 my-2" type="password" name="senha" id="password" placeholder="Senha" required data-parsley-length="[8, 16]" data-parsley-trigger="keyup" data-parsley-required-message="Informe sua senha!" data-parsley-length-message="A senha deve possuir de 8 a 16 caracteres!" data-parsley-validation-threshold="1">
-                <input class="form-control py-2 mb-3" type="password" name="confirm_senha" id="confirm_password" placeholder="Confirme a senha" data-parsley-equalto="#password" data-parsley-equalto-message="As senhas não conferem!" data-parsley-trigger="keyup" required data-parsley-required-message="Confirme sua senha!" data-parsley-validation-threshold="1">
-                <div class="btn-group w-100 justify-content-center">
+                <input class="form-control py-2" type="text" name="nome" id="primeiro_nome" placeholder="Nome" required data-parsley-pattern="^[a-zA-Z]+$" data-parsley-errors-container="#nome_error" data-parsley-trigger="keyup" data-parsley-required-message="Informe seu nome!" data-parsley-length="[2, 25]" data-parsley-validation-threshold="0" data-parsley-length-message="Nome muito curto!">
+                <div class="invalid-feedback mt-2" style="display: block;" id="nome_error"></div>
+
+                <input class="form-control py-2 my-2" type="text" name="sobrenome" id="last_name" placeholder="Sobrenome" data-parsley-errors-container="#sobrenome_error" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup" data-parsley-required-message="Informe seu sobrenome!" data-parsley-length="[2, 25]" data-parsley-validation-threshold="0" data-parsley-length-message="Sobrenome muito curto!">
+                <div class="invalid-feedback my-0" style="display: block;" id="sobrenome_error"></div>
+
+                <input class="form-control py-2" type="text" name="email" id="email" placeholder="Email" data-parsley-type="email" data-parsley-errors-container="#email_error" data-parsley-trigger="keyup" data-parsley-required-message="Informe seu email!" data-parsley-type-message="Email inválido!" required data-parsley-validation-threshold="">
+                <div class="invalid-feedback mb-0" style="display: block;" id="email_error"></div>
+
+                <input class="form-control py-2 my-2" type="password" name="senha" id="password" placeholder="Senha" required data-parsley-length="[8, 16]" data-parsley-errors-container="#senha_error" data-parsley-trigger="keyup" data-parsley-required-message="Informe sua senha!" data-parsley-length-message="A senha deve possuir de 8 a 16 caracteres!" data-parsley-validation-threshold="0">
+                <div class="invalid-feedback my-0" style="display: block;" id="senha_error"></div>
+
+                <input class="form-control py-2" type="password" name="confirm_senha" id="confirm_password" placeholder="Confirme a senha" data-parsley-errors-container="#confirm_senha_error" data-parsley-equalto="#password" data-parsley-equalto-message="As senhas não conferem!" data-parsley-trigger="keyup" required data-parsley-required-message="Confirme sua senha!" data-parsley-validation-threshold="0">
+                <div class="invalid-feedback my-0" style="display: block;" id="confirm_senha_error"></div>
+
+                <div class="btn-group w-100 justify-content-center mt-3">
                     <a class="btn btn-default mr-2 rounded" href="#email_login" onclick="mudar(form_cadastrar)">Já é Cadastrado?</a>
                     <input class="btn btn-success rounded" type="submit" id="submit" name="submit" value="CADASTRAR" >
                 </div>
@@ -37,6 +47,11 @@ include '../cabecalho.php';
         </div>
     </div>
 </div>
+<style>
+    ul{
+        list-style-type: none;
+    }
+</style>
 <!--<script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
