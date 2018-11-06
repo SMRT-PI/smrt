@@ -11,6 +11,7 @@ $resultado = mysqli_query($conexao, $sql);
 $resultado2 = mysqli_query($conexao, $sql2);
 require_once './form_inserir.php';
 ?>
+<h5 class="text-center">(Substitui 'publicacao.php' por 'teste.php' ali em cima)</h5>
 <link rel="stylesheet" href="css/style.css">
 <?php
 if (mysqli_num_rows($resultado) > 0) {
@@ -18,7 +19,6 @@ if (mysqli_num_rows($resultado) > 0) {
         $id = $linha['id'];
         ?>  
         <br>
-
         <div class="row">
             <div class="col-sm-6 offset-md-3">
 

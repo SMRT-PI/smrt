@@ -22,7 +22,7 @@ create table usuario(
     foto varchar(220)
   );
 -- /USUÁRIO --
-select * from usuario;
+
 -- ADMNISTRADOR --
 create table administrador(
     id int PRIMARY KEY AUTO_INCREMENT,
@@ -38,7 +38,7 @@ create table denuncia(
     dataa date
 );
 -- /DENUNCIA --
-select * from denuncia;
+
 -- BLOQUEIO --
 create table bloqueio(
     id int PRIMARY KEY AUTO_INCREMENT,
@@ -46,8 +46,6 @@ create table bloqueio(
     bloqueado int unique REFERENCES usuario(id),
     dataa date
 );
-select distinct denuncia.denunciado, denuncia.dataa, usuario.nome, usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on denuncia.denunciado= usuario.id order by nome;
-select * from bloqueio;
 -- /BLOQUEIO --
 
 -- MATÉRIA --
@@ -62,16 +60,33 @@ create table materia(
 -- /MATÉRIA --
 
 -- PUBLICACAO --
+-- create table pub(
+--     id int PRIMARY KEY AUTO_INCREMENT,
+--     legenda varchar(400),
+--     imagem varchar(220),
+--     titulo varchar(500),
+--     autor varchar(200),
+--     dataa date
+-- );
+-- PUBLICACAO --
 create table pub(
     id int PRIMARY KEY AUTO_INCREMENT,
     legenda varchar(400),
     imagem varchar(220),
-    titulo varchar(500),
-    autor varchar(200),
+    autor int references usuario(id),
     dataa date
 );
-drop table pub
-select * from pub
+drop table pub;
+select * from pub;
+
+SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
+FROM pub inner join usuario on pub.autor = usuario.id order by pub.id DESC;
+-- create table comentario(
+--     id int PRIMARY KEY AUTO_INCREMENT,
+--     publicacao int references pub(id),
+--     publicador int references usuario(id),
+--     dataa date
+-- );
 
 -- ALERTAS --
 create table alertas(
@@ -82,11 +97,10 @@ create table alertas(
     dataa date
 );
 
-select * from pub;
+-- select * from pub;
 -- SELECT pub.id,pub.legenda,pub.comentarios,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
 -- FROM pub inner join usuario on pub.autor = usuario.id order by dataa DESC;
 -- /PUBLICACAO --
-
 -- COMENTARIO --
 create table comentario(
     idc int PRIMARY KEY AUTO_INCREMENT,
@@ -95,12 +109,12 @@ create table comentario(
     autor varchar(200),
     dataa date
 );
-drop table comentario
-
-select *from comentario
-INSERT INTO comentario (publicacao ,conteudo, autor, dataa) VALUES ('1','asd','a','2018/05/03')
-select * from comentario
-drop table comentario
+-- drop table comentario
+-- 
+-- select *from comentario
+-- INSERT INTO comentario (publicacao ,conteudo, autor, dataa) VALUES ('1','asd','a','2018/05/03')
+-- select * from comentario
+-- drop table comentario
 -- /COMENTARIO --
 
 

@@ -124,7 +124,7 @@ $linha_form = mysqli_fetch_array($retorno_form);
     <form class="col-lg-6" method="post" action="inserir.php" enctype="multipart/form-data">
         <input type="hidden" name="autor" value="<?= $linha_form['id'] ?>"> 
         <div class="input-group">
-            <textarea class="form-control" rows="1" placeholder="Legenda" name="legenda"></textarea>
+            <textarea class="form-control" rows="1"  placeholder="Legenda" name="legenda"></textarea>
             <div class="input-group-append">
                 <span class="input-group-text">
                     <input type="file" id="imagem" name="imagem" style="cursor: pointer;display: inline-block;opacity: 0;position: absolute;" multiple="true">
