@@ -74,20 +74,22 @@ create table pub(
     legenda varchar(400),
     imagem varchar(220),
     autor int references usuario(id),
-    dataa date
+    dataa datetime
 );
+select * from pub
+select now();
 drop table pub;
 select * from pub;
 
 SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
-FROM pub inner join usuario on pub.autor = usuario.id order by pub.id DESC;
+FROM pub inner join usuario on pub.autor = usuario.id order by pub.dataa DESC;
 -- create table comentario(
 --     id int PRIMARY KEY AUTO_INCREMENT,
 --     publicacao int references pub(id),
 --     publicador int references usuario(id),
 --     dataa date
 -- );
-
+SELECT * FROM pub JOIN comentario WHERE pub.id = comentario.id_postagem ORDER BY pub.dataa DESC;
 -- ALERTAS --
 create table alertas(
     id int PRIMARY KEY AUTO_INCREMENT,
@@ -109,6 +111,7 @@ create table comentario(
     autor varchar(200),
     dataa date
 );
+select *from comentario
 -- drop table comentario
 -- 
 -- select *from comentario

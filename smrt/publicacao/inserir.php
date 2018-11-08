@@ -5,7 +5,11 @@ require_once '../bd/conectar.php';
 $legenda = $_POST['legenda'];
 $imagem = $_FILES['imagem']['name'];
 $autor = $_POST['autor'];
-$data = (idate("Y") . "-" . idate("m") . "-" . idate("d"));
+$data = "SELECT NOW()";
+$data = mysqli_query($conexao, $data);
+$data = mysqli_fetch_row($data);
+$date = date('Y-m-d H:i:s');
+$date = $data[0];
 
 $_UP['pasta'] = '../img/'; //PASTA ONDE A IMAGEM VAI SER ARMAZENADA
 $_UP['tamanho'] = 1024 * 1024 * 100; //Tamanho MÁXIMO do arquivo em BYTES (FICA 5mB)
@@ -53,7 +57,7 @@ else {
     //Verificar se é possivel mover o arquivo para a pasta escolhida
     if (move_uploaded_file($_FILES['imagem']['tmp_name'], $_UP['pasta'] . $nome_final)) {
         //Upload efetuado com sucesso, exibe a mensagem
-        mysqli_query($conexao, "INSERT INTO pub (legenda, imagem, autor, dataa) VALUES ('$legenda', '$nome_final','$autor','$data')");
+        mysqli_query($conexao, "INSERT INTO pub (legenda, imagem, autor, dataa) VALUES ('$legenda', '$nome_final','$autor','$date')");
         echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/teste.php'>";
     } else {
         //Upload não efetuado com sucesso, exibe a mensagem
