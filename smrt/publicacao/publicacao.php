@@ -1,83 +1,58 @@
 <?php
+include_once '../usuario/autenticacao.php';
 include_once '../cabecalho.php';
 include_once '../bd/conectar.php';
-error_reporting(0);
-?>
 
-<?php
-$sql = "SELECT * FROM pub";
-$sql2 = "SELECT * FROM comentario";
+$sql = "SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
+FROM pub inner join usuario on pub.autor = usuario.id order by pub.id DESC;";
 $resultado = mysqli_query($conexao, $sql);
-$resultado2 = mysqli_query($conexao, $sql2);
 require_once './form_inserir.php';
-?>
-<h5 class="text-center">(Substitui 'publicacao.php' por 'teste.php' ali em cima)</h5>
-<link rel="stylesheet" href="css/style.css">
-<?php
+
 if (mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
-        $id = $linha['id'];
-        ?>  
-        <br>
-        <div class="row">
-            <div class="col-sm-6 offset-md-3">
+        ?>
+        <div class="row my-3">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="card">
+                    <div class="card-header bg-light">
+                        <a class=" text-dark">
+                            <strong class=""><?= $linha["nome"] ?> <?= $linha["sobrenome"] ?></strong><br>
+                        </a>
+                        <a class="float-left text-muted" style="font-size: 80%"><?php echo $linha["dataa"] ?></a>
 
-                <div class="post-content">
-                    <h4><i class="fas fa-user"> </i> <?php echo $linha["autor"]; ?></h4>
-                    <span class="text-muted small"><i class="far fa-clock"></i > <?php echo $linha["dataa"]; ?> </span>
-                    <div class="media">
-                        <img class="mr-3" src="../img/rio1.jpg">
-                        <div class="media-body">
-                            <?php echo $linha["legenda"]; ?>
-
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text container-fluid"><?php echo $linha["legenda"] ?></p>
+                        <div class="container-fluid">
+                            <img class="img-fluid" src="/smrt/img/<?php echo $linha["imagem"]; ?>" style="min-width: 100%">
                         </div>
                     </div>
+                    <div class="card-footer bg-light">
 
-                    <div id="box_comentario" id="<?php echo $id; ?>">
-                        <form action="inserir_comentario.php" method="post" name="form_comentario" id="form_comentario"><br>
-                            <input type="text" name="comentario" size="50" placeholder="Digite seu comentario!" class="form-control campo"/>
-                            <input type="hidden" name="id_postagem" value="<?php echo $id ?>"
-                                   <input type="submit" name="enviar" class="btn btn-success float-left" value="Enviar" />
-                        </form>
+                        <div class="row text-center">
+                            <div class="col"> Curtir</div>
+                            <div class="col"> Mapa </div>
+                            <div class="col"> Comentar </div>
+                        </div>
+                    </div>
+                    <div class="float-center">
+                        <input type="text" name="comentario" size="50" placeholder="Digite seu comentario!" class="form-control campo"/>
                     </div>
 
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Autor</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+
         <?php
     }
-} else {
-    echo '<h1>Nenhuma publicacao encontrada!</h1>';
 }
-?>
-<?php
-if (mysqli_num_rows($resultado2) > 0) {
-    while ($linha = mysqli_fetch_assoc($resultado2)) {
-        ?>
-        <?php
-        if ($linha["comentario"] == !NULL) {
-            ?>
-            <div class="row">
-                <div class="col-sm-6 offset-md-3">
-                    <div class="post-content">
-                        <i class="fas fa-user"> </i> <?php echo $linha["autor"]; ?><br>
-                        <span class="text-muted small"><i class="far fa-clock"></i > <?php echo $linha["dataa"]; ?> </span>
-
-                        <?php echo $linha["comentario"]; ?>
-                        <div class="comentarios media-body">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php
-        } else {
-            ?>
-            <div class="text-muted small"><?php echo 'Nenhum comentario encontrado!'; ?></div>
-            <?php
-        }
-    }
-}
-
-
-include_once '../rodape.php';
+require_once '../rodape.php';

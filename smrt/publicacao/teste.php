@@ -1,118 +1,84 @@
 <?php
-include_once '../usuario/autenticacao.php';
 include_once '../cabecalho.php';
 include_once '../bd/conectar.php';
-include_once '../publicacao/jvBotaoLike.php';
+error_reporting(0);
+?>
 
-$sql = "SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
-FROM pub inner join usuario on pub.autor = usuario.id order by pub.id DESC;";
+<?php
+$sql = "SELECT * FROM pub";
+$sql2 = "SELECT * FROM comentario";
 $resultado = mysqli_query($conexao, $sql);
+$resultado2 = mysqli_query($conexao, $sql2);
 require_once './form_inserir.php';
 ?>
+<h5 class="text-center">(Substitui 'publicacao.php' por 'teste.php' ali em cima)</h5>
 <link rel="stylesheet" href="css/style.css">
 <?php
 if (mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
-        $retorno_denunciados = mysqli_query($conexao, "select * from denuncia where denunciado = $linha[id]");
-        $denunciado = mysqli_fetch_array($retorno_denunciados);
-        ?>
+        $id = $linha['id'];
+        ?>  
+        <br>
+        <div class="row">
+            <div class="col-sm-6 offset-md-3">
 
-        <div class="row my-3">
-            <div class="col-lg-6 offset-lg-3">
-                <div class="card">
-                    <div class="card-header bg-light">
-                        <a class="float-left text-dark">
-                            <strong class=""><?= $linha["nome"] ?> <?= $linha["sobrenome"] ?></strong>
-                        </a>
-        <!--                        <p class="float-left text-muted" style="font-size: 70%"><?php echo $linha["dataa"] ?></p>-->
+                <div class="post-content">
+                    <h4><i class="fas fa-user"> </i> <?php echo Ezequias ?></h4>
+                    <span class="text-muted small"><i class="far fa-clock"></i > <?php echo $linha["dataa"]; ?> </span>
+                    <div class="media">
+                        <img class="mr-3" src="../img/rio1.jpg">
+                        <div class="media-body">
+                            <?php echo $linha["legenda"]; ?>
 
-<!--                        <button type="button" id="denunciar" onclick="denunciar(<?= $denunciado['denunciado'] ?>)"
-                                class="<?php if (($linha['id'] !== $denunciado['denunciado']) || ($denunciado['denunciado'] == NULL)) { ?>
-                                    btn-light
-                                <?php } else { ?>
-                                    btn-danger <?php } ?> btn btn-sm text-center float-right">
-
-                            <?php if ($denunciado['denunciado'] !== $linha['id']) { ?>
-                                DENUNCIAR<?php } else { ?>
-                                DENUNCIADO<?php } ?>
-                        </button>-->
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text container-fluid"><?php echo $linha["legenda"] ?></p>
-                        <div class="container-fluid">
-                            <img class="img-fluid" src="/smrt/img/<?php echo $linha["imagem"]; ?>" style="min-width: 100%">
                         </div>
                     </div>
-                    <div class="card-footer bg-light">
 
-                        <div class="row text-center">
-                            <div class="col"> Curtir</div>
-                            <div class="col"> Mapa </div>
-                            <div class="col"> Comentar </div>
+                    <div id="box_comentario" id="<?php echo $id; ?>">
+                        <form action="inserir_comentario.php" method="post" name="form_comentario" id="form_comentario"><br>
+                            <input type="text" name="comentario" size="50" placeholder="Digite seu comentario!" class="form-control campo"/>
+                            <input type="hidden" name="id_postagem" value="<?php echo $id ?>"
+                                   <input type="submit" name="enviar" class="btn btn-success float-left" value="Enviar" />
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+} else {
+    echo '<h1>Nenhuma publicacao encontrada!</h1>';
+}
+?>
+<?php
+if (mysqli_num_rows($resultado2) > 0) {
+    while ($linha = mysqli_fetch_assoc($resultado2)) {
+        $idc = $linha['idc'];
+        ?>
+        <?php
+        if ($linha["comentario"] == !NULL) {
+            ?>
+            <div class="row">
+                <div class="col-sm-6 offset-md-3">
+                    <div class="post-content">
+                        <i class="fas fa-user"> </i> <?php echo $linha["autor"]; ?><br>
+                        <span class="text-muted small"><i class="far fa-clock"></i > <?php echo $linha["dataa"]; ?> </span>
+
+                        <?php echo $linha["comentario"]; ?>
+                        <div class="comentarios media-body">
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <script>
-
-            function denunciar(usuario) {
-                var xhttp;
-                if (window.XMLHttpRequest) {
-                    // codigo para browsers modernos
-                    xhttp = new XMLHttpRequest();
-                } else {
-                    // codigo para IE6, IE5
-                    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState === 4 && this.status === 200) {
-                        location.reload();
-                    }
-                };
-                xhttp.open("POST", "denunciar.php?usuario=" + usuario, true);
-                xhttp.send();
-            }
-
-        </script>
-
-        <!--        <div class="row">
-                    <div class="col-sm-6 offset-md-3">
-
-                        <div class="post-content">
-                            <h4><?php echo $linha["legenda"]; ?></h4>
-                            <span class="text-muted small"><i class="fas fa-user"> </i> <?php echo $linha["autor"]; ?> - <i class="far fa-clock"></i > <?php echo $linha["dataa"]; ?> </span>
-                            <div class="media">
-                                <img class="mr-3" src="../img/rio1.jpg">
-                                <div class="media-body">
-        <?php echo $linha["titulo"]; ?>
-                                </div>
-
-
-                                <div class="facebook-reaction"> container div for reaction system  
-                                    <span class="like-btn">  Default like button  
-                                        <span class="fa like-btn-emo fa-thumbs-o-up"></span>  Default like button emotion 
-                                        <span class="like-btn-text">Like</span>   Default like button text,(Like, wow, sad..) default:Like  
-                                        <ul class="reactions-box">
-                                            Reaction buttons container
-                                            <li class="reaction reaction-like" data-reaction="Like"></li>
-                                            <li class="reaction reaction-love" data-reaction="Love"></li>
-                                            <li class="reaction reaction-haha" data-reaction="HaHa"></li>
-                                            <li class="reaction reaction-wow" data-reaction="Wow"></li>
-                                            <li class="reaction reaction-sad" data-reaction="Sad"></li>
-                                            <li class="reaction reaction-angry" data-reaction="Angry"></li>
-                                        </ul>
-                                    </span>
-                                    <div class="like-stat">  Like statistic container 
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                        </div>-->
-        <?php
+            <?php
+        } else {
+            ?>
+            <div class="text-muted small"><?php echo 'Nenhum comentario encontrado!'; ?></div>
+            <?php
+        }
     }
 }
-require_once '../rodape.php';
+
+
+include_once '../rodape.php';
