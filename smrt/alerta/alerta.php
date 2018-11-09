@@ -1,30 +1,170 @@
 <?php
-include '../usuario/autenticacao.php';
-include '../bd/conectar.php';
+include_once '../bd/conectar.php';
 include '../cabecalho.php';
-include '../publicacao.php';
 ?>
-            <html lang="en">
-            <head>
-              <title></title>
-              <meta charset="utf-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1">
-              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-              <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-            </head>
-            <body>
-                <p> </p>
-            <div class="container">
-              <div class="alert alert-danger alert-dismissible fade show">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>ALERTA!</strong> Temos um novo alerta para você! Veja. <button type="button" class="button">Ver</button>
-              </div>
+<script>
+    var lat = "";
+    var lon = "";
+
+    var x = document.getElementById("demo");
+    function getLocation()
+    {
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            x.innerHTML = "Geolocalização não é suportada nesse browser."
+        }
+    }
+
+    function showError(error)
+    {
+        switch (error.code)
+        {
+            case error.PERMISSION_DENIED:
+                x.innerHTML = "Usuário rejeitou a solicitação de Geolocalização."
+                break;
+            case error.POSITION_UNAVAILABLE:
+                x.innerHTML = "Localização indisponível."
+                break;
+            case error.TIMEOUT:
+                x.innerHTML = "O tempo da requisição expirou."
+                break;
+            case error.UNKNOWN_ERROR:
+                x.innerHTML = "Algum erro desconhecido aconteceu."
+                break;
+        }
+    }
+    function showPosition(position)
+    {
+        lat = position.coords.latitude;
+        lon = position.coords.longitude;
+        mapholder = document.getElementById('mapholder');
+        mapholder.innerHTML = ('<iframe id="mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d876.7773817165236!2d' + lon + '!3d' + lat + '!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDI4JzM0LjUiUyA0OcKwMDEnMzQuNiJX!5e0!3m2!1spt-BR!2sbr!4v1539659561200" width="600" height="450" frameborder="0" style="border:0;width:100%;height:100%;min-height: 40vh;min-width: 40vw;" allowfullscreen></iframe>');
+        document.getElementById("lat").value = lat;
+        document.getElementById("lon").value = lon;
+        /*
+         var latlon=new google.maps.LatLng(lat, lon)
+         var myOptions={
+         center:latlon,zoom:14,
+         mapTypeId:google.maps.MapTypeId.ROADMAP,
+         mapTypeControl:false,
+         navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+         };
+         var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
+         var marker=new google.maps.Marker({position:latlon,map:map,title:"Minha localização!"});
+         */
+    }
+    function lat() {
+        lat = position.coords.latitude;
+        return lat;
+    }
+    function lon() {
+        lon = position.coords.longitude;
+        return lon;
+    }
+//CHAVE API GOOGLE MAPS - AIzaSyC7xO0yzbGdqeO7caYCe1PDDwzMw6TphtU
+</script>
+
+<!--Google Maps Localização-->
+
+<div class="justify-content-center d-flex text-center my-3">
+    <form class="col-lg-6" method="post" action="../publicacao/inserir.php" enctype="multipart/form-data">
+        <input type="hidden" name="autor" value="<?= $linha_form['id'] ?>"> 
+        <input type="text" id="lat" name="lat" value="">
+        <input type="text" id="lon" name="lon" value=""> 
+        <div class="input-group">
+            <textarea class="form-control" rows="1" placeholder="Legenda" name="legenda"></textarea>
+            <div class="input-group-append">
+                <span class="input-group-text" style="cursor: pointer;">
+                    <input data-toggle="modal" data-target="#modalmapa"type="button" id="imagem" name="mapa" onclick="getLocation()" style="cursor: pointer;display: inline-block;opacity: 0;position: absolute;" multiple="true">
+                    <i for="mapa" style="cursor: pointer;" class="fas fa-map-marked-alt"></i>
+                </span>
+                <span class="input-group-text" style="cursor: pointer;">
+                    <input type="file" id="imagem" name="imagem" style="cursor: pointer;display: inline-block;opacity: 0;position: absolute;" multiple="true">
+                    <i for="imagem" style="cursor: pointer;" class="fas fa-image"></i>
+                </span>
+                <input type="submit" value="Publicar" class="btn btn-lg btn-success small" formenctype="multipart/form-data">
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="modalmapa">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- CABEÇA DO MODAL -->
+            <div class="modal-header">
+                <h4 class="modal-title">Confirme sua localização!</h4>
+            </div>
+            <!-- CORPO DO MODAL (MAPA) -->
+            <div class="modal-body p-0" id="mapholder"></div>
+            <!-- RODAPÉ DO MODAL -->
+            <div class="modal-footer">
+                <p id="demo"></p>
+                <!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>-->
+                <button type="button" class="btn btn-success" data-dismiss="modal">Confirmar</button>
             </div>
 
-            </body>
-            </html>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--<div class="container">
+    Mapa    
+    <div class="col-md-6 offset-md-3 mt-5 mb-5">  
+        <div class="row mt-3 mb-3">
+            <div id="mapholder" style="margin:0 auto;"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-4">
+                <button class="btn btn-primary float-right" onclick="getLocation()">Obtenha a localização aqui!</button>
+                <p id="demo"></p>
+            </div>
+        </div>
+        <input type="hidden" name="autor" value="<?= $linha_form['id'] ?>"/>   
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input class="form-control my-3" type="text" id="lat" name="lat" value="" placeholder="Latitude"/>
+                <input class="form-control" type="text" id="lon" name="lon" value="" placeholder="Longitude"/>
+            </div>
+        </div>
+        Mapa 
+        Formulario 
+        <form method="post" action="inserir.php">
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Imagem:</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="file" name="imagem" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Título:</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" name="legenda" placeholder="Informe o título de publicação"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Legenda:</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" rows="5" placeholder="Informe a legenda de Publicação" name="titulo"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb-4">
+                    <input type="submit" name="enviar" class="btn btn-success float-left" value="Enviar" />
+                </div>
+            </div>
+        </form>
+        Formulario
+    </div>
+</div>-->
 
 <?php
-include '../rodape.php';
+require_once '../rodape.php';

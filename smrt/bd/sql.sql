@@ -74,7 +74,9 @@ create table pub(
     legenda varchar(400),
     imagem varchar(220),
     autor int references usuario(id),
-    dataa datetime
+    dataa datetime,
+    latitude float,
+    longitude float
 );
 select * from pub
 select now();

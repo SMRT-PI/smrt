@@ -58,7 +58,7 @@ else {
     if (move_uploaded_file($_FILES['imagem']['tmp_name'], $_UP['pasta'] . $nome_final)) {
         //Upload efetuado com sucesso, exibe a mensagem
         mysqli_query($conexao, "INSERT INTO pub (legenda, imagem, autor, dataa) VALUES ('$legenda', '$nome_final','$autor','$date')");
-        echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/teste.php'>";
+        echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/publicacao.php'>";
     } else {
         //Upload não efetuado com sucesso, exibe a mensagem
         echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/inserir.php'>
