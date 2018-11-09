@@ -15,10 +15,15 @@ if (mysqli_num_rows($resultado) > 0) {
             <div class="col-lg-6 offset-lg-3">
                 <div class="card">
                     <div class="card-header bg-light">
-                        <a class=" text-dark">
-                            <strong class=""><?= $linha["nome"] ?> <?= $linha["sobrenome"] ?></strong><br>
+                        <a class="text-dark">
+                            <div class="row-lg-6">
+                                <img class="rounded-circle" src="/smrt/img/m1.jpg" width="40" height="40">
+                                <strong class=""><?= $linha["nome"] ?> <?= $linha["sobrenome"] ?></strong>
+                                <strong class="float-right text-muted" style="font-size: 70%"><?php echo $linha["dataa"] ?></strong>
+                            </div>
                         </a>
-                        <a class="float-left text-muted" style="font-size: 80%"><?php echo $linha["dataa"] ?></a>
+
+
 
                     </div>
                     <div class="card-body">
