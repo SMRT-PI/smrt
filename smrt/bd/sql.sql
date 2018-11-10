@@ -9,6 +9,7 @@ drop table administrador;
 drop table denuncia;
 drop table bloqueio;
 drop table pub;
+drop table comentario;
 -- /DROP TABLES --
 
 -- USUÁRIO --
@@ -60,15 +61,6 @@ create table materia(
 -- /MATÉRIA --
 
 -- PUBLICACAO --
--- create table pub(
---     id int PRIMARY KEY AUTO_INCREMENT,
---     legenda varchar(400),
---     imagem varchar(220),
---     titulo varchar(500),
---     autor varchar(200),
---     dataa date
--- );
--- PUBLICACAO --
 create table pub(
     id int PRIMARY KEY AUTO_INCREMENT,
     legenda varchar(400),
@@ -78,42 +70,46 @@ create table pub(
     latitude float,
     longitude float
 );
-select * from pub
+-- /PUBLICACAO --
+select * from pub;
 select now();
 drop table pub;
 select * from pub;
 
 SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
 FROM pub inner join usuario on pub.autor = usuario.id order by pub.dataa DESC;
--- create table comentario(
---     id int PRIMARY KEY AUTO_INCREMENT,
---     publicacao int references pub(id),
---     publicador int references usuario(id),
---     dataa date
--- );
+
 SELECT * FROM pub JOIN comentario WHERE pub.id = comentario.id_postagem ORDER BY pub.dataa DESC;
--- ALERTAS --
-create table alertas(
-    id int PRIMARY KEY AUTO_INCREMENT,
-    titulo varchar(400),
-    lat varchar(220),
-    lon varchar(200),
-    dataa date
-);
+
+SELECT comentario.id_postagem,pub.id FROM comentario WHERE comentario.id_postagem = pub.id;
 
 -- select * from pub;
 -- SELECT pub.id,pub.legenda,pub.comentarios,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
 -- FROM pub inner join usuario on pub.autor = usuario.id order by dataa DESC;
--- /PUBLICACAO --
+
+
 -- COMENTARIO --
 create table comentario(
     idc int PRIMARY KEY AUTO_INCREMENT,
     id_postagem int references pub(id),
     comentario varchar(500),
-    autor varchar(200),
+    autor varchar(300),
     dataa date
 );
-select *from comentario
+drop table comentario
+-- /COMENTARIO --
+select * from comentario
+
+
+SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,
+date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub inner join usuario on pub.autor = usuario.id order by dataa Desc;
+
+SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,comentario.idc,comentario.comentario,comentario.dataa,comentario.id_postagem,comentario.autor,
+date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub,comentario inner join usuario,comentario on pub.autor = usuario.id, comentario.id_postagem = pub.id order by dataa Desc;
+
+SELECT comentario.idc,comentario.comentario,comentario.id_postagem
+
+SELECT comentario.id,comentario.comentario,comentario.dataa,comentario.id_postagem,comentario.autor,pub.id FROM comentario inner join pub on comentario.id_postagem = pub.id;
 -- drop table comentario
 -- 
 -- select *from comentario
@@ -144,6 +140,16 @@ select *from comentario
 -- 
 -- select * from denuncia order by denunciador;
 -- update denuncia set data = '2018-09-28' where id = 3;
+
+-- ALERTAS --
+create table alertas(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    titulo varchar(400),
+    lat varchar(220),
+    lon varchar(200),
+    dataa date
+);
+-- /ALERTAS --
 
 insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admin', 'admin@admin','123', TRUE);
 

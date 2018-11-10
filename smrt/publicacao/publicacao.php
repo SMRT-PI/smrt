@@ -5,25 +5,37 @@ include_once '../bd/conectar.php';
 
 $sql = "SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,
 date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub inner join usuario on pub.autor = usuario.id order by dataa Desc;";
+
+
 $resultado = mysqli_query($conexao, $sql);
+
 require_once './form_inserir.php';
 
 if (mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
+        $id = $linha['id'];
         ?>
         <div class="row my-3">
             <div class="col-lg-6 offset-lg-3">
                 <div class="card">
                     <div class="card-header bg-light">
+
+                        <div class="dropdown">
+                            <button class="btn btn btn-outline-secondary float-right " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Left Align" style="width: 6%">
+                                <span class="fa fa-bars" aria-hidden="true"></span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Denunciar Publicação</a>
+                            </div>
+                        </div>
+
                         <a class="text-dark">
-                            <div class="row-lg-6">
+                            <div class="row-lg-6" id="<?php echo $id; ?>">
                                 <img class="rounded-circle" src="/smrt/img/m1.jpg" width="40" height="40">
                                 <strong class=""><?= $linha["nome"] ?> <?= $linha["sobrenome"] ?></strong>
                                 <strong class="float-right text-muted" style="font-size: 70%"><?php echo $linha["dataa"] ?></strong>
                             </div>
                         </a>
-
-
 
                     </div>
                     <div class="card-body">
@@ -34,30 +46,51 @@ if (mysqli_num_rows($resultado) > 0) {
                     </div>
                     <div class="card-footer bg-light">
 
-                        <div class="row text-center">
-                            <div class="col"> Curtir</div>
-                            <div class="col"> Mapa </div>
-                            <div class="col"> Comentar </div>
+                        <div class="row text-center" id="headingOne">
+                            <div class="col"><button class="btn bg-transparent" type="button"> Curtir </button></div>
+                            <div class="col"><button class="btn bg-transparent" type="button"> Mapa </button></div>
+                            <div class="col"><button class="btn bg-transparent" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> Comentar </button></div>
                         </div>
-                    </div>
-                    <div class="float-center">
-                        <input type="text" name="comentario" size="50" placeholder="Digite seu comentario!" class="form-control campo"/>
                     </div>
 
-                    <div class="card w-100">
-                        <div class="card-body">
-                            <h5 class="card-title">Autor</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        </div>
+                    <div class="float-center collapse show" id="collapseOne <?php echo $id ?>" aria-labelledby="headingOne" data-parent="#accordion" id="<?php echo $id; ?>" >
+                        <form action="inserir_comentario.php" method="post" name="form_comentario" id="form_comentario">
+                            <input type="text" name="comentario" size="50" placeholder="Digite seu comentario!" class="form-control campo "/>
+                            <input type="hidden" name="id_postagem" value="<?php echo $id ?>"/>
+                            <input type="hidden" name="enviar" class="btn btn-success float-left" value="Enviar"/>
+                        </form>
                     </div>
+
+                    <?php
+                    $resultado2 = mysqli_query($conexao, "SELECT * FROM comentario WHERE id_postagem = $id");
+                    if (mysqli_num_rows($resultado2) > 0) {
+                        while ($linha = mysqli_fetch_assoc($resultado2)) {
+                            $idc = $linha['idc'];
+                            ?>
+                            <div class="card w-100"<?php echo $id; ?>>
+                                <div class="card-body" id="<?php echo $id; ?>">
+                                    <h5 class="card-title"><?php echo $linha["autor"]; ?></h5>
+                                    <p class="card-text"><?php echo $linha["comentario"]; ?></p>
+
+                                </div>
+                            </div>
+                        <?php } ?>
+                        <?php
+                    }
+                    ?>
+
+                    <!--                    <div class="card w-100">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Autor</h5>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                            </div>
+                                        </div>-->
                 </div>
             </div>
         </div>
-
-
-
-
         <?php
     }
 }
+
+
 require_once '../rodape.php';

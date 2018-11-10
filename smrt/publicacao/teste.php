@@ -36,8 +36,8 @@ if (mysqli_num_rows($resultado) > 0) {
                     <div id="box_comentario" id="<?php echo $id; ?>">
                         <form action="inserir_comentario.php" method="post" name="form_comentario" id="form_comentario"><br>
                             <input type="text" name="comentario" size="50" placeholder="Digite seu comentario!" class="form-control campo"/>
-                            <input type="hidden" name="id_postagem" value="<?php echo $id ?>"
-                                   <input type="submit" name="enviar" class="btn btn-success float-left" value="Enviar" />
+                            <input type="hidden" name="id_postagem" value="<?php echo $id ?>"/>
+                            <input type="hidden" name="enviar" class="btn btn-success float-left" value="Enviar" />
                         </form>
                     </div>
 

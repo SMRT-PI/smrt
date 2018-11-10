@@ -13,7 +13,7 @@ $sql_pessoa = "INSERT INTO comentario (id_postagem, comentario, autor, dataa) VA
 
 mysqli_query($conexao, $sql_pessoa);
 
-header("Location: /smrt/publicacao/publicacao.php?id=$id");
+header("Location: http://localhost/smrt/publicacao/publicacao.php");
 //echo $autor;
 
 
