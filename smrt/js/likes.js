@@ -9,6 +9,9 @@ $(document).ready(function () {
             dataType: 'json',
             
             success:function(data){
+                var likes = data['likes'];
+                var text = data['text'];
+                
                 
             }
         });

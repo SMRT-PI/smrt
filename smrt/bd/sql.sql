@@ -101,6 +101,9 @@ create table likes(
     id_post int references pub(id),
     dataa date
 );
+INSERT INTO likes (id_user,id_post) values ('1','2')
+UPDATE pub SET likes = likes+1 WHERE id_pub = 2
+select * from likes
 -- LIKE --
 
 
