@@ -2,8 +2,11 @@
 include_once '../usuario/autenticacao.php';
 include_once '../cabecalho.php';
 include_once '../bd/conectar.php';
+?>
+<script type="text/javascript" src="../js/likes.js"></script>
+<?php
 
-$sql = "SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,
+$sql = "SELECT pub.id_pub,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,
 date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub inner join usuario on pub.autor = usuario.id order by dataa Desc;";
 
 
@@ -13,7 +16,8 @@ require_once './form_inserir.php';
 
 if (mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
-        $id = $linha['id'];
+        $id = $linha['id_pub'];
+//        echo $id;
         ?>
         <div class="row my-3">
             <div class="col-lg-6 offset-lg-3">
@@ -44,16 +48,19 @@ if (mysqli_num_rows($resultado) > 0) {
                             <img class="img-fluid" src="/smrt/img/<?php echo $linha["imagem"]; ?>" style="min-width: 100%">
                         </div>
                     </div>
+                    <?php
+                        $sql = "SELECT * FROM likes WHERE id_post = '".$linha['id_pub']."' AND id_user = ".$_SESSION['id']."";
+                        $query = mysqli_query($conexao, $sql)
+                    ?>
                     <div class="card-footer bg-light">
-
                         <div class="row text-center" id="headingOne">
-                            <div class="col"><button class="btn bg-transparent" type="button"> Curtir </button></div>
-                            <div class="col"><button class="btn bg-transparent" type="button"> Mapa </button></div>
+                            <div class="col"><button class="btn bg-transparent like" type="button" id="<?php echo $linha['id_pub']; ?>"><i class="fa fa-thumbs-o-up"></i> Curtir </button></div><span id="likes_<?php $linha['id']; ?>">(# likes)</span>
+                            <div class="col"><button class="btn bg-transparent" type="button" name="botao"> Mapa </button></div>
                             <div class="col"><button class="btn bg-transparent" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> Comentar </button></div>
                         </div>
                     </div>
 
-                    <div class="float-center collapse show" id="collapseOne <?php echo $id ?>" aria-labelledby="headingOne" data-parent="#accordion" id="<?php echo $id; ?>" >
+                    <div class="float-center collapse show" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion" id="<?php echo $id; ?>" >
                         <form action="inserir_comentario.php" method="post" name="form_comentario" id="form_comentario">
                             <input type="text" name="comentario" size="50" placeholder="Digite seu comentario!" class="form-control campo "/>
                             <input type="hidden" name="id_postagem" value="<?php echo $id ?>"/>

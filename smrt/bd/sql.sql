@@ -62,26 +62,22 @@ create table materia(
 
 -- PUBLICACAO --
 create table pub(
-    id int PRIMARY KEY AUTO_INCREMENT,
+    id_pub int PRIMARY KEY AUTO_INCREMENT,
     legenda varchar(400),
     imagem varchar(220),
     autor int references usuario(id),
     dataa datetime,
     latitude float,
-    longitude float
+    longitude float,
+    likes int
 );
+drop table pub
 -- /PUBLICACAO --
+
 select * from pub;
 select now();
 drop table pub;
 select * from pub;
-
-SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
-FROM pub inner join usuario on pub.autor = usuario.id order by pub.dataa DESC;
-
-SELECT * FROM pub JOIN comentario WHERE pub.id = comentario.id_postagem ORDER BY pub.dataa DESC;
-
-SELECT comentario.id_postagem,pub.id FROM comentario WHERE comentario.id_postagem = pub.id;
 
 -- select * from pub;
 -- SELECT pub.id,pub.legenda,pub.comentarios,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
@@ -96,10 +92,19 @@ create table comentario(
     autor varchar(300),
     dataa date
 );
-drop table comentario
 -- /COMENTARIO --
-select * from comentario
+drop table comentario
+-- LIKE --
+create table likes(
+    id_like int PRIMARY KEY AUTO_INCREMENT,
+    id_user int references usuario(id),
+    id_post int references pub(id),
+    dataa date
+);
+-- LIKE --
 
+
+-- SELECTS --
 
 SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,
 date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub inner join usuario on pub.autor = usuario.id order by dataa Desc;
@@ -110,36 +115,31 @@ date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub,comentario inner join 
 SELECT comentario.idc,comentario.comentario,comentario.id_postagem
 
 SELECT comentario.id,comentario.comentario,comentario.dataa,comentario.id_postagem,comentario.autor,pub.id FROM comentario inner join pub on comentario.id_postagem = pub.id;
--- drop table comentario
--- 
--- select *from comentario
--- INSERT INTO comentario (publicacao ,conteudo, autor, dataa) VALUES ('1','asd','a','2018/05/03')
--- select * from comentario
--- drop table comentario
--- /COMENTARIO --
 
 
--- select id, nome from usuario;
--- select administrador.id as adm, usuario.id as usuario from administrador inner join usuario on usuario.id = administrador.adm;
--- select denuncia.denunciador, denuncia.denunciado, usuario.nome from usuario inner join denuncia on denuncia.denunciado = usuario.id order by denunciador;
--- select * from bloqueio;
--- 
--- select distinct denuncia.denunciado, usuario.nome, usuario.sobrenome, usuario.email, denuncia.data from denuncia inner join usuario on denuncia.denunciado= usuario.id where nome != "admin" order by data;
--- select count(*) from denuncia where denunciado = 7;
--- 
--- 
--- select distinct usuario from usuario inner join usuario on usuario.id = denunciado;
--- 
--- select administrador.id as adm_id, usuario.id as usuario_id, usuario.nome from administrador inner join usuario on administrador.adm = 1;
--- select administrador.id from administrador where adm = 1;
--- select distinct denuncia.denunciado, denuncia.data, usuario.nome, usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on denuncia.denunciado= usuario.id order by nome;
--- 
--- select usuario.nome, usuario.sobrenome, usuario.email, 
--- 
--- select * from bloqueio;
--- 
--- select * from denuncia order by denunciador;
--- update denuncia set data = '2018-09-28' where id = 3;
+select id, nome from usuario;
+select administrador.id as adm, usuario.id as usuario from administrador inner join usuario on usuario.id = administrador.adm;
+select denuncia.denunciador, denuncia.denunciado, usuario.nome from usuario inner join denuncia on denuncia.denunciado = usuario.id order by denunciador;
+select * from bloqueio;
+
+select distinct denuncia.denunciado, usuario.nome, usuario.sobrenome, usuario.email, denuncia.data from denuncia inner join usuario on denuncia.denunciado= usuario.id where nome != "admin" order by data;
+select count(*) from denuncia where denunciado = 7;
+
+
+select distinct usuario from usuario inner join usuario on usuario.id = denunciado;
+
+select administrador.id as adm_id, usuario.id as usuario_id, usuario.nome from administrador inner join usuario on administrador.adm = 1;
+select administrador.id from administrador where adm = 1;
+select distinct denuncia.denunciado, denuncia.data, usuario.nome, usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on denuncia.denunciado= usuario.id order by nome;
+
+select usuario.nome, usuario.sobrenome, usuario.email, 
+
+select * from bloqueio;
+
+select * from denuncia order by denunciador;
+update denuncia set data = '2018-09-28' where id = 3;
+
+-- /SELECTS --
 
 -- ALERTAS --
 create table alertas(
@@ -151,6 +151,7 @@ create table alertas(
 );
 -- /ALERTAS --
 
+-- INSERTS --
 insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admin', 'admin@admin','123', TRUE);
 
 insert into usuario (nome, sobrenome ,email, senha) values  ('a', 'a', 'a@a','123');
@@ -221,3 +222,4 @@ insert into denuncia(denunciador, denunciado,dataa) values (3,15,'2018-09-28');
 insert into denuncia(denunciador, denunciado,dataa) values (1,16,'2018-09-28');
 insert into denuncia(denunciador, denunciado,dataa) values (2,16,'2018-09-28');
 insert into denuncia(denunciador, denunciado,dataa) values (3,16,'2018-09-28');
+-- INSERTS --
