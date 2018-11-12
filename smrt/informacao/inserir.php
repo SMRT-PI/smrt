@@ -8,7 +8,7 @@ $conteudo = $_POST['conteudo'];
 $autor = $_POST['autor'];
 $capa = $_POST['capa'];
 
-$sql = "insert into materia (titulo,descricao,conteudo,autor,capa) values ('$titulo','$descricao','$conteudo', $autor, '$capa')";
+$sql = "insert into materia (titulo,descricao,conteudo,capa) values ('$titulo','$descricao','$conteudo', '$capa')";
 header('Location: area_info.php');
 
 

@@ -58,6 +58,8 @@ create table materia(
     capa blob not null,
     autor int REFERENCES usuario(id)
 );
+drop table materia
+insert into materia (titulo,descricao,conteudo,capa) values ('asd','asd','asd', 'asd')
 -- /MATÉRIA --
 
 -- PUBLICACAO --
@@ -106,6 +108,13 @@ UPDATE pub SET likes = likes+1 WHERE id_pub = 2
 select * from likes
 -- LIKE --
 
+create table denuncia_pub(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    id_post int references pub(id),
+    id_user int references usuario(id)
+);
+select * from denuncia_pub
+INSERT INTO denuncia_pub (id,id_post, id_user) VALUES (default,'11', '1')
 
 -- SELECTS --
 

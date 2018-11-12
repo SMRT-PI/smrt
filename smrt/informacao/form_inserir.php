@@ -15,7 +15,7 @@ if (estaLogado()) {
                 <input type="hidden" name="autor" value="<?= $linha['id'] ?>"> 
                 <div class="custom-file">
                     <label class="custom-file-label" for="customFile">Capa</label>>
-                    <input type="file" name="capa" class="custom-file-input" lang="pt-br" id="capa">
+                    <input type="file" id="imagem" name="imagem" class="custom-file-input" lang="pt-br" id="capa">
                 </div>
                 <textarea class="form-control py-2" type="text" rows="1" name="titulo" wrap="hard" placeholder="Título"></textarea>
                 <textarea class="form-control py-2 my-2" rows="3" type="text" name="descricao" placeholder="Descrição"></textarea>

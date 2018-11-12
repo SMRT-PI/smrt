@@ -28,7 +28,7 @@ if (mysqli_num_rows($resultado) > 0) {
                                 <span class="fa fa-bars" aria-hidden="true"></span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Denunciar Publicação</a>
+                                <a class="dropdown-item" href="../denunciar/denunciar.php?idus=<?=$id_us?>&id=<?= $id?>">Denunciar Publicação</a>
                             </div>
                         </div>
 
@@ -39,6 +39,7 @@ if (mysqli_num_rows($resultado) > 0) {
                                 <strong class="float-right text-muted" style="font-size: 70%"><?php echo $linha["dataa"] ?></strong>
                             </div>
                         </a>
+                        
 
                     </div>
                     <div class="card-body">
