@@ -20,7 +20,14 @@ create table usuario(
     senha varchar(100),
     adm boolean default FALSE,
     email varchar(100) unique,
-    foto varchar(220)
+    foto varchar(220),
+    ------ acrescentar -------
+    sobre varchar(220),
+    experiencias varchar(220),
+    hobbies varchar(220),
+    endereco varchar(220),
+    cidade varchar(220),
+    estado varchar(220)
   );
 -- /USUÁRIO --
 
