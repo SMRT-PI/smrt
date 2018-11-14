@@ -2,9 +2,6 @@
 include_once '../cabecalho.php';
 include_once '../bd/conectar.php';
 error_reporting(0);
-?>
-
-<?php
 $sql = "SELECT id, legenda, autor, imagem, date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub order by dataa Desc";
 $sql2 = "SELECT * FROM comentario";
 $resultado = mysqli_query($conexao, $sql);

@@ -8,7 +8,7 @@ if (isset($_POST["email"]) && isset($_POST["senha"])) {
     $email = $_POST["email"];
     $senha = $_POST["senha"];
 
-    $sql = "select * from usuario where email = '$email' and senha = '$senha'";
+    $sql = "select * from usuario where email = '$email' and senha = md5('$senha')";
     $retorno = mysqli_query($conexao, $sql);
     $resultado = mysqli_fetch_array($retorno);
 
@@ -16,22 +16,22 @@ if (isset($_POST["email"]) && isset($_POST["senha"])) {
     header('Location: /smrt/index.php');
 }
 
-if (isset($_POST["email"]) && isset($_POST["senha"])) {
-    $connect = new PDO("mysql:host=localhost;dbname=smrt", "root", "ifsc");
-
-    $data = array(
-        ':nome' => $_POST['nome'],
-        ':sobrenome' => $_POST['sobrenome'],
-        ':email' => $_POST['email'],
-        ':senha' => $_POST['senha'],
-    );
-
-    $query = "select * from usuario where email = '$email' and senha = '$senha'";
-    $statement = $connect->prepare($query);
-    if ($statement->execute($data)) {
-        
-    }
-}
+//if (isset($_POST["email"]) && isset($_POST["senha"])) {
+//    $connect = new PDO("mysql:host=localhost;dbname=smrt", "root", "ifsc");
+//
+//    $data = array(
+//        ':nome' => $_POST['nome'],
+//        ':sobrenome' => $_POST['sobrenome'],
+//        ':email' => $_POST['email'],
+//        ':senha' => $_POST['senha'],
+//    );
+//
+//    $query = "select * from usuario where email = '$email' and senha = '$senha'";
+//    $statement = $connect->prepare($query);
+//    if ($statement->execute($data)) {
+//        
+//    }
+//}
 ?>
 
 //<?php

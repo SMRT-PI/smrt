@@ -20,16 +20,18 @@ create table usuario(
     senha varchar(100),
     adm boolean default FALSE,
     email varchar(100) unique,
-    foto varchar(220),
+    foto varchar(220)
     ------ acrescentar -------
-    sobre varchar(220),
-    experiencias varchar(220),
-    hobbies varchar(220),
-    endereco varchar(220),
-    cidade varchar(220),
-    estado varchar(220)
+--     sobre varchar(220),
+--     experiencias varchar(220),
+--     hobbies varchar(220),
+--     endereco varchar(220),
+--     cidade varchar(220),
+--     estado varchar(220)
   );
 -- /USUÁRIO --
+drop table usuario;
+select * from usuario;
 
 -- ADMNISTRADOR --
 create table administrador(
@@ -171,9 +173,9 @@ create table alertas(
 -- /ALERTAS --
 
 -- INSERTS --
-insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admin', 'admin@admin','123', TRUE);
+insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admin', 'admin@admin',md5('123'), TRUE);
 
-insert into usuario (nome, sobrenome ,email, senha) values  ('a', 'a', 'a@a','123');
+insert into usuario (nome, sobrenome ,email, senha) values  ('a', 'a', 'a@a',md5('123'));
 insert into usuario (nome, sobrenome ,email, senha) values  ('b', 'b', 'b@b','123');
 insert into usuario (nome, sobrenome ,email, senha) values  ('c', 'c', 'c@c','123');
 insert into usuario (nome, sobrenome ,email, senha) values  ('d', 'd', 'd@d','123');
