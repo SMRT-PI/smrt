@@ -122,6 +122,13 @@ create table denuncia_pub(
     id_post int references pub(id),
     id_user int references usuario(id)
 );
+SELECT * FROM denuncia_pub
+$sql = "SELECT pub.id_pub,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,
+date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub inner join usuario on pub.autor = usuario.id order by dataa Desc;";
+
+SELECT denuncia_pub.id,denuncia_pub.denunciador,denuncia_pub.denunciado,denuncia_pub.id_post,denuncia_pub.id_user,usuario.id,usuario.nome,usuario.sobrenome FROM denuncia_pub inner join usuario on denuncia_pub.id_user = usuario.id;
+
+SELECT denuncia_pub.id,denuncia_pub.id_post,denuncia_pub.id_user,usuario.id,usuario.nome,usuario.sobrenome FROM denuncia_pub inner join usuario on denuncia_pub.id_user = usuario.id;
 select * from denuncia_pub
 INSERT INTO denuncia_pub (id,id_post, id_user) VALUES (default,'11', '1')
 

@@ -13,7 +13,8 @@ $Usua = $_GET['idus'];
 $sql_pessoa = "INSERT INTO denuncia_pub (id,id_post, id_user) VALUES (default,'$id', '$Usua')";
 
 if (mysqli_query($conexao, $sql_pessoa)){
-    echo 'quem confia digita 1';
+    
+    header("Location: http://localhost/smrt/publicacao/publicacao.php?id=#$id");
     
 }
 
