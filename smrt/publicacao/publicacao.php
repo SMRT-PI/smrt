@@ -17,6 +17,10 @@ if (mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
         $id = $linha['id_pub'];
         $id_us = $linha['id'];
+        $nome_denunciador = $_SESSION['nome'];
+        $id_denunciado = $linha['autor'];
+        $sobrenome_denunciador = $_SESSION['sobrenome'];
+        echo $id_denunciado;
         ?>
         <div class="row my-3">
             <div class="col-lg-6 offset-lg-3">
@@ -28,7 +32,7 @@ if (mysqli_num_rows($resultado) > 0) {
                                 <span class="fa fa-bars" aria-hidden="true"></span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="../denunciar/denunciar.php?idus=<?=$id_us?>&id=<?= $id?>">Denunciar Publicação</a>
+                                <a class="dropdown-item" href="../denunciar/denunciar.php?idus=<?=$id_us?>&id=<?= $id?>&denunciador=<?= $nome_denunciador?>&sobrenome_denunciador=<?= $sobrenome_denunciador?>">Denunciar Publicação</a>
                             </div>
                         </div>
 

@@ -33,6 +33,8 @@ create table usuario(
 drop table usuario;
 select * from usuario;
 
+
+SELECT pub.id_pub,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub inner join usuario on pub.autor = usuario.id order by dataa Desc;
 -- ADMNISTRADOR --
 create table administrador(
     id int PRIMARY KEY AUTO_INCREMENT,
@@ -120,16 +122,18 @@ select * from likes
 create table denuncia_pub(
     id int PRIMARY KEY AUTO_INCREMENT,
     id_post int references pub(id),
-    id_user int references usuario(id)
+    id_user int references usuario(id),
+    nome_denunciador varchar(400),
+    sobrenome_denunciador varchar(400),
+    nome_denunciado varchar(400)
 );
 SELECT * FROM denuncia_pub
-$sql = "SELECT pub.id_pub,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,
-date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub inner join usuario on pub.autor = usuario.id order by dataa Desc;";
+drop table denuncia_pub
 
-SELECT denuncia_pub.id,denuncia_pub.denunciador,denuncia_pub.denunciado,denuncia_pub.id_post,denuncia_pub.id_user,usuario.id,usuario.nome,usuario.sobrenome FROM denuncia_pub inner join usuario on denuncia_pub.id_user = usuario.id;
+SELECT denuncia_pub.id,denuncia_pub.id_post,denuncia_pub.id_user from ((denuncia_pub 
+INNER JOIN usuario on usuario.id = denuncia_pub.id_user)
+INNER JOIN pub on pub.id_pub = denuncia_pub.id_post);
 
-SELECT denuncia_pub.id,denuncia_pub.id_post,denuncia_pub.id_user,usuario.id,usuario.nome,usuario.sobrenome FROM denuncia_pub inner join usuario on denuncia_pub.id_user = usuario.id;
-select * from denuncia_pub
 INSERT INTO denuncia_pub (id,id_post, id_user) VALUES (default,'11', '1')
 
 -- SELECTS --
