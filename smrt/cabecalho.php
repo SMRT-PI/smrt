@@ -88,6 +88,7 @@
                                     </a>
                                     <div class="dropdown-menu text-center  bg-light py-1" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item bg-light text-dark py-2" href="/smrt/usuario/listar.php">Usuários</a>
+                                        <a class="dropdown-item bg-light text-dark py-2" href="/smrt/denunciar/form_denunciarpub.php">Denuncias Pub</a>
                                     </div>
                                 </li>
                                 <?php

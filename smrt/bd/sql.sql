@@ -123,14 +123,16 @@ create table denuncia_pub(
     id int PRIMARY KEY AUTO_INCREMENT,
     id_post int references pub(id),
     id_user int references usuario(id),
+    id_denunciado int,
     nome_denunciador varchar(400),
     sobrenome_denunciador varchar(400),
-    nome_denunciado varchar(400)
+    nome_denunciado varchar(400),
+    sobrenome_denunciado varchar(400)
 );
 SELECT * FROM denuncia_pub
 drop table denuncia_pub
 
-SELECT denuncia_pub.id,denuncia_pub.id_post,denuncia_pub.id_user from ((denuncia_pub 
+SELECT denuncia_pub.id,denuncia_pub.id_post,denuncia_pub.id_user,denuncia_pub.id_denunciado,denuncia_pub.nome_denunciador,denuncia_pub.sobrenome_denunciador,denuncia_pub.nome_denunciado,denuncia_pub.sobrenome_denunciado from ((denuncia_pub 
 INNER JOIN usuario on usuario.id = denuncia_pub.id_user)
 INNER JOIN pub on pub.id_pub = denuncia_pub.id_post);
 

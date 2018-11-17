@@ -20,7 +20,8 @@ if (mysqli_num_rows($resultado) > 0) {
         $nome_denunciador = $_SESSION['nome'];
         $id_denunciado = $linha['autor'];
         $sobrenome_denunciador = $_SESSION['sobrenome'];
-        echo $id_denunciado;
+        $nome_denunciado = $linha['nome'];
+        $sobrenome_denunciado = $linha['sobrenome'];
         ?>
         <div class="row my-3">
             <div class="col-lg-6 offset-lg-3">
@@ -32,7 +33,10 @@ if (mysqli_num_rows($resultado) > 0) {
                                 <span class="fa fa-bars" aria-hidden="true"></span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="../denunciar/denunciar.php?idus=<?=$id_us?>&id=<?= $id?>&denunciador=<?= $nome_denunciador?>&sobrenome_denunciador=<?= $sobrenome_denunciador?>">Denunciar Publicação</a>
+                                <a class="dropdown-item" href="../denunciar/denunciar.php?idus=<?=$id_us?>
+                                   &id=<?= $id?>&denunciador=<?= $nome_denunciador?>&sobrenome_denunciador=<?= $sobrenome_denunciador?>
+                                   &id_denunciado=<?= $id_denunciado?>&nome_denunciado=<?= $nome_denunciado?>
+                                   &sobrenome_denunciado=<?= $sobrenome_denunciado?>">Denunciar Publicação</a>
                             </div>
                         </div>
 
@@ -99,12 +103,6 @@ if (mysqli_num_rows($resultado) > 0) {
                     }
                     ?>
 
-                    <!--                    <div class="card w-100">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Autor</h5>
-                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                            </div>
-                                        </div>-->
                 </div>
             </div>
         </div>
