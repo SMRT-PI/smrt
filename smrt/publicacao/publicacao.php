@@ -61,11 +61,17 @@ if (mysqli_num_rows($resultado) > 0) {
                                 <span class="fa fa-bars" aria-hidden="true"></span>
                             </button>
                             
-                            
+                            <?php if (admin()) { ?>
                             
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Denunciar Publicação</a>
+                                <a class="dropdown-item" href="excluir.php?id=<?= $linha['id_pub'] ?>">Excluir publicação</a>
                             </div>
+                            <?php}else { ?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Denunciar Publicação</a>
+                            </div>
+                            <?php } ?>
                         </div>
 
                         <a class="text-dark">
