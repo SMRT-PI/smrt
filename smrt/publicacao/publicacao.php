@@ -23,6 +23,34 @@ if (mysqli_num_rows($resultado) > 0) {
         $nome_denunciado = $linha['nome'];
         $sobrenome_denunciado = $linha['sobrenome'];
         ?>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmação de denuncia</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Deseja realmente denunciar esta publicação?
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-light" data-dismiss="modal">Não</a>
+        <a class="btn btn-danger" href="../denunciar/denunciar.php?idus=<?=$id_us?>
+                                   &id=<?= $id?>&denunciador=<?= $nome_denunciador?>&sobrenome_denunciador=<?= $sobrenome_denunciador?>
+                                   &id_denunciado=<?= $id_denunciado?>&nome_denunciado=<?= $nome_denunciado?>
+                                   &sobrenome_denunciado=<?= $sobrenome_denunciado?>">Sim</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--                    <a class="btn btn-primary" href="../denunciar/denunciar.php?idus=<?=$id_us?>
+                                   &id=<?= $id?>&denunciador=<?= $nome_denunciador?>&sobrenome_denunciador=<?= $sobrenome_denunciador?>
+                                   &id_denunciado=<?= $id_denunciado?>&nome_denunciado=<?= $nome_denunciado?>
+                                   &sobrenome_denunciado=<?= $sobrenome_denunciado?>">Sim</a>-->
         <div class="row my-3">
             <div class="col-lg-6 offset-lg-3">
                 <div class="card">
@@ -32,11 +60,11 @@ if (mysqli_num_rows($resultado) > 0) {
                             <button class="btn btn btn-outline-secondary float-right " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Left Align" style="width: 6%">
                                 <span class="fa fa-bars" aria-hidden="true"></span>
                             </button>
+                            
+                            
+                            
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="../denunciar/denunciar.php?idus=<?=$id_us?>
-                                   &id=<?= $id?>&denunciador=<?= $nome_denunciador?>&sobrenome_denunciador=<?= $sobrenome_denunciador?>
-                                   &id_denunciado=<?= $id_denunciado?>&nome_denunciado=<?= $nome_denunciado?>
-                                   &sobrenome_denunciado=<?= $sobrenome_denunciado?>">Denunciar Publicação</a>
+                                <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Denunciar Publicação</a>
                             </div>
                         </div>
 
@@ -67,7 +95,10 @@ if (mysqli_num_rows($resultado) > 0) {
                                 while ($linha = mysqli_fetch_assoc($query)) {
                                 ?>
                                 <div class = "col"><button class = "btn bg-transparent like" type = "button" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Curtir </button></div><span id = "likes_<?php $linha['id_pub']; ?>">(<?php $linha['likes']; ?>)</span>
-                            <?php} }else { ?>
+                            <?php} ?>
+                            
+                                <?php} ?>
+                                <?phpelse { ?>
                                 <div class = "col"><button class = "btn bg-transparent like" type = "button" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Descurtir </button></div><span id = "likes_<?php $linha['id_pub']; ?>">(<?php $linha['likes']; ?>)</span>
                                 <?php } ?>
                             <?php } ?>

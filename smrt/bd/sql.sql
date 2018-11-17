@@ -107,6 +107,7 @@ create table comentario(
 );
 -- /COMENTARIO --
 drop table comentario
+select * from comentario
 -- LIKE --
 create table likes(
     id_like int PRIMARY KEY AUTO_INCREMENT,
