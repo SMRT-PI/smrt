@@ -12,10 +12,11 @@ if (estaLogado()) {
         ?>
         <div class="justify-content-center d-flex text-center my-3">
             <form class="col-lg-6" method="post" action="inserir.php">
-                <input type="hidden" name="autor" value="<?= $linha['id'] ?>"> 
+                <input type="hidden" name="autor" value="<?= $linha['id_info'] ?>"> 
                 <div class="custom-file">
                     <label class="custom-file-label" for="customFile">Capa</label>>
-                    <input type="file" id="imagem" name="imagem" class="custom-file-input" lang="pt-br" id="capa">
+<!--                    <input type="file" id="imagem" name="imagem" class="custom-file-input" lang="pt-br" id="capa">-->
+                    <input type="file" id="imagem" name="imagem" class="custom-file-input" lang="pt-br" multiple="true">
                 </div>
                 <textarea class="form-control py-2" type="text" rows="1" name="titulo" wrap="hard" placeholder="Título"></textarea>
                 <textarea class="form-control py-2 my-2" rows="3" type="text" name="descricao" placeholder="Descrição"></textarea>

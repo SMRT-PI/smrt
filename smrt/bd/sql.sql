@@ -1,4 +1,3 @@
-
 CREATE DATABASE smrt DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 use smrt;
 drop database smrt;
@@ -29,9 +28,10 @@ create table usuario(
 --     cidade varchar(220),
 --     estado varchar(220)
   );
--- /USUÁRIO --
 drop table usuario;
 select * from usuario;
+-- /USUÁRIO --
+
 
 
 SELECT pub.id_pub,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub inner join usuario on pub.autor = usuario.id order by dataa Desc;
@@ -70,7 +70,7 @@ create table materia(
     autor int REFERENCES usuario(id)
 );
 drop table materia
-insert into materia (titulo,descricao,conteudo,capa) values ('asd','asd','asd', 'asd')
+insert into materia (titulo,descricao,conteudo,capa) values ('asd','asd','asd', 'asd');
 -- /MATÉRIA --
 
 -- PUBLICACAO --
@@ -85,17 +85,8 @@ create table pub(
     likes int
 );
 drop table pub
--- /PUBLICACAO --
-
-select * from pub;
 select now();
-drop table pub;
-select * from pub;
-
--- select * from pub;
--- SELECT pub.id,pub.legenda,pub.comentarios,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome
--- FROM pub inner join usuario on pub.autor = usuario.id order by dataa DESC;
-
+-- /PUBLICACAO --
 
 -- COMENTARIO --
 create table comentario(
@@ -105,9 +96,11 @@ create table comentario(
     autor varchar(300),
     dataa date
 );
--- /COMENTARIO --
 drop table comentario
 select * from comentario
+-- /COMENTARIO --
+
+
 -- LIKE --
 create table likes(
     id_like int PRIMARY KEY AUTO_INCREMENT,
@@ -120,6 +113,7 @@ UPDATE pub SET likes = likes+1 WHERE id_pub = 2
 select * from likes
 -- LIKE --
 
+-- DENUNCIAR PUBLICACAO --
 create table denuncia_pub(
     id int PRIMARY KEY AUTO_INCREMENT,
     id_post int references pub(id),
@@ -132,49 +126,7 @@ create table denuncia_pub(
 );
 SELECT * FROM denuncia_pub
 drop table denuncia_pub
-
-SELECT denuncia_pub.id,denuncia_pub.id_post,denuncia_pub.id_user,denuncia_pub.id_denunciado,denuncia_pub.nome_denunciador,denuncia_pub.sobrenome_denunciador,denuncia_pub.nome_denunciado,denuncia_pub.sobrenome_denunciado from ((denuncia_pub 
-INNER JOIN usuario on usuario.id = denuncia_pub.id_user)
-INNER JOIN pub on pub.id_pub = denuncia_pub.id_post);
-
-INSERT INTO denuncia_pub (id,id_post, id_user) VALUES (default,'11', '1')
-
--- SELECTS --
-
-SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,
-date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub inner join usuario on pub.autor = usuario.id order by dataa Desc;
-
-SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,comentario.idc,comentario.comentario,comentario.dataa,comentario.id_postagem,comentario.autor,
-date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub,comentario inner join usuario,comentario on pub.autor = usuario.id, comentario.id_postagem = pub.id order by dataa Desc;
-
-SELECT comentario.idc,comentario.comentario,comentario.id_postagem
-
-SELECT comentario.id,comentario.comentario,comentario.dataa,comentario.id_postagem,comentario.autor,pub.id FROM comentario inner join pub on comentario.id_postagem = pub.id;
-
-
-select id, nome from usuario;
-select administrador.id as adm, usuario.id as usuario from administrador inner join usuario on usuario.id = administrador.adm;
-select denuncia.denunciador, denuncia.denunciado, usuario.nome from usuario inner join denuncia on denuncia.denunciado = usuario.id order by denunciador;
-select * from bloqueio;
-
-select distinct denuncia.denunciado, usuario.nome, usuario.sobrenome, usuario.email, denuncia.data from denuncia inner join usuario on denuncia.denunciado= usuario.id where nome != "admin" order by data;
-select count(*) from denuncia where denunciado = 7;
-
-
-select distinct usuario from usuario inner join usuario on usuario.id = denunciado;
-
-select administrador.id as adm_id, usuario.id as usuario_id, usuario.nome from administrador inner join usuario on administrador.adm = 1;
-select administrador.id from administrador where adm = 1;
-select distinct denuncia.denunciado, denuncia.data, usuario.nome, usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on denuncia.denunciado= usuario.id order by nome;
-
-select usuario.nome, usuario.sobrenome, usuario.email, 
-
-select * from bloqueio;
-
-select * from denuncia order by denunciador;
-update denuncia set data = '2018-09-28' where id = 3;
-
--- /SELECTS --
+-- /DENUNCIAR PUBLICACAO --
 
 -- ALERTAS --
 create table alertas(
@@ -186,36 +138,51 @@ create table alertas(
 );
 -- /ALERTAS --
 
+-- Area informativa --
+create table area_info(
+    id_info int PRIMARY KEY AUTO_INCREMENT,
+    titulo varchar(400),
+    descricao varchar(600),
+    conteudo varchar(20000),
+    imagem varchar(220),
+    dataa datetime
+);
+drop table area_info
+select * from area_info
+insert into area_info (titulo,descricao,conteudo,capa) values ('asd','asd','asd', 'asd');
+insert into area_info (titulo,descricao,conteudo,capa,dataa) values ('asdasd','asdasd','asdasd', 'Penguins.jpg','2018-11-18 12:42:50')
+-- /Area informativa --
+
 -- INSERTS --
 insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admin', 'admin@admin',md5('123'), TRUE);
 
 insert into usuario (nome, sobrenome ,email, senha) values  ('a', 'a', 'a@a',md5('123'));
-insert into usuario (nome, sobrenome ,email, senha) values  ('b', 'b', 'b@b','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('c', 'c', 'c@c','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('d', 'd', 'd@d','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('e', 'e', 'e@e','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('f', 'f', 'f@f','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('g', 'g', 'g@g','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('h', 'h', 'h@h','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('i', 'i', 'i@i','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('j', 'j', 'j@j','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('k', 'k', 'k@k','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('l', 'l', 'l@l','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('m', 'm', 'm@m','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('n', 'n', 'n@n','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('o', 'o', 'o@o','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('p', 'p', 'p@p','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('q', 'q', 'q@q','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('r', 'r', 'r@r','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('s', 's', 's@s','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('t', 't', 't@t','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('u', 'u', 'u@u','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('v', 'v', 'v@v','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('w', 'w', 'w@w','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('x', 'x', 'x@x','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('y', 'y', 'y@y','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('z', 'z', 'z@z','123');
-insert into usuario (nome, sobrenome ,email, senha) values  ('Ezequias', 'Serafim', 'serafimezequias@gmail.com','123');
+insert into usuario (nome, sobrenome ,email, senha) values  ('b', 'b', 'b@b',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('c', 'c', 'c@c',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('d', 'd', 'd@d',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('e', 'e', 'e@e',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('f', 'f', 'f@f',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('g', 'g', 'g@g',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('h', 'h', 'h@h',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('i', 'i', 'i@i',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('j', 'j', 'j@j',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('k', 'k', 'k@k',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('l', 'l', 'l@l',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('m', 'm', 'm@m',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('n', 'n', 'n@n',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('o', 'o', 'o@o',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('p', 'p', 'p@p',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('q', 'q', 'q@q',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('r', 'r', 'r@r',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('s', 's', 's@s',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('t', 't', 't@t',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('u', 'u', 'u@u',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('v', 'v', 'v@v',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('w', 'w', 'w@w',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('x', 'x', 'x@x',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('y', 'y', 'y@y',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('z', 'z', 'z@z',md5('123'));
+insert into usuario (nome, sobrenome ,email, senha) values  ('Ezequias', 'Serafim', 'serafimezequias@gmail.com',md5('123'));
 
 
 insert into denuncia(denunciador, denunciado,dataa) values (1,4,'2018-09-28');
@@ -258,3 +225,40 @@ insert into denuncia(denunciador, denunciado,dataa) values (1,16,'2018-09-28');
 insert into denuncia(denunciador, denunciado,dataa) values (2,16,'2018-09-28');
 insert into denuncia(denunciador, denunciado,dataa) values (3,16,'2018-09-28');
 -- INSERTS --
+
+-- SELECTS --
+
+SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,
+date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub inner join usuario on pub.autor = usuario.id order by dataa Desc;
+
+SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,comentario.idc,comentario.comentario,comentario.dataa,comentario.id_postagem,comentario.autor,
+date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub,comentario inner join usuario,comentario on pub.autor = usuario.id, comentario.id_postagem = pub.id order by dataa Desc;
+
+SELECT comentario.idc,comentario.comentario,comentario.id_postagem
+
+SELECT comentario.id,comentario.comentario,comentario.dataa,comentario.id_postagem,comentario.autor,pub.id FROM comentario inner join pub on comentario.id_postagem = pub.id;
+
+
+select id, nome from usuario;
+select administrador.id as adm, usuario.id as usuario from administrador inner join usuario on usuario.id = administrador.adm;
+select denuncia.denunciador, denuncia.denunciado, usuario.nome from usuario inner join denuncia on denuncia.denunciado = usuario.id order by denunciador;
+select * from bloqueio;
+
+select distinct denuncia.denunciado, usuario.nome, usuario.sobrenome, usuario.email, denuncia.data from denuncia inner join usuario on denuncia.denunciado= usuario.id where nome != "admin" order by data;
+select count(*) from denuncia where denunciado = 7;
+
+
+select distinct usuario from usuario inner join usuario on usuario.id = denunciado;
+
+select administrador.id as adm_id, usuario.id as usuario_id, usuario.nome from administrador inner join usuario on administrador.adm = 1;
+select administrador.id from administrador where adm = 1;
+select distinct denuncia.denunciado, denuncia.data, usuario.nome, usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on denuncia.denunciado= usuario.id order by nome;
+
+select usuario.nome, usuario.sobrenome, usuario.email, 
+
+select * from bloqueio;
+
+select * from denuncia order by denunciador;
+update denuncia set data = '2018-09-28' where id = 3;
+
+-- /SELECTS --

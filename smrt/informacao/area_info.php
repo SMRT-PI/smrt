@@ -3,7 +3,7 @@ include_once '../usuario/autenticacao.php';
 include_once '../cabecalho.php';
 include_once '../bd/conectar.php';
 
-$sql = "select * from materia";
+$sql = "select * from area_info";
 $resultado = mysqli_query($conexao, $sql);
 ?> 
 
@@ -15,14 +15,20 @@ $resultado = mysqli_query($conexao, $sql);
 <div class="d-flex justify-content-center text-center my-3">
     <div class="list-group d-flex w-100">
         <?php
-        while ($linha = mysqli_fetch_array($resultado)) {
-            ?>
-            <a class="hover-zoom list-group-item my-1 list-group-item-action flex-column align-items-start img-fluid" href="conteudo.php?id=<?= $linha['id'] ?>" style="background-image: url(../img/<?= $linha['capa'] ?>);" >
-                <div class="d-flex w-100 justify-content-center">
-                    <h2 class="font-weight-light"><kbd><?= $linha['titulo'] ?></kbd></h2>
-                </div>
-                <p class="mb-1 font-weight-light"><kbd><?= $linha['descricao'] ?></kbd></p>
-            </a>
+        if (mysqli_num_rows($resultado) > 0) {
+            while ($linha = mysqli_fetch_array($resultado)) {
+                ?>
+                <a class="hover-zoom list-group-item my-1 list-group-item-action flex-column align-items-start img-fluid" href="conteudo.php?id=<?= $linha['id'] ?>" style="background-image: url(../img/foto1.jpg<?= $linha['capa'] ?>);" >
+                    <div class="d-flex w-100 justify-content-center">
+                        <h2 class="font-weight-light"><kbd><?= $linha['titulo'] ?></kbd></h2>
+                    </div>
+                    <p class="mb-1 font-weight-light"><kbd><?= $linha['descricao'] ?></kbd></p>
+                </a>
+            <?php } ?>
+        <?php } else { ?>
+            <div>
+                <h5 class="text-muted">Nenhuma matéria encontrada!</h5>
+            </div>
         <?php } ?>
     </div>
 </div>
