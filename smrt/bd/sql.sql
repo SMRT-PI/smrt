@@ -129,14 +129,16 @@ drop table denuncia_pub
 -- /DENUNCIAR PUBLICACAO --
 
 -- ALERTAS --
-create table alertas(
+create table alerta(
     id int PRIMARY KEY AUTO_INCREMENT,
-    titulo varchar(400),
     lat varchar(220),
-    lon varchar(200),
-    dataa date
+    lon varchar(200)
 );
 -- /ALERTAS --
+select * from alerta;
+drop table alerta;
+
+
 
 -- Area informativa --
 create table area_info(

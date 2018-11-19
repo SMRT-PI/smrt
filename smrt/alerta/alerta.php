@@ -40,12 +40,10 @@ include '../cabecalho.php';
         lat = position.coords.latitude;
         lon = position.coords.longitude;
         mapholder = document.getElementById('mapholder');
-        mapholder.innerHTML = ('<iframe id="mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d876.7773817165236!2d' + lon + '!3d' + lat + '!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDI4JzM0LjUiUyA0OcKwMDEnMzQuNiJX!5e0!3m2!1spt-BR!2sbr!4v1539659561200" width="600" height="450" frameborder="0" style="border:0;width:100%;height:100%;min-height: 40vh;min-width: 40vw;" allowfullscreen></iframe>');
+        mapholder.innerHTML = ('<iframe id="mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d876.7773817165236!2d' + lon + '!3d' + lat + '!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDI4JzM0LjUiUyA0OcKwMDEnMzQuNiJX!5e0!3m2!1spt-BR!2sbr!4v1539659561200" width="600" height="450" frameborder="0" style="border:0;width:100%;height:100%;min-height: 40vh;min-width: 40vw;" ></iframe>');
         coordenadas = document.getElementById('coordenadas');
         coordenadas.innerHTML = ('<input class="form-control" type="text" id="lat" name="lat" value="' + lat + '"> <input class="form-control" type="text" id="lon" name="lon" value="' + lon + '">');
-
-        /*
-         var latlon=new google.maps.LatLng(lat, lon)
+         var latlon=new google.maps.LatLng(lat, lon);
          var myOptions={
          center:latlon,zoom:14,
          mapTypeId:google.maps.MapTypeId.ROADMAP,
@@ -54,7 +52,7 @@ include '../cabecalho.php';
          };
          var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
          var marker=new google.maps.Marker({position:latlon,map:map,title:"Minha localização!"});
-         */
+         
     }
     function lat() {
         lat = position.coords.latitude;
@@ -65,33 +63,6 @@ include '../cabecalho.php';
         return lon;
     }
 //CHAVE API GOOGLE MAPS - AIzaSyC7xO0yzbGdqeO7caYCe1PDDwzMw6TphtU
-</script>
-
-<style>
-    /* Always set the map height explicitly to define the size of the div
-     * element that contains the map. */
-    #map {
-        height: 100%;
-    }
-    /* Optional: Makes the sample page fill the window. */
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-</style>
-
-<div id="map"></div>
-<script>
-    var map;
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -34.397, lng: 150.644},
-            zoom: 8
-        });
-    }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7xO0yzbGdqeO7caYCe1PDDwzMw6TphtU&callback=initMap" async defer>
 </script>
 
 <!--Google Maps Localização-->
@@ -120,6 +91,7 @@ include '../cabecalho.php';
         </div>
     </div>
 </div>
+
 <!-- The Modal -->
 <div class="modal fade" id="modalmapa">
     <div class="modal-dialog modal-lg">
