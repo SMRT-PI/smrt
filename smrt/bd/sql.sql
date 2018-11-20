@@ -3,6 +3,7 @@ use smrt;
 drop database smrt;
 
 -- DROP TABLES --
+drop table perfil;
 drop table usuario;
 drop table administrador;
 drop table denuncia;
@@ -18,16 +19,20 @@ create table usuario(
     sobrenome varchar(100),
     senha varchar(100),
     adm boolean default FALSE,
-    email varchar(100) unique,
-    foto varchar(220)
-    ------ acrescentar -------
---     sobre varchar(220),
---     experiencias varchar(220),
---     hobbies varchar(220),
---     endereco varchar(220),
---     cidade varchar(220),
---     estado varchar(220)
+    email varchar(100) unique
   );
+
+create table perfil(
+    sobre varchar(220),
+    experiencias varchar(220),
+    hobbies varchar(220),
+    endereco varchar(220),
+    cidade varchar(220),
+    estado varchar(220) 
+);
+
+
+     
 drop table usuario;
 select * from usuario;
 -- /USUÁRIO --

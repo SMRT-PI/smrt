@@ -172,9 +172,6 @@ $retorno_alertas = mysqli_query($conexao, $sql_alertas);
                 <li class="nav-item">
                     <a href="../alerta/alerta.php" data-target="#alert" data-toggle="tab" class="nav-link">Alertas</a>
                 </li>
-                <li class="nav-item">
-                    <a href="editar.php" data-target="#edit" data-toggle="tab" class="nav-link">Editar Informações</a>
-                </li>
             </ul>
             
 <!--            INFORMACOES DO PERFIL-->
@@ -244,104 +241,6 @@ $retorno_alertas = mysqli_query($conexao, $sql_alertas);
                     MOSTRAR ALERTAS
                    
                 </div>
-
-<!--                  EDITAR INFO-->
-
-                <?php
-                $id = $_GET['id'];
-                $sql_pessoa = "select * from usuario where id = $id";
-                $resultado = mysqli_query($conexao, $sql_pessoa);
-                $linha = mysqli_fetch_array($resultado);
-                ?>
-   
-
-                <div class="tab-pane" id="edit">
-                    <form role="form" method="post" action="alterar.php">
-                        <p>Sobre você:</p>
-                        <input type="hidden" name="id" value="<?= $id ?>">
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Sobre mim</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="<?= $linha['sobre'] ?>">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Experiências</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="<?= $linha['experiencias'] ?>">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Hobbies</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="<?= $linha['hobbies'] ?>">
-                            </div>
-                        </div>
-                        
-                        
-                        <p>Dados:</p>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Nome</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="<?= $linha['nome'] ?>">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Sobrenome</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="<?= $linha['sobrenome'] ?>">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Email</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="email" value="<?= $linha['email'] ?>">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Endereço</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="" placeholder="<?= $linha['endereco'] ?>">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label"></label>
-                            <div class="col-lg-6">
-                                <input class="form-control" type="text" value="<?= $linha['cidade'] ?>" placeholder="Cidade">
-                            </div>
-                            <div class="col-lg-3">
-                                <input class="form-control" type="text" value="<?= $linha['estado'] ?>" placeholder="Estado">
-                            </div>
-                        </div>
-                     
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Usuário</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="<?= $linha['usuario'] ?>">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Senha</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="password" value="<?= $linha['senha'] ?>">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Confirmar senha</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="password" value="<?= $linha['senha'] ?>">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label"></label>
-                            <div class="col-lg-9">
-                                <input type="reset" class="btn btn-secondary" value="Cancelar">
-                                <input type="button" class="btn btn-primary" value="Salvar alterações">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
             </div>
         </div>
         
@@ -355,11 +254,12 @@ $retorno_alertas = mysqli_query($conexao, $sql_alertas);
                 <button type="button" class="btn btn-success btn-sm" onClick="alert('Você seguiu <?= $linha['nome'] . ' ' . $linha['sobrenome'] ?>')">Seguir</button>
 
             </div> 
-            
-            <label class="custom-file">
-                <input type="file" id="file" class="custom-file-input">
-                <span class="custom-file-control">Escolher foto</span>
-            </label>
+            <br>
+            <div class="profile-userbuttons">
+                <button type="submit" class="btn btn-success btn-sm" value="editar.php">Editar informações</button>
+
+            </div> 
+           
         </div>
     </div>
 </div>
