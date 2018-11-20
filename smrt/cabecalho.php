@@ -84,7 +84,7 @@
                         <!-- LINK5 -->
                         <?php
                         if (estaLogado()) {
-                            if (adm()) {
+                            if (admin()) {
                                 ?>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

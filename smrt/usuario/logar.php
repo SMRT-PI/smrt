@@ -1,6 +1,6 @@
 <?php  
  
- session_start();
+// session_start();
  ini_set("display_errors", true);
 
 require_once './autenticacao.php';
@@ -11,13 +11,16 @@ $_SESSION['erro'] = '';
 $email = $_POST["email"];
 $senha = $_POST["senha"];
 
-$sql = sprintf("select * from usuario where email = '%s' and senha = '%s'", $email, $senha);
+$sql = sprintf("select * from usuario where email = '%s' and senha = md5('%s')", $email, $senha);
 $retorno = mysqli_query($conexao, $sql);
 $resultado = mysqli_fetch_array($retorno);
 
+//echo "TESTE: " . print_r($resultado);;
+//exit;
+
 if (!$resultado) {
     $_SESSION['erro'] = 'Usuário ou senha inválido';
-    header('Location: /usuario/entrar.php');
+    header('Location: http://localhost/smrt/usuario/entrar.php');
     die();
 }
 
@@ -27,7 +30,7 @@ $resultado1 = mysqli_fetch_array($retorno1);
 
 $isAdmin = $resultado1['id'] >= 1;
 logar($resultado['nome'], $resultado['sobrenome'], $resultado['email'], $isAdmin, $resultado['id']);
-header("Location: /usuario/listar.php");
+header("Location: http://localhost/smrt/usuario/listar.php");
 
 
 //require_once './autenticacao.php';

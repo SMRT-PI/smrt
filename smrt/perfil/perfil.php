@@ -198,10 +198,8 @@ $retorno_alertas = mysqli_query($conexao, $sql_alertas);
                             <p>
                                 <?= $linha['endereco'] ?>
                             </p>
-                            <h6>Like</h6>
-                            <p>
-                                <?= $linha['like'] ?>
-                            </p>
+
+
                         </div>
                         <div class="col-md-6">
                             <h6>Rescentes</h6>
@@ -247,7 +245,7 @@ $retorno_alertas = mysqli_query($conexao, $sql_alertas);
 <!--        AVATAR-->
         
         <div class="col-lg-4 order-lg-1 text-center">
-            <img src="http://www.epsomps.vic.edu.au/wp-content/uploads/2016/09/512x512-1-300x300.png" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            <img src="http://localhost/smrt/img/<?php echo $linha['foto']?>" class="mx-auto img-fluid img-circle d-block" alt="avatar">
             <h2 class="mt-2"><?= $linha['nome'] . ' ' . $linha['sobrenome'] ?></h2>
             <p class="mt-2"><?= $linha['email'] ?></p>
             <div class="profile-userbuttons">
@@ -256,7 +254,7 @@ $retorno_alertas = mysqli_query($conexao, $sql_alertas);
             </div> 
             <br>
             <div class="profile-userbuttons">
-                <button type="submit" class="btn btn-success btn-sm" value="editar.php">Editar informações</button>
+                <a type="button" href="form_alterar.php" class="btn btn-success btn-sm">Editar informações</a>
 
             </div> 
            

@@ -39,7 +39,7 @@ function estaLogado() {
     return isset($_SESSION['email']);
 }
 
-function adm() {
+function admin() {
  if(isset($_SESSION['adm']) === TRUE){
      return TRUE;
  } else {
