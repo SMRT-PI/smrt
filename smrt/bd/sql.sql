@@ -143,7 +143,25 @@ create table alerta(
 select * from alerta;
 drop table alerta;
 
+CREATE TABLE `smrt`.`friends` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `idUser` INT NOT NULL,
+  `IdFriend` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `idFriend_idx` (`IdFriend` ASC),
+  INDEX `idUser_idx` (`idUser` ASC),
+  CONSTRAINT `idUser_fk`
+    FOREIGN KEY (`idUser`)
+    REFERENCES `smrt`.`usuario` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idFriend_fk`
+    FOREIGN KEY (`IdFriend`)
+    REFERENCES `smrt`.`usuario` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 
+ALTER TABLE usuario ADD COLUMN ext VARCHAR(4) NULL AFTER email;
 
 -- Area informativa --
 create table area_info(

@@ -1,48 +1,59 @@
-<?php
+<?php  
+ 
+ session_start();
+ ini_set("display_errors", true);
+
 require_once './autenticacao.php';
-ini_set("display_errors", true);
 require_once '../bd/conectar.php';
 
-if (isset($_POST["email"]) && isset($_POST["senha"])) {
+$_SESSION['erro'] = '';
 
-    $email = $_POST["email"];
-    $senha = $_POST["senha"];
+$email = $_POST["email"];
+$senha = $_POST["senha"];
 
-    $sql = "select * from usuario where email = '$email' and senha = md5('$senha')";
-    $retorno = mysqli_query($conexao, $sql);
-    $resultado = mysqli_fetch_array($retorno);
+$sql = sprintf("select * from usuario where email = '%s' and senha = '%s'", $email, $senha);
+$retorno = mysqli_query($conexao, $sql);
+$resultado = mysqli_fetch_array($retorno);
 
-    logar($resultado['nome'], $resultado['sobrenome'], $resultado['email'], $resultado['adm']);
-    header('Location: /smrt/index.php');
+if (!$resultado) {
+    $_SESSION['erro'] = 'Usuário ou senha inválido';
+    header('Location: /usuario/entrar.php');
+    die();
 }
 
-//if (isset($_POST["email"]) && isset($_POST["senha"])) {
-//    $connect = new PDO("mysql:host=localhost;dbname=smrt", "root", "ifsc");
-//
-//    $data = array(
-//        ':nome' => $_POST['nome'],
-//        ':sobrenome' => $_POST['sobrenome'],
-//        ':email' => $_POST['email'],
-//        ':senha' => $_POST['senha'],
-//    );
-//
-//    $query = "select * from usuario where email = '$email' and senha = '$senha'";
-//    $statement = $connect->prepare($query);
-//    if ($statement->execute($data)) {
-//        
-//    }
-//}
-?>
+$sql1 = sprintf("select administrador.id from administrador where adm = %d", $resultado['id']);
+$retorno1 = mysqli_query($conexao, $sql);
+$resultado1 = mysqli_fetch_array($retorno1);
 
-//<?php
+$isAdmin = $resultado1['id'] >= 1;
+logar($resultado['nome'], $resultado['sobrenome'], $resultado['email'], $isAdmin, $resultado['id']);
+header("Location: /usuario/listar.php");
+
+
+//require_once './autenticacao.php';
+//require_once '../bd/conectar.php';
+//if (isset($_POST['logar']) && $_POST['logar'] == 'sim'):
 //
-//ini_set('display_errors', true);
-//error_reporting(E_ALL);
+//    $novos_campos = array();
+//    $campos_post = $_POST['campos'];
 //
-//if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+//    $respostas = array();
+//    foreach ($campos_post as $indice => $valor) {
+//        $novos_campos[$valor['name']] = $valor['value'];
+//    }
 //
-//    $sql = "INSERT INTO usuario (nome, sobrenome,email,senha) VALUES
-//('" . getPost('nome') . "', '" . getPost('sobrenome') . "', '" . getPost('email') . "', '" . md5(getPost('senha')) . "')";
-//    $retorno = mysqli_query($conexao, $sql);
-//}
-//?>
+//    if (!strstr($retorno['email'], '@')) {
+//        $respostas['erro'] = 'sim';
+//        $respostas['getErro'] = 'E-mail inválido, preencha com e-mail válido';
+//    } elseif ($retorno['senha'] != $senha) {
+//        $respostas['erro'] = 'sim';
+//        $respostas['getErro'] = 'As senhas informada não correspondem!';
+//    } else {
+//        $respostas['erro'] = 'nao';
+//        $respostas['msg'] = 'Cadastrado com sucesso!';
+//    }
+//
+//    echo json_encode($respostas);
+//
+//endif;
+?>

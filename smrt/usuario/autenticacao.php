@@ -1,17 +1,13 @@
 <?php
+
 session_start();
-//ini_set('display_errors',0);
-//ini_set('display_startup_errors',0);
-//error_reporting(E_ALL);
-date_default_timezone_set("America/Sao_Paulo");
 
-$btnclick = 0;
-
-function logar($nome, $sobrenome, $email, $adm) {
+function logar($nome, $sobrenome, $email, $adm, $id) {
     $_SESSION['nome'] = $nome;
     $_SESSION['sobrenome'] = $sobrenome;
     $_SESSION['email'] = $email;
     $_SESSION['adm'] = $adm;
+    $_SESSION['id'] = $id;
     iniciarTempoSessao();
 }
 
@@ -44,23 +40,11 @@ function estaLogado() {
 }
 
 function adm() {
-    if ($_SESSION['adm'] == TRUE) {
-        return TRUE;
-    } else {
-        return FALSE;
-    }
-}
-
-function admin() {
-    if (estaLogado()) {
-        if (adm()) {
-            return TRUE;
-        } else {
-            return FALSE;
-        }
-    } else {
-        return FALSE;
-    }
+ if(isset($_SESSION['adm']) === TRUE){
+     return TRUE;
+ } else {
+     return FALSE;    
+ }
 }
 
 function iniciarTempoSessao() {
