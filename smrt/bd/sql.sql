@@ -12,6 +12,8 @@ drop table pub;
 drop table comentario;
 -- /DROP TABLES --
 
+select * from usuario
+
 -- USUÁRIO --
 create table usuario(
     id int PRIMARY KEY AUTO_INCREMENT,
@@ -19,16 +21,14 @@ create table usuario(
     sobrenome varchar(100),
     senha varchar(100),
     adm boolean default FALSE,
-    email varchar(100) unique
-  );
-
-create table perfil(
+    email varchar(100) unique,
     sobre varchar(220),
     experiencias varchar(220),
     hobbies varchar(220),
     endereco varchar(220),
     cidade varchar(220),
-    estado varchar(220) 
+    estado varchar(220),
+    foto varchar(220)
 );
 
 
@@ -180,7 +180,7 @@ insert into area_info (titulo,descricao,conteudo,capa,dataa) values ('asdasd','a
 -- /Area informativa --
 
 -- INSERTS --
-insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admin', 'admin@admin',md5('123'), TRUE);
+insert into usuario (nome, sobrenome ,email, senha, adm, sobre, experiencias, hobbies, endereco, cidade, estado, foto) values  ('admin', 'admin', 'admin@admin',md5('123'), TRUE, 'shuashuha', 'hsauhsau', 'hsuhuashusha', 'hsahsuahsu', 'shuahsuahsa', 'hsuahsuahs','foto.jpg');
 
 insert into usuario (nome, sobrenome ,email, senha) values  ('a', 'a', 'a@a',md5('123'));
 insert into usuario (nome, sobrenome ,email, senha) values  ('b', 'b', 'b@b',md5('123'));
