@@ -67,10 +67,6 @@
                             <?php } ?>
                         </li>
                         <!-- /LINK4 --> 
-                        
-                        <li class="nav-item">
-                                    <a class="nav-link" href="http://localhost/usuario/amigos.php">Amigos</a>
-                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link text-light" href="/smrt/publicacao/publicacao.php"><strong>Feed de Notícias</strong></a>
