@@ -143,6 +143,7 @@ create table alerta(
 select * from alerta;
 drop table alerta;
 
+
 CREATE TABLE `smrt`.`friends` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `idUser` INT NOT NULL,

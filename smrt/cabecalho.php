@@ -26,6 +26,8 @@
         <script type="text/javascript" src="../js/functions.js"></script>
         <!-- Botão de Like-->
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9x1ioWPmKq2F5zrfw4FVeHCW_L2Ruso&callback=initMap"
+        type="text/javascript"></script>
     </head>
 
 
