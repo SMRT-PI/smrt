@@ -252,6 +252,7 @@ insert into denuncia(denunciador, denunciado,dataa) values (2,16,'2018-09-28');
 insert into denuncia(denunciador, denunciado,dataa) values (3,16,'2018-09-28');
 -- INSERTS --
 
+select * from denuncia
 -- SELECTS --
 
 SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,
