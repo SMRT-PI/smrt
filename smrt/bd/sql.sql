@@ -136,12 +136,18 @@ drop table denuncia_pub
 -- ALERTAS --
 create table alerta(
     id int PRIMARY KEY AUTO_INCREMENT,
-    lat varchar(220),
-    lon varchar(200)
+    lat float,
+    lng float
 );
 -- /ALERTAS --
+SELECT * FROM alerta WHERE 1
 select * from alerta;
 drop table alerta;
+
+insert into alerta (lat,lng) values ('-28.477013','-49.001140');
+insert into alerta (lat,lng) values ('-28.477475',' -49.002342');
+insert into alerta (lat,lng) values ('-28.481936','-49.009477');
+insert into alerta (lat,lng) values ('-28.477013','-49.001140');
 
 
 CREATE TABLE `smrt`.`friends` (

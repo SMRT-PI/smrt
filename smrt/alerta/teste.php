@@ -2,78 +2,70 @@
 
 require_once '../cabecalho.php';
 ?>
-<!--
+
 <style>
-    /* Set the size of the div element that contains the map */
     #map {
-        height: 73vh;  /* The height is 400 pixels */
-        width: 100%;  /* The width is the width of the web page */
+        height: 73vh;
     }
 </style>
 
 <div id="map"></div>
 
 <script>
-    // Initialize and add the map
+    var customLabel = {};
+
     function initMap() {
-        // AS COORDENADAS DO CENTRO
-        var centro = {lat: -28.481078, lng: -49.008822};
-        // MAPA CENTRALIZADO EM TUBARÃO
-        var map = new google.maps.Map(
-                document.getElementById('map'), {zoom: 14, center: centro});
-//        var marker = new google.maps.Marker({position: centro, map: map});
-    }
-</script>-->
-
-
-<style>
-    /* Always set the map height explicitly to define the size of the div
-     * element that contains the map. */
-    #map {
-        height: 73vh;
-    }
-    /* Optional: Makes the sample page fill the window. */
-    html, body {
-        height: 73vh;
-        margin: 0;
-        padding: 0;
-    }
-</style>
-
-<div id="map"></div>
-<script>
-    var map;
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 14,
-            center: new google.maps.LatLng(-28.481050, -49.008865)
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: new google.maps.LatLng(-28.481050, -49.008865),
+            zoom: 14
         });
+        var infoWindow = new google.maps.InfoWindow;
 
-        // Create a <script> tag and set the USGS URL as the source.
-        var script = document.createElement('script');
-        // This example uses a local copy of the GeoJSON stored at
-        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-        script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
-        document.getElementsByTagName('head')[0].appendChild(script);
-    }
+        // Change this depending on the name of your PHP or XML file
+        downloadUrl('pontosBD.php', function (data) {
+            var xml = data.responseXML;
+            var markers = xml.documentElement.getElementsByTagName('marker');
+            Array.prototype.forEach.call(markers, function (markerElem) {
+                var id = markerElem.getAttribute('id');
+                var point = new google.maps.LatLng(
+                        parseFloat(markerElem.getAttribute('lat')),
+                        parseFloat(markerElem.getAttribute('lng')));
 
-    // Loop through the results array and place a marker for each
-    // set of coordinates.
-    window.eqfeed_callback = function (results) {
-        for (var i = 0; i < results.features.length; i++) {
-            var coords = results.features[i].geometry.coordinates;
-            var latLng = new google.maps.LatLng(coords[1], coords[0]);
-            var marker = new google.maps.Marker({
-                position: latLng,
-                map: map
+                var icon = customLabel[id] || {};
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: point,
+                    label: icon.label
+                });
             });
-        }
+        });
     }
+
+
+
+    function downloadUrl(url, callback) {
+        var request = window.ActiveXObject ?
+                new ActiveXObject('Microsoft.XMLHTTP') :
+                new XMLHttpRequest;
+
+        request.onreadystatechange = function () {
+            if (request.readyState == 4) {
+                request.onreadystatechange = doNothing;
+                callback(request, request.status);
+            }
+        };
+
+        request.open('GET', url, true);
+        request.send(null);
+    }
+
+    function doNothing() {}
 </script>
+
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9x1ioWPmKq2F5zrfw4FVeHCW_L2Ruso&callback=initMap">
 </script>
-
+<!--AIzaSyDV9x1ioWPmKq2F5zrfw4FVeHCW_L2Ruso-->
 <?php
 
 require_once '../rodape.php';

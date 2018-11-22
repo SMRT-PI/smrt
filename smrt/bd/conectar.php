@@ -1,3 +1,7 @@
 <?php
 
-$conexao = mysqli_connect("localhost", "root", "ifsc", "smrt" );
+$username = "root";
+$password = "ifsc";
+$database = "smrt";
+
+$conexao = mysqli_connect("localhost", "$username", "$password", "$database" );
