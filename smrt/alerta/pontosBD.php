@@ -22,7 +22,7 @@ if (!$db_selected) {
 
 // Select all the rows in the markers table
 
-$query = "SELECT * FROM alerta WHERE 1";
+$query = "SELECT * FROM pub WHERE 1";
 $result = mysql_query($query);
 if (!$result) {
     die('Invalid query: ' . mysql_error());

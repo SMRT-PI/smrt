@@ -1,137 +1,97 @@
 <?php
 //include_once '../bd/conectar.php';
 //include '../cabecalho.php';
-$sql_form = "select * from usuario where email = '$_SESSION[email]'";
+$sql_form = "select id as autor from usuario where email = '$_SESSION[email]'";
 $retorno_form = mysqli_query($conexao, $sql_form);
 $linha_form = mysqli_fetch_array($retorno_form);
 ?>
 
-<!--Google Maps Localização-->
-<script>
-    var lat = '';
-    var lon = '';
-
-    var x = document.getElementById("demo");
-    function getLocation()
-    {
-        if (navigator.geolocation)
-        {
-            navigator.geolocation.getCurrentPosition(showPosition, showError);
-        } else {
-            x.innerHTML = "Geolocalização não é suportada nesse browser."
-        }
-    }
-
-    function showError(error)
-    {
-        switch (error.code)
-        {
-            case error.PERMISSION_DENIED:
-                x.innerHTML = "Usuário rejeitou a solicitação de Geolocalização."
-                break;
-            case error.POSITION_UNAVAILABLE:
-                x.innerHTML = "Localização indisponível."
-                break;
-            case error.TIMEOUT:
-                x.innerHTML = "O tempo da requisição expirou."
-                break;
-            case error.UNKNOWN_ERROR:
-                x.innerHTML = "Algum erro desconhecido aconteceu."
-                break;
-        }
-    }
-    function showPosition(position)
-    {
-        lat = position.coords.latitude;
-        lon = position.coords.longitude;
-        mapholder = document.getElementById('mapholder');
-        mapholder.style.height = '250px';
-        mapholder.style.width = '500px';
-        mapholder.innerHTML = ('<iframe id="mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d876.7773817165236!2d' + lon + '!3d' + lat + '!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDI4JzM0LjUiUyA0OcKwMDEnMzQuNiJX!5e0!3m2!1spt-BR!2sbr!4v1539659561200" width="600" height="450" frameborder="0" style="border:0;width:100%;height:100%;" allowfullscreen></iframe>');
-        document.getElementById("lat").value = lat;
-        document.getElementById("lon").value = lon;
-        /*
-         var latlon=new google.maps.LatLng(lat, lon)
-         var myOptions={
-         center:latlon,zoom:14,
-         mapTypeId:google.maps.MapTypeId.ROADMAP,
-         mapTypeControl:false,
-         navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
-         };
-         var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
-         var marker=new google.maps.Marker({position:latlon,map:map,title:"Minha localização!"});
-         */
-    }
-//CHAVE API GOOGLE MAPS - AIzaSyC7xO0yzbGdqeO7caYCe1PDDwzMw6TphtU
-</script>
-
-<!--Google Maps Localização-->
-
-
-
-<!--<div class="container">
-        Mapa    
-    <div class="col-md-6 offset-md-3 mt-5 mb-5">  
-        <div class="row mt-3 mb-3">
-            <div id="mapholder" style="margin:0 auto;"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 mb-4">
-                <button class="btn btn-primary float-right" onclick="getLocation()">Obtenha a localização aqui!</button>
-                <p id="demo"></p>
-            </div>
-        </div>
-        <input type="hidden" name="autor" value="<?= $linha_form['id'] ?>"/>   
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <input class="form-control my-3" type="text" id="lat" name="lat" value="" placeholder="Latitude"/>
-                <input class="form-control" type="text" id="lon" name="lon" value="" placeholder="Longitude"/>
-            </div>
-        </div>
-            Mapa 
-            Formulario 
-        <form method="post" action="inserir.php">
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Imagem:</label>
-                <div class="col-sm-10">
-                    <input class="form-control" type="file" name="imagem" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Título:</label>
-                <div class="col-sm-10">
-                    <input class="form-control" type="text" name="legenda" placeholder="Informe o título de publicação"/>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Legenda:</label>
-                <div class="col-sm-10">
-                    <textarea class="form-control" rows="5" placeholder="Informe a legenda de Publicação" name="titulo"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 mb-4">
-                    <input type="submit" name="enviar" class="btn btn-success float-left" value="Enviar" />
-                </div>
-            </div>
-        </form>
-            Formulario
-    </div>
-</div>-->
-
 <div class="justify-content-center d-flex text-center my-3">
-    <form class="col-lg-6" method="post" action="inserir.php" enctype="multipart/form-data">
-        <input type="hidden" name="autor" value="<?= $linha_form['id'] ?>"> 
+    <form class="col-lg-6 my-3" method="post" action="inserir.php" enctype="multipart/form-data">
+        <input type="hidden" name="autor" value="<?= $linha_form['autor'] ?>"> 
+        <div id="coordenadas">
+        </div>
         <div class="input-group">
-            <textarea class="form-control" rows="1"  placeholder="Legenda" name="legenda"></textarea>
+            <input class="form-control" rows="1" placeholder="Legenda" name="legenda">
             <div class="input-group-append">
-                <span class="input-group-text">
-                    <input type="file" id="imagem" name="imagem" style="cursor: pointer;display: inline-block;opacity: 0;position: absolute;" multiple="true">
-                    <i for="imagem" style="cursor: pointer;" class="fas fa-image"></i>
+                <div id="coordenadas">
+                    <input type="hidden" id="lat" name="lat" value="">
+                    <input type="hidden" id="lon" name="lon" value="">
+                </div>
+                <span class="input-group-text" id="blocal">
+                    <input class="form-control" type="button" id="mapa" name="mapa" onclick="getLocation()" 
+                           style="cursor: pointer;
+                           width: 0.1px;
+                           height: 0.1px;
+                           opacity: 0;
+                           overflow: hidden;
+                           position: absolute;
+                           z-index: 1;">
+                    <label class="m-0 p-0" style="cursor: pointer;" for="mapa"><i class="fas fa-map-marked-alt"></i></label>
+                </span>
+                <span class="input-group-text" style="cursor: pointer;">
+                    <input type="file" id="imagem" name="imagem" style="
+                           width: 0.1px;
+                           height: 0.1px;
+                           opacity: 0;
+                           overflow: hidden;
+                           position: absolute;
+                           z-index: 1;" multiple="true">
+                    <label class="m-0 p-0" style="cursor: pointer;" for="imagem"><i for="imagem" class="fas fa-image"></i></label>
                 </span>
                 <input type="submit" value="Publicar" class="btn btn-lg btn-success small" formenctype="multipart/form-data">
             </div>
         </div>
     </form>
 </div>
+
+
+<script>
+    function input_img() {
+        //FAZ DEPOIS LUCA
+    }
+</script>
+
+
+<script>
+    var x = document.getElementById("coordenadas");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            x.innerHTML = "Geolocalização não é suportada nesse navegador.";
+        }
+    }
+
+    function showPosition(position) {
+        blocal = document.getElementById("blocal");
+        lat = document.getElementById("lat");
+        lon = document.getElementById("lon");
+
+        lat.value = position.coords.latitude;
+        lon.value = position.coords.longitude;
+
+        blocal.className = "input-group-text bg-success text-light";
+    }
+
+    function showError(error) {
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                x.innerHTML = "Usuário negou a solicitação de geolocalização."
+                break;
+            case error.POSITION_UNAVAILABLE:
+                x.innerHTML = "As informações de localização não estão disponíveis."
+                break;
+            case error.TIMEOUT:
+                x.innerHTML = "O pedido para obter a localização do usuário atingiu o tempo limite."
+                break;
+            case error.UNKNOWN_ERROR:
+                x.innerHTML = "Ocorreu um erro desconhecido."
+                break;
+        }
+    }
+</script>
+
+<?php
+require_once '../rodape.php';

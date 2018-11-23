@@ -56,7 +56,7 @@
                     <ul class="navbar-nav text-center py-2 px-3">
                         <!-- LINK4 -->
                         <li class="nav-item <?php if (admin()) { ?>dropdown <?php } ?>">
-                            <a class="nav-link text-light" <?php if (admin()) { ?>href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php } else { ?>href="/smrt/informacao/area_info.php" <?php } ?> >
+                            <a class="nav-link text-light" <?php if (adm()) { ?>href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php } else { ?>href="/smrt/informacao/area_info.php" <?php } ?> >
                                 <strong>Área Informativa </strong>
                             </a>
                             <?php if (admin()) { ?>  

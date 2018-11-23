@@ -3,6 +3,8 @@
 require_once '../bd/conectar.php';
 
 $legenda = $_POST['legenda'];
+$lat = $_POST['lat'];
+$lon = $_POST['lon'];
 $imagem = $_FILES['imagem']['name'];
 $autor = $_POST['autor'];
 $data = "SELECT NOW()";
@@ -57,7 +59,7 @@ else {
     //Verificar se é possivel mover o arquivo para a pasta escolhida
     if (move_uploaded_file($_FILES['imagem']['tmp_name'], $_UP['pasta'] . $nome_final)) {
         //Upload efetuado com sucesso, exibe a mensagem
-        mysqli_query($conexao, "INSERT INTO pub (legenda, imagem, autor, dataa) VALUES ('$legenda', '$nome_final','$autor','$date')");
+        mysqli_query($conexao, "INSERT INTO pub (legenda, imagem, autor, dataa, lat, lng) VALUES ('$legenda', '$nome_final','$autor','$date','$lat', '$lon')");
         echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/publicacao.php'>";
     } else {
         //Upload não efetuado com sucesso, exibe a mensagem

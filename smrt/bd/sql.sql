@@ -2,18 +2,6 @@ CREATE DATABASE smrt DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 use smrt;
 drop database smrt;
 
--- DROP TABLES --
-drop table perfil;
-drop table usuario;
-drop table administrador;
-drop table denuncia;
-drop table bloqueio;
-drop table pub;
-drop table comentario;
--- /DROP TABLES --
-
-select * from usuario
-
 -- USUÁRIO --
 create table usuario(
     id int PRIMARY KEY AUTO_INCREMENT,
@@ -21,25 +9,17 @@ create table usuario(
     sobrenome varchar(100),
     senha varchar(100),
     adm boolean default FALSE,
-    email varchar(100) unique,
-    sobre varchar(220),
-    experiencias varchar(220),
-    hobbies varchar(220),
-    endereco varchar(220),
-    cidade varchar(220),
-    estado varchar(220),
-    foto varchar(220)
+    email varchar(100) unique
+--     sobre varchar(220),
+--     experiencias varchar(220),
+--     hobbies varchar(220),
+--     endereco varchar(220),
+--     cidade varchar(220),
+--     estado varchar(220),
+--     foto varchar(220)
 );
-
-
-     
-drop table usuario;
-select * from usuario;
 -- /USUÁRIO --
-
-
-
-SELECT pub.id_pub,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub inner join usuario on pub.autor = usuario.id order by dataa Desc;
+select * from usuario;
 -- ADMNISTRADOR --
 create table administrador(
     id int PRIMARY KEY AUTO_INCREMENT,
@@ -74,8 +54,6 @@ create table materia(
     capa blob not null,
     autor int REFERENCES usuario(id)
 );
-drop table materia
-insert into materia (titulo,descricao,conteudo,capa) values ('asd','asd','asd', 'asd');
 -- /MATÉRIA --
 
 -- PUBLICACAO --
@@ -85,12 +63,14 @@ create table pub(
     imagem varchar(220),
     autor int references usuario(id),
     dataa datetime,
-    latitude float,
-    longitude float,
+    lat float,
+    lng float,
     likes int
 );
-drop table pub
-select now();
+drop table pub;
+select * from pub;
+SELECT pub.id_pub,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,
+date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub inner join usuario on pub.autor = usuario.id order by dataa Desc;
 -- /PUBLICACAO --
 
 -- COMENTARIO --
@@ -101,8 +81,6 @@ create table comentario(
     autor varchar(300),
     dataa date
 );
-drop table comentario
-select * from comentario
 -- /COMENTARIO --
 
 
@@ -113,9 +91,6 @@ create table likes(
     id_post int references pub(id),
     dataa date
 );
-INSERT INTO likes (id_user,id_post) values ('1','2')
-UPDATE pub SET likes = likes+1 WHERE id_pub = 2
-select * from likes
 -- LIKE --
 
 -- DENUNCIAR PUBLICACAO --
@@ -129,25 +104,20 @@ create table denuncia_pub(
     nome_denunciado varchar(400),
     sobrenome_denunciado varchar(400)
 );
-SELECT * FROM denuncia_pub
-drop table denuncia_pub
 -- /DENUNCIAR PUBLICACAO --
 
 -- ALERTAS --
-create table alerta(
-    id int PRIMARY KEY AUTO_INCREMENT,
-    lat float,
-    lng float
-);
--- /ALERTAS --
-SELECT * FROM alerta WHERE 1
-select * from alerta;
-drop table alerta;
-
-insert into alerta (lat,lng) values ('-28.477013','-49.001140');
-insert into alerta (lat,lng) values ('-28.477475',' -49.002342');
-insert into alerta (lat,lng) values ('-28.481936','-49.009477');
-insert into alerta (lat,lng) values ('-28.477013','-49.001140');
+-- create table alerta(
+--     id int PRIMARY KEY AUTO_INCREMENT,
+--     lat float,
+--     lng float
+-- );
+-- -- /ALERTAS --
+-- 
+-- insert into alerta (lat,lng) values ('-28.477013','-49.001140');
+-- insert into alerta (lat,lng) values ('-28.477475',' -49.002342');
+-- insert into alerta (lat,lng) values ('-28.481936','-49.009477');
+-- insert into alerta (lat,lng) values ('-28.477013','-49.001140');
 
 
 CREATE TABLE `smrt`.`friends` (
@@ -179,14 +149,12 @@ create table area_info(
     imagem varchar(220),
     dataa datetime
 );
-drop table area_info
-select * from area_info
-insert into area_info (titulo,descricao,conteudo,capa) values ('asd','asd','asd', 'asd');
-insert into area_info (titulo,descricao,conteudo,capa,dataa) values ('asdasd','asdasd','asdasd', 'Penguins.jpg','2018-11-18 12:42:50')
 -- /Area informativa --
 
 -- INSERTS --
 insert into usuario (nome, sobrenome ,email, senha, adm, sobre, experiencias, hobbies, endereco, cidade, estado, foto) values  ('admin', 'admin', 'admin@admin',md5('123'), TRUE, 'shuashuha', 'hsauhsau', 'hsuhuashusha', 'hsahsuahsu', 'shuahsuahsa', 'hsuahsuahs','foto.jpg');
+
+insert into usuario (nome, sobrenome ,email, senha, adm) values  ('admin', 'admin', 'admin@admin',md5('123'), TRUE);
 
 insert into usuario (nome, sobrenome ,email, senha) values  ('a', 'a', 'a@a',md5('123'));
 insert into usuario (nome, sobrenome ,email, senha) values  ('b', 'b', 'b@b',md5('123'));
@@ -258,7 +226,18 @@ insert into denuncia(denunciador, denunciado,dataa) values (2,16,'2018-09-28');
 insert into denuncia(denunciador, denunciado,dataa) values (3,16,'2018-09-28');
 -- INSERTS --
 
-select * from denuncia
+
+
+
+
+
+
+
+
+
+
+
+
 -- SELECTS --
 
 SELECT pub.id,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,
