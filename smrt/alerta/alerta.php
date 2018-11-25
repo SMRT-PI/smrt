@@ -2,14 +2,6 @@
 include_once '../bd/conectar.php';
 ?>
 
-<!--<style>
-    #map {
-        height: 55vh;
-    }
-</style>-->
-
-<!--<div id="map"></div>-->
-
 <script>
     var customLabel = {};
 
@@ -39,8 +31,6 @@ include_once '../bd/conectar.php';
             });
         });
     }
-
-
 
     function downloadUrl(url, callback) {
         var request = window.ActiveXObject ?

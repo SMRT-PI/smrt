@@ -2,6 +2,8 @@ CREATE DATABASE smrt DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 use smrt;
 drop database smrt;
 
+select * from pub;
+
 -- USUÁRIO --
 create table usuario(
     id int PRIMARY KEY AUTO_INCREMENT,

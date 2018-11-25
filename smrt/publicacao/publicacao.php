@@ -8,6 +8,9 @@ include_once '../bd/conectar.php';
 $sql = "SELECT pub.id_pub,pub.legenda,pub.imagem,pub.autor,pub.dataa,usuario.id,usuario.nome,usuario.sobrenome,
 date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM pub inner join usuario on pub.autor = usuario.id order by dataa Desc;";
 
+$sql_dono = "select id as dono from usuario where email = '$_SESSION[email]'";
+$dono = mysqli_query($conexao, $sql_dono);
+$linha_dono = mysqli_fetch_array($dono);
 
 $resultado = mysqli_query($conexao, $sql);
 
@@ -23,65 +26,54 @@ if (mysqli_num_rows($resultado) > 0) {
         $nome_denunciado = $linha['nome'];
         $sobrenome_denunciado = $linha['sobrenome'];
         ?>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Confirmação de denuncia</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Deseja realmente denunciar esta publicação?
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-light" data-dismiss="modal">Não</a>
-        <a class="btn btn-danger" href="../denunciar/denunciar.php?idus=<?=$id_us?>
-                                   &id=<?= $id?>&denunciador=<?= $nome_denunciador?>&sobrenome_denunciador=<?= $sobrenome_denunciador?>
-                                   &id_denunciado=<?= $id_denunciado?>&nome_denunciado=<?= $nome_denunciado?>
-                                   &sobrenome_denunciado=<?= $sobrenome_denunciado?>">Sim</a>
-      </div>
-    </div>
-  </div>
-</div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirmação de denuncia</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Deseja realmente denunciar esta publicação?
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-light" data-dismiss="modal">Não</a>
+                        <a class="btn btn-danger" href="../denunciar/denunciar.php?idus=<?= $id_us ?>
+                           &id=<?= $id ?>&denunciador=<?= $nome_denunciador ?>&sobrenome_denunciador=<?= $sobrenome_denunciador ?>
+                           &id_denunciado=<?= $id_denunciado ?>&nome_denunciado=<?= $nome_denunciado ?>
+                           &sobrenome_denunciado=<?= $sobrenome_denunciado ?>">Sim</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<!--                    <a class="btn btn-primary" href="../denunciar/denunciar.php?idus=<?=$id_us?>
-                                   &id=<?= $id?>&denunciador=<?= $nome_denunciador?>&sobrenome_denunciador=<?= $sobrenome_denunciador?>
-                                   &id_denunciado=<?= $id_denunciado?>&nome_denunciado=<?= $nome_denunciado?>
-                                   &sobrenome_denunciado=<?= $sobrenome_denunciado?>">Sim</a>-->
+        <!--                    <a class="btn btn-primary" href="../denunciar/denunciar.php?idus=<?= $id_us ?>
+                                           &id=<?= $id ?>&denunciador=<?= $nome_denunciador ?>&sobrenome_denunciador=<?= $sobrenome_denunciador ?>
+                                           &id_denunciado=<?= $id_denunciado ?>&nome_denunciado=<?= $nome_denunciado ?>
+                                           &sobrenome_denunciado=<?= $sobrenome_denunciado ?>">Sim</a>-->
         <div class="row my-3">
             <div class="col-lg-6 offset-lg-3">
                 <div class="card">
                     <div class="card-header bg-light">
 
-
-                            <?php if (admin()) { ?>
-                        <div class="dropdown">
-                            <button class="btn btn btn-outline-secondary float-right " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Left Align" style="width: 6%">
-                                <span class="fa fa-bars" aria-hidden="true"></span>
-                            </button>
-                                
-                        
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Denunciar Publicação</a>
-                                <a class="dropdown-item" href="excluir.php?id=<?= $linha['id_pub'] ?>">Excluir publicação</a>
-                            </div>
-                        </div>    
-                            <?php } else{?>
-                                <div class="dropdown">
-                            <button class="btn btn btn-outline-secondary float-right " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Left Align" style="width: 6%">
-                                <span class="fa fa-bars" aria-hidden="true"></span>
-                            </button>
-                                    
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Denunciar Publicação</a>
-                            </div>
-                                    </div>
-                            <?php } ?>
-                            
-                        
+                        <?php
+                        if (estaLogado()) {
+                            ?>
+                            <div class="dropdown">
+                                <button class="btn btn btn-outline-secondary float-right " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Left Align" style="width: 6%">
+                                    <span class="fa fa-bars" style="cursor: pointer" aria-hidden="true"></span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Denunciar Publicação</a>
+                                    <?php if ((admin()) || ($linha['autor'] === $linha_dono['dono'])) { ?>
+                                        <a class="dropdown-item" href="excluir.php?id=<?= $linha['id_pub'] ?>">Excluir publicação</a>
+                                    <?php } ?>
+                                </div>
+                            </div>    
+                        <?php } ?>
 
                         <a class="text-dark">
                             <div class="row-lg-6" id="<?php echo $id; ?>">
@@ -90,12 +82,12 @@ if (mysqli_num_rows($resultado) > 0) {
                                 <strong class="float-right text-muted" style="font-size: 70%"><?php echo $linha["dataa"] ?></strong>
                             </div>
                         </a>
-                        
+
 
                     </div>
-                    <div class="card-body">
-                        <p class="card-text container-fluid"><?php echo $linha["legenda"] ?></p>
-                        <div class="container-fluid">
+                    <div class="card-body m-0 p-0">
+                        <p class="card-text container-fluid my-3"><?php echo $linha["legenda"] ?></p>
+                        <div class="container-fluid m-0 p-0">
                             <img class="img-fluid" src="/smrt/img/<?php echo $linha["imagem"]; ?>" style="min-width: 100%">
                         </div>
                     </div>
@@ -105,17 +97,16 @@ if (mysqli_num_rows($resultado) > 0) {
                             <?php
                             $sql4 = "SELECT * FROM likes WHERE id_post = $id AND id_user = $id_us";
                             $query = mysqli_query($conexao, $sql4);
-                            
+
                             if (mysqli_num_rows($query) == 0) {
                                 while ($linha = mysqli_fetch_assoc($query)) {
+                                    ?>
+                                    <div class = "col"><button class = "btn bg-transparent like" type = "button" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Curtir </button></div><span id = "likes_<?php $linha['id_pub']; ?>">(<?php $linha['likes']; ?>)</span>
+                                    <?php
+                                }
+                            } else {
                                 ?>
-                                <div class = "col"><button class = "btn bg-transparent like" type = "button" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Curtir </button></div><span id = "likes_<?php $linha['id_pub']; ?>">(<?php $linha['likes']; ?>)</span>
-                            <?php} ?>
-                            
-                                <?php} ?>
-                                <?phpelse { ?>
                                 <div class = "col"><button class = "btn bg-transparent like" type = "button" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Descurtir </button></div><span id = "likes_<?php $linha['id_pub']; ?>">(<?php $linha['likes']; ?>)</span>
-                                <?php } ?>
                             <?php } ?>
 
                             <div class = "col"><button class = "btn bg-transparent" type = "button" name = "botao"> Mapa </button></div>
@@ -155,6 +146,5 @@ if (mysqli_num_rows($resultado) > 0) {
         <?php
     }
 }
-
 
 require_once '../rodape.php';

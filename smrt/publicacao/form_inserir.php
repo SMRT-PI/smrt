@@ -92,6 +92,3 @@ $linha_form = mysqli_fetch_array($retorno_form);
         }
     }
 </script>
-
-<?php
-require_once '../rodape.php';

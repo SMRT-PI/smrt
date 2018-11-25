@@ -1,7 +1,7 @@
 <?php
 
 $username = "root";
-$password = "kia123";
+$password = "ifsc";
 $database = "smrt";
 
 $conexao = mysqli_connect("localhost", "$username", "$password", "$database" );
