@@ -1,6 +1,8 @@
 <?php
 
+require_once '../usuario/autenticacao.php';
 require_once '../bd/conectar.php';
+
 
 $legenda = $_POST['legenda'];
 $lat = $_POST['lat'];
@@ -25,48 +27,56 @@ $_UP['erros'][3] = 'O upload do arquivo foi feito parcialmente';
 $_UP['erros'][4] = 'Não foi feito o upload do arquivo';
 
 
-if ($_FILES['imagem']['error'] !== 0) { //Verifica se houve algum erro com o upload. Sem sim, exibe a mensagem do erro
-    die("Não foi possivel fazer o upload, erro: <br />" . $_UP['erros'][$_FILES['imagem']['error']]);
-    exit; //Para a execução do script
-}
+if (!estaLogado()) {
+    echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/usuario/entrar.php'>
+                <script type=\"text/javascript\">
+                alert(\"Entre com sua conta!\");
+                </script>";
+} else {
+    if (($_FILES['imagem']['error'] !== 4)) {
+        if (($_FILES['imagem']['error'] !== 0)) { //Verifica se houve algum erro com o upload. Sem sim, exibe a mensagem do erro
+            die("Não foi possivel fazer o upload, erro: <br />" . $_UP['erros'][$_FILES['imagem']['error']]);
+            exit; //Para a execução do script
+        }
+    }
 
 //Faz a verificação da extensao do arquivo
-$extensao = (strtolower(end(explode('.', $_FILES['imagem']['name']))));
-if (array_search($extensao, $_UP['extensoes']) === FALSE) {
-    echo "                              <META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/form_inserir.php'>
+    $extensao = (strtolower(end(explode('.', $_FILES['imagem']['name']))));
+    if (array_search($extensao, $_UP['extensoes']) === FALSE) {
+        echo "                              <META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/publicacao.php'>
 					<script type=\"text/javascript\">
 						alert(\"A imagem não foi cadastrada extesão inválida.\");
 					</script>";
-}
+    }
 
 //Faz a verificação do tamanho do arquivo
-else if ($_UP['tamanho'] < $_FILES['imagem']['size']) {
-    echo "
-        <META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/form_inserir.php'>
+    else if ($_UP['tamanho'] < $_FILES['imagem']['size']) {
+        echo "
+        <META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/publicacao.php'>
         <script type=\"text/javascript\">  alert(\"Arquivo muito grande.\"); </script>";
-}
+    }
 
 //O arquivo passou em todas as verificações, hora de tentar move-lo para a pasta foto
-else {
-    //Primeiro verifica se deve trocar o nome do arquivo
+    else {
+        //Primeiro verifica se deve trocar o nome do arquivo
 //    if ($UP['renomeia'] === TRUE) {
-    //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão .jpg
-    $nome_final = "" . time() . $extensao;
+        //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão .jpg
+        $nome_final = "" . time() . $extensao;
 //    } else {
 //    mantem o nome original do arquivo
 //        $nome_final = $_FILES['imagem']['name'];
 //    }
-    //Verificar se é possivel mover o arquivo para a pasta escolhida
-    if (move_uploaded_file($_FILES['imagem']['tmp_name'], $_UP['pasta'] . $nome_final)) {
-        //Upload efetuado com sucesso, exibe a mensagem
-        mysqli_query($conexao, "INSERT INTO pub (legenda, imagem, autor, dataa, lat, lng) VALUES ('$legenda', '$nome_final','$autor','$date','$lat', '$lon')");
-        echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/publicacao.php'>";
-    } else {
-        //Upload não efetuado com sucesso, exibe a mensagem
-        echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/inserir.php'>
+        //Verificar se é possivel mover o arquivo para a pasta escolhida
+        if (move_uploaded_file($_FILES['imagem']['tmp_name'], $_UP['pasta'] . $nome_final)) {
+            //Upload efetuado com sucesso, exibe a mensagem
+            mysqli_query($conexao, "INSERT INTO pub (legenda, imagem, autor, dataa, lat, lng) VALUES ('$legenda', '$nome_final','$autor','$date','$lat', '$lon')");
+            echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/publicacao.php'>";
+        } else {
+            //Upload não efetuado com sucesso, exibe a mensagem
+            echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/publicacao/publicacao.php'>
                 <script type=\"text/javascript\">
                 alert(\"Imagem não foi cadastrada com Sucesso.\");
                 </script>";
+        }
     }
-}
-		
+}		
