@@ -2,7 +2,10 @@
 <html lang="pt-br">
     <head>
 
-        <?php require_once 'usuario/autenticacao.php'; ?>
+        <?php require_once 'usuario/autenticacao.php'; 
+        
+        
+        ?>
 
         <meta charset="UTF-8">
         <title>SMRT</title>

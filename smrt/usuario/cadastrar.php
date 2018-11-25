@@ -3,7 +3,7 @@
 require_once '../bd/conectar.php';
 sleep(1);
 if (isset($_POST['nome'])) {
-    $connect = new PDO("mysql:host=localhost;dbname=$database", "$username", "$password");
+    $connect = new PDO("mysql:host=$host;dbname=$database", "$username", "$password");
 
     $data = array(
         ':nome' => $_POST['nome'],

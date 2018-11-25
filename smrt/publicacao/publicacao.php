@@ -50,15 +50,12 @@ if (mysqli_num_rows($resultado) > 0) {
             </div>
         </div>
 
-        <!--                    <a class="btn btn-primary" href="../denunciar/denunciar.php?idus=<?= $id_us ?>
-                                           &id=<?= $id ?>&denunciador=<?= $nome_denunciador ?>&sobrenome_denunciador=<?= $sobrenome_denunciador ?>
-                                           &id_denunciado=<?= $id_denunciado ?>&nome_denunciado=<?= $nome_denunciado ?>
-                                           &sobrenome_denunciado=<?= $sobrenome_denunciado ?>">Sim</a>-->
         <div class="row my-3">
             <div class="col-lg-6 offset-lg-3">
                 <div class="card">
-                    <div class="card-header bg-light">
 
+                    <!-- CARD-HEADER -->
+                    <div class="card-header">
                         <?php
                         if (estaLogado()) {
                             ?>
@@ -76,23 +73,27 @@ if (mysqli_num_rows($resultado) > 0) {
                         <?php } ?>
 
                         <a class="text-dark">
-                            <div class="row-lg-6" id="<?php echo $id; ?>">
+                            <div id="<?php echo $id; ?>">
                                 <img class="rounded-circle img-fluid" src="/smrt/img/perfil2.png" width="40" height="40">
                                 <strong class=""><?= $linha["nome"] ?> <?= $linha["sobrenome"] ?></strong>
-                                <strong class="float-right text-muted" style="font-size: 70%"><?php echo $linha["dataa"] ?></strong>
+                                <strong class="text-muted small"><?php echo $linha["dataa"] ?></strong>
                             </div>
                         </a>
-
-
                     </div>
+                    <!-- /CARD-HEADER -->
+
+                    <!-- CARD-BODY -->
                     <div class="card-body m-0 p-0">
                         <p class="card-text container-fluid my-3"><?php echo $linha["legenda"] ?></p>
                         <div class="container-fluid m-0 p-0">
                             <img class="img-fluid" src="/smrt/img/<?php echo $linha["imagem"]; ?>" style="min-width: 100%">
                         </div>
                     </div>
+                    <!-- /CARD-BODY -->
 
-                    <div class="card-footer bg-light">
+
+                    <!-- CARD-FOOTER -->
+                    <div class="card-footer">
                         <div class="row text-center" id="headingOne">
                             <?php
                             $sql4 = "SELECT * FROM likes WHERE id_post = $id AND id_user = $id_us";
@@ -113,6 +114,8 @@ if (mysqli_num_rows($resultado) > 0) {
                             <div class = "col"><button class = "btn bg-transparent" data-toggle = "collapse" data-target = "#collapseOne" aria-expanded = "true" aria-controls = "collapseOne"> Comentar </button></div>
                         </div>
                     </div>
+                    <!-- /CARD-FOOTER -->
+
 
                     <div class = "float-center collapse show" id = "collapseOne" aria-labelledby = "headingOne" data-parent = "#accordion" id = "<?php echo $id; ?>" >
                         <form action = "inserir_comentario.php" method = "post" name = "form_comentario" id = "form_comentario">
@@ -122,24 +125,30 @@ if (mysqli_num_rows($resultado) > 0) {
                         </form>
                     </div>
 
-                    <?php
-                    $resultado2 = mysqli_query($conexao, "SELECT * FROM comentario WHERE id_postagem = $id");
-                    if (mysqli_num_rows($resultado2) > 0) {
-                        while ($linha = mysqli_fetch_assoc($resultado2)) {
-                            $idc = $linha['idc'];
-                            ?>
-                            <div class="card w-100"<?php echo $id; ?>>
-                                <div class="card-body" id="<?php echo $id; ?>">
-                                    <h5 class="card-title"><?php echo $linha["autor"]; ?></h5>
-                                    <p class="card-text"><?php echo $linha["comentario"]; ?></p>
 
-                                </div>
-                            </div>
-                        <?php } ?>
+                    <div class="card">
                         <?php
-                    }
-                    ?>
-
+                        $resultado2 = mysqli_query($conexao, "SELECT * FROM comentario WHERE id_postagem = $id");
+                        if (mysqli_num_rows($resultado2) > 0) {
+                            while ($linha = mysqli_fetch_assoc($resultado2)) {
+                                $idc = $linha['idc'];
+                                ?>
+                                <!-- COMENTÁRIOS -->
+                                <div class="card-body" id="<?php echo $id; ?>">
+                                    <div class="container my-0 py-0 row-lg-6">
+                                        <img class="rounded-circle" src="/smrt/img/perfil2.png" width="40" height="40">
+                                        <div class="col-lg rounded" style="background-color: whitesmoke;">
+                                            <a href="#" class="card-text my-0 py-0"><?php echo $linha["autor"]; ?></a>
+                                            <p class="card-text my-0 py-0"><?php echo $linha["comentario"]; ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /COMENTÁRIOS -->
+                            <?php } ?>
+                            <?php
+                        }
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>
