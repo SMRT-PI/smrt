@@ -73,10 +73,6 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="/smrt/alerta/alerta.php"><strong>Alertas</strong></a>
-                        </li>
-
-                        <li class="nav-item">
                             <a class="nav-link text-light" href="/smrt/sobre.php"><strong>Sobre nós</strong></a>
                         </li>
                         <!-- LINK5 -->

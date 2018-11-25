@@ -63,7 +63,7 @@ if (mysqli_num_rows($resultado) > 0) {
                         if (estaLogado()) {
                             ?>
                             <div class="dropdown">
-                                <button class="btn btn btn-outline-secondary float-right " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Left Align" style="width: 6%">
+                                <button class="btn btn btn-outline-secondary float-right " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Left Align">
                                     <span class="fa fa-bars" style="cursor: pointer" aria-hidden="true"></span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -77,7 +77,7 @@ if (mysqli_num_rows($resultado) > 0) {
 
                         <a class="text-dark">
                             <div class="row-lg-6" id="<?php echo $id; ?>">
-                                <img class="rounded-circle" src="/smrt/img/m1.jpg" width="40" height="40">
+                                <img class="rounded-circle img-fluid" src="/smrt/img/perfil2.png" width="40" height="40">
                                 <strong class=""><?= $linha["nome"] ?> <?= $linha["sobrenome"] ?></strong>
                                 <strong class="float-right text-muted" style="font-size: 70%"><?php echo $linha["dataa"] ?></strong>
                             </div>
