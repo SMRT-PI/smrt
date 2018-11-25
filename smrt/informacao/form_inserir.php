@@ -11,7 +11,7 @@ if (estaLogado()) {
     if (adm()) {
         ?>
         <div class="justify-content-center d-flex text-center my-3">
-            <form class="col-lg-6" method="post" action="inserir.php">
+            <form class="col-lg-6" enctype="multipart/form-data" method="post" action="inserir.php">
                 <input type="hidden" name="autor" value="<?= $linha['id_info'] ?>"> 
                 <div class="custom-file">
                     <label class="custom-file-label" for="customFile">Capa</label>>

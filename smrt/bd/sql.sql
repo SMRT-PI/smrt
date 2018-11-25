@@ -19,7 +19,7 @@ create table usuario(
 --     foto varchar(220)
 );
 -- /USUÁRIO --
-select * from usuario;
+
 -- ADMNISTRADOR --
 create table administrador(
     id int PRIMARY KEY AUTO_INCREMENT,
@@ -147,8 +147,13 @@ create table area_info(
     descricao varchar(600),
     conteudo varchar(20000),
     imagem varchar(220),
+    autor integer references usario(id),
     dataa datetime
 );
+select * from area_info
+
+SELECT area_info.id_info,area_info.titulo,area_info.descricao,area_info.conteudo,area_info.imagem,area_info.autor,area_info.dataa,usuario.id,usuario.nome,usuario.sobrenome,date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM area_info inner join usuario on area_info.autor = usuario.id order by dataa Desc;
+drop table area_info
 -- /Area informativa --
 
 -- INSERTS --
