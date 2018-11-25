@@ -3,14 +3,18 @@ include_once '../usuario/autenticacao.php';
 include_once '../cabecalho.php';
 include_once '../bd/conectar.php';
 
-$sql = "select * from area_info";
+$sql = "SELECT area_info.id_info,area_info.titulo,area_info.descricao,area_info.conteudo,area_info.imagem,"
+        . "area_info.autor,area_info.dataa,usuario.id,usuario.nome,usuario.sobrenome,"
+        . "date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM"
+        . " area_info inner join usuario on area_info.autor = usuario.id order by dataa Desc;";
 $resultado = mysqli_query($conexao, $sql);
-?> 
+?>
+<?php $teste = ['imagem']; ?>
 
-<div class="jumbotron jumbotron-fluid text-center m-0 px-1 text-light" style="background-image: url(../img/fundo2.png); background-size: cover; background-attachment: fixed;">
-    <h1>Materiais Para Seu Conhecimento!</h1>
-    <h6>Dicas para conhecer mais sobre o mal que atinge nossos rios</h6> 
-</div>
+    <div class="jumbotron jumbotron-fluid text-center m-0 px-1 text-light" style="background-image: url(../img/<?= $linha_1['imagem']; ?>); background-size: cover; background-attachment: fixed;">
+        <h1>Materiais Para Seu Conhecimento!</h1>
+        <h6>Dicas para conhecer mais sobre o mal que atinge nossos rios</h6> 
+    </div>
 
 <div class="d-flex justify-content-center text-center my-3">
     <div class="list-group d-flex w-100">
