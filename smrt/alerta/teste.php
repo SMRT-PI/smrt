@@ -1,71 +1,175 @@
-<?php
-
-require_once '../cabecalho.php';
-?>
-
 <style>
-    #map {
-        height: 73vh;
+    *{margin:0px;padding:0px}
+    body{font-family: Arial, Helvetica, sans-serif;background-color: #e9eaed;color: #333333;}
+    #container{margin:0 auto;width:900px}
+    #timelineContainer{width:100%;position:relative}
+    #timelineBackground {
+        height: 315px;
+        position: relative;
+        border-left: 1px solid #333333;
+        border-right: 1px solid #333333;
+        margin-top: -20px;
+        overflow: hidden;
+        background-color:#ffffff;
+    }
+    #timelineProfilePic {
+        width: 170px;
+        height: 170px;
+        border: 1px solid #666666;
+        background-color: #ffffff;
+        position: absolute;
+        margin-top: -145px;
+        margin-left: 20px;
+        z-index: 1000;
+        overflow: hidden;
+    }
+    #timelineTitle {
+        color: #ffffff;
+        font-size: 24px;
+        margin-top: -45px;
+        position: absolute;
+        margin-left: 206px;
+        font-weight: bold;
+        text-rendering: optimizelegibility;
+        text-shadow: 0 0 3px rgba(0,0,0,.8);
+        z-index: 999;
+        text-transform: capitalize;
+    }
+    #timelineShade {
+        min-height: 95px;
+        position: absolute;
+        margin-top: -95px;
+        width: 100%;
+        background:url(images/timeline_shade.png);
+    }
+    .timelineUploadBG {
+        position: absolute;
+        margin-top: 50px;
+        margin-left: 813px;
+        height: 32px;
+        width: 32px;
+    }
+    #timelineNav {
+        border: 1px solid #d6d7da;
+        background-color: #ffffff;
+        min-height: 43px;
+        margin-bottom: 10px;
+        position: relative;
+    }
+    .uploadFile {
+        background: url('images_bg/whitecam.png') no-repeat;
+        height: 32px;
+        width: 32px;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    .uploadFile input {
+        filter: alpha(opacity=0);
+        opacity: 0;
+        margin-left: -110px;
+    }
+    .custom-file-input {
+        height: 25px;
+        cursor: pointer;
     }
 </style>
 
-<div id="map"></div>
 
+<div id="container">
+
+    <div id="timelineContainer">
+        <!-- timeline background -->
+        <div id="timelineBackground">
+            <img src="uploads/backgroundimage.jpg" class="bgImage" style="margin-top: -10px;">
+        </div>
+
+        <!-- timeline background -->
+        <div id="timelineShade">
+            <form id="bgimageform" method="post" enctype="multipart/form-data" action="image_upload_ajax_bg.php">
+                <div class="uploadFile timelineUploadBG">
+                    <input type="file" name="photoimg" id="bgphotoimg" class="custom-file-input">
+                </div>
+            </form>
+        </div>
+
+        <!-- timeline profile picture -->
+        <div id="timelineProfilePic"></div>
+
+        <!-- timeline title -->
+        <div id="timelineTitle">Srinivas Tamada</div>
+
+        <!-- timeline nav -->
+        <div id="timelineNav"></div>
+
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.wallform.js"></script>
 <script>
-    var customLabel = {};
+    $(document).ready(function ()
+    {
 
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: new google.maps.LatLng(-28.481050, -49.008865),
-            zoom: 14
+        /* Uploading Profile BackGround Image */
+        $('body').on('change', '#bgphotoimg', function ()
+        {
+            $("#bgimageform").ajaxForm({target: '#timelineBackground',
+                    success:function(){
+                    $("#timelineShade").hide();
+                            $("#bgimageform").hide();
+                            }).submit();
         });
-        var infoWindow = new google.maps.InfoWindow;
 
-        // Change this depending on the name of your PHP or XML file
-        downloadUrl('pontosBD.php', function (data) {
-            var xml = data.responseXML;
-            var markers = xml.documentElement.getElementsByTagName('marker');
-            Array.prototype.forEach.call(markers, function (markerElem) {
-                var id = markerElem.getAttribute('id');
-                var point = new google.maps.LatLng(
-                        parseFloat(markerElem.getAttribute('lat')),
-                        parseFloat(markerElem.getAttribute('lng')));
-
-                var icon = customLabel[id] || {};
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: point,
-                    label: icon.label
-                });
+        /* Banner position drag */
+        $("body").on('mouseover', '.headerimage', function ()
+        {
+            var y1 = $('#timelineBackground').height();
+            var y2 = $('.headerimage').height();
+            $(this).draggable({
+                scroll: false,
+                axis: "y",
+                drag: function (event, ui) {
+                    if (ui.position.top >= 0)
+                    {
+                        ui.position.top = 0;
+                    } else if (ui.position.top <= y1 - y2)
+                    {
+                        ui.position.top = y1 - y2;
+                    }
+                },
+                stop: function (event, ui)
+                {
+                }
             });
         });
-    }
 
+        /* Bannert Position Save*/
+        $("body").on('click', '.bgSave', function ()
+        {
+            var p = $("#timelineBGload").attr("style");
+            var Y = p.split("top:");
+            var Z = Y[1].split(";");
+            var dataString = 'position=' + Z[0];
+            $.ajax({
+                type: "POST",
+                url: "image_saveBG_ajax.php",
+                data: dataString,
+                cache: false,
+                success: function (html)
+                {
+                    if (html)
+                    {
+                        $(".bgImage").fadeOut('slow');
+                        $(".bgSave").fadeOut('slow');
+                        $("#timelineShade").fadeIn("slow");
+                        $("#timelineBGload").removeClass("headerimage").css({'margin-top': html});
+                        return false;
+                    }
+                }
+            });
+            return false;
+        });
 
-
-    function downloadUrl(url, callback) {
-        var request = window.ActiveXObject ?
-                new ActiveXObject('Microsoft.XMLHTTP') :
-                new XMLHttpRequest;
-
-        request.onreadystatechange = function () {
-            if (request.readyState == 4) {
-                request.onreadystatechange = doNothing;
-                callback(request, request.status);
-            }
-        };
-
-        request.open('GET', url, true);
-        request.send(null);
-    }
-
-    function doNothing() {}
+    });
 </script>
-
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9x1ioWPmKq2F5zrfw4FVeHCW_L2Ruso&callback=initMap">
-</script>
-<!--AIzaSyDV9x1ioWPmKq2F5zrfw4FVeHCW_L2Ruso-->
-<?php
-
-require_once '../rodape.php';

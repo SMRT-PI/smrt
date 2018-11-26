@@ -2,8 +2,6 @@ CREATE DATABASE smrt DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 use smrt;
 drop database smrt;
 
-select * from pub;
-
 -- USUÁRIO --
 create table usuario(
     id int PRIMARY KEY AUTO_INCREMENT,
@@ -11,15 +9,15 @@ create table usuario(
     sobrenome varchar(100),
     senha varchar(100),
     adm boolean default FALSE,
-    email varchar(100) unique
+    email varchar(100) unique,
+    foto varchar(220)
+);
 --     sobre varchar(220),
 --     experiencias varchar(220),
 --     hobbies varchar(220),
 --     endereco varchar(220),
 --     cidade varchar(220),
 --     estado varchar(220),
---     foto varchar(220)
-);
 -- /USUÁRIO --
 
 -- ADMNISTRADOR --
@@ -103,25 +101,25 @@ create table denuncia_pub(
 );
 -- /DENUNCIAR PUBLICACAO --
 
-CREATE TABLE `smrt`.`friends` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `idUser` INT NOT NULL,
-  `IdFriend` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `idFriend_idx` (`IdFriend` ASC),
-  INDEX `idUser_idx` (`idUser` ASC),
-  CONSTRAINT `idUser_fk`
-    FOREIGN KEY (`idUser`)
-    REFERENCES `smrt`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `idFriend_fk`
-    FOREIGN KEY (`IdFriend`)
-    REFERENCES `smrt`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-ALTER TABLE usuario ADD COLUMN ext VARCHAR(4) NULL AFTER email;
+-- CREATE TABLE `smrt`.`friends` (
+--   `id` INT NOT NULL AUTO_INCREMENT,
+--   `idUser` INT NOT NULL,
+--   `IdFriend` INT NOT NULL,
+--   PRIMARY KEY (`id`),
+--   INDEX `idFriend_idx` (`IdFriend` ASC),
+--   INDEX `idUser_idx` (`idUser` ASC),
+--   CONSTRAINT `idUser_fk`
+--     FOREIGN KEY (`idUser`)
+--     REFERENCES `smrt`.`usuario` (`id`)
+--     ON DELETE NO ACTION
+--     ON UPDATE NO ACTION,
+--   CONSTRAINT `idFriend_fk`
+--     FOREIGN KEY (`IdFriend`)
+--     REFERENCES `smrt`.`usuario` (`id`)
+--     ON DELETE NO ACTION
+--     ON UPDATE NO ACTION);
+-- 
+-- ALTER TABLE usuario ADD COLUMN ext VARCHAR(4) NULL AFTER email;
 
 -- Area informativa --
 create table area_info(
@@ -133,10 +131,6 @@ create table area_info(
     autor integer references usario(id),
     dataa datetime
 );
-select * from area_info
-
-SELECT area_info.id_info,area_info.titulo,area_info.descricao,area_info.conteudo,area_info.imagem,area_info.autor,area_info.dataa,usuario.id,usuario.nome,usuario.sobrenome,date_format(dataa, '%d-%m-%Y %H:%i:%s') as dataa FROM area_info inner join usuario on area_info.autor = usuario.id order by dataa Desc;
-drop table area_info
 -- /Area informativa --
 
 -- INSERTS --

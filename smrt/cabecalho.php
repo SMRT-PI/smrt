@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-
-        <?php require_once 'usuario/autenticacao.php'; 
-        
-        
-        ?>
-
+        <?php require_once 'usuario/autenticacao.php'; ?>
         <meta charset="UTF-8">
         <title>SMRT</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -105,7 +100,7 @@
                                 <strong><?= $_SESSION['nome'] ?> <?= $_SESSION['sobrenome'] ?> </strong>
                             </a>
                             <div class="dropdown-menu dropdown-menu-left m-0 bg-light py-1 text-center" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item bg-light text-dark py-2 m-0" href="/smrt/perfil/perfil.php">Perfil</a>
+                                <a class="dropdown-item bg-light text-dark py-2 m-0" href="/smrt/usuario/perfil.php">Perfil</a>
                                 <a class="m-0 text-muted dropdown-item bg-light py-2" href="/smrt/usuario/logout.php">
                                     <strong>SAIR</strong>
                                 </a>
