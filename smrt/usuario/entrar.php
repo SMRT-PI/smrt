@@ -14,7 +14,7 @@ if (!estaLogado()) {
                 <form id="form_logar" class="col-lg-6" name="logar">
                     <div class="jumbotron jumbotron-fluid text-center m-0 h2" style="background-color: whitesmoke;">Entre com sua Conta!</div>
 
-                    <div style="display: block;" id="data_login"></div>
+                    <div class="" style="display: block;" id="data_login"></div>
                     <input class="form-control py-2" id="email_login" type="email" name="email_login" placeholder="E-mail" data-parsley-type="email" data-parsley-errors-container="#email_error_login" data-parsley-trigger="keyup" data-parsley-required-message="Informe seu email!" data-parsley-type-message="Email inválido!" required data-parsley-validation-threshold="">
                     <div class="invalid-feedback mb-0" style="display: block;" id="email_error_login"></div>
 
@@ -57,7 +57,7 @@ if (!estaLogado()) {
             list-style-type: none;
         }
     </style>
-    
+
     <script>
         $(document).ready(function () {
             $('#form_cadastrar').parsley();
@@ -117,7 +117,15 @@ if (!estaLogado()) {
                                 $('#data_login').html(data);
                                 window.location.replace("/smrt/index.php");
 
+                            } else if (data === "Usuário bloqueado!") {
+                                $('#data_login').attr('class', 'invalid-feedback mt-0 mb-2');
+                                $('#data_login').html(data);
+                                $('#form_logar').parsley().reset();
+                                $('#submit_login').attr('disabled', false);
+                                $('#submit_login').val('LOGAR');
+
                             }
+
                         }
                     });
                 }

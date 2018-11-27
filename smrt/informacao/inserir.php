@@ -1,78 +1,83 @@
-<?php 
- ini_set("display_errors", true);
+<?php
+require_once '../usuario/autenticacao.php';
+ini_set("display_errors", true);
 include '../bd/conectar.php';
 
 $titulo = $_POST['titulo'];
 $descricao = $_POST['descricao'];
 $conteudo = $_POST['conteudo'];
 $autor = $_POST['autor'];
+$imagem = $_FILES['imagem']['name'];
+$data = "SELECT NOW()";
+$data = mysqli_query($conexao, $data);
+$data = mysqli_fetch_row($data);
+$date = date('Y-m-d H:i:s');
+$date = $data[0];
 
 
-$sql = "insert into area_info (titulo,descricao,conteudo) values ('$titulo','$descricao','$conteudo')";
-echo $sql;
-
-mysqli_query($conexao, $sql);
-//header('Location: area_info.php');
-
-
-
-//require_once '../usuario/autenticacao.php';
-//require_once '../bd/conectar.php';
-//
-//
-// 
-//$titulo = (!empty($_POST['titulo']) ? $_POST['titulo'] : null);
-//$descricao = (!empty($_POST['descricao']) ? $_POST['descricao'] : null);
-//$conteudo = (!empty($_POST['conteudo']) ? $_POST['conteudo'] : null);
-//$autor = (!empty($_POST['autor']) ? $_POST['autor'] : null);
-//$capa = (!empty($_POST['capa']) ? $_POST['capa'] : null);
-//
-//if (!empty($_FILES['capa']['titulo'])){
-//    $uploaddir = 'uploads/';
-//    $dir = (rtrim(dirname(__FILE__), '\\/') . $uploaddir); // Obtém a pasta do arquivo do site
-//    if (!@is_writable($dir)) mkdir($dir, 0777, true); // Cria a pasta de uploads se não existir
-//    $arquivo = strtolower(preg_replace('{[^a-z0-9_\-\.]+}i', '_', $_FILES['capa']['titulo'])); // Limpa o nome da imagem removendo caracteres não permitidos
-//    $caminho = ($dir . $arquivo); // Monta o endereço da imagem
-//    $foto = ( // Monta a url da imagem
-//        'http' .
-//        ((isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? 's' : '') .
-//        '://' .
-//        $_SERVER['HTTP_HOST'] .
-//        rtrim(dirname($_SERVER['REQUEST_URI']), '\\/')  .
-//        $uploaddir . $arquivo
-//    );
-//    if (!empty($_FILES['capa']['error'])) die('Erro ao fazer upload'); // Para se deu erro no envio do arquivo
-//    if (empty($_FILES['capa']['tmp_name'])) die('Upload não enviado'); // Para se não foi encontrado o arquivo temporário
-//    if (!@is_readable($_FILES['capa']['tmp_name'])) die('Upload não encontrado'); // Para se não foi encontrado o arquivo temporário
-//    move_uploaded_file($_FILES['capa']['tmp_name'], $caminho) or die('Upload não copiado'); // Move o arquivo enviado para a pasta de uploads
-//} else {
-//    $capa = null;
-//}
-//
-//
-//$sql = mysqli_query($conexao, "insert into materia (titulo,descricao,conteudo,autor,capa) values ('$titulo','$descricao','$conteudo', $autor, '$capa')");
-//header('Location: area_info.php');
+$_UP['pasta'] = '../img/'; //PASTA ONDE A IMAGEM VAI SER ARMAZENADA
+$_UP['tamanho'] = 1024 * 1024 * 100; //Tamanho MÁXIMO do arquivo em BYTES (FICA 5mB)
+$_UP['extensoes'] = array('png', 'jpg', 'jpeg', 'gif'); //Array com a EXTENÇÕES PERMITIDAS
+//$_UP['renomeia'] = TRUE; //Renomeiar;
+//Array com os tipos de erros de upload do PHP
+$_UP['erros'][0] = 'Não houve erro';
+$_UP['erros'][1] = 'O arquivo no upload é maior que o limite do PHP';
+$_UP['erros'][2] = 'O arquivo ultrapassa o limite de tamanho especificado no HTML';
+$_UP['erros'][3] = 'O upload do arquivo foi feito parcialmente';
+$_UP['erros'][4] = 'Não foi feito o upload do arquivo';
 
 
+if (!admin()) {
+    echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/usuario/entrar.php'>
+                <script type=\"text/javascript\">
+                alert(\"Entre com sua conta!\");
+                </script>";
+} else {
+    if (($_FILES['imagem']['error'] !== 4)) {
+        if (($_FILES['imagem']['error'] !== 0)) { //Verifica se houve algum erro com o upload. Sem sim, exibe a mensagem do erro
+            die("Não foi possivel fazer o upload, erro: <br />" . $_UP['erros'][$_FILES['imagem']['error']]);
+            exit; //Para a execução do script
+        }
+    }
 
-//$query_perfil = "update usuario set nome = ".mysqliEscaparTexto($nome).", sobrenome = ".mysqliEscaparTexto($sobrenome).", email= ".mysqliEscaparTexto($email).", sexo = ".mysqliEscaparTexto($sexo).", datanasc = ".mysqliEscaparTexto($datanasc, 'date');
-//if ($foto) $query_perfil .= ", foto = ".mysqliEscaparTexto($foto);
-//$query_perfil .= " where id = $_SESSION[id]";
-//mysqli_query($conexao, $query_perfil) or die('ERRO: '.mysqli_error($conexao).PHP_EOL.$query_perfil.PHP_EOL.print_r(debug_backtrace(), true));
-//
-//if ($foto) $_SESSION['foto'] = $foto;
-//
-//header('Location: perfil.php');
+//Faz a verificação da extensao do arquivo
+    $extensao = (strtolower(end(explode('.', $_FILES['imagem']['name']))));
+    if (array_search($extensao, $_UP['extensoes']) === FALSE) {
+        echo "                              <META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/informacao/area_info.php'>
+					<script type=\"text/javascript\">
+						alert(\"A imagem não foi cadastrada extesão inválida.\");
+					</script>";
+    }
 
-// Para dar permissão nas pastas do site pelo linux:
-// Abra um terminal e acesse a pasta
-//  # cd /var/www/html/FitSan
-// Digite o comando:
-//  # sudo chown -Rc karen:karen ./
-//  # find \( -type f -printf 'chmod -c 666 %p\n' \) -or \( -type d -printf 'chmod -c 777 %p\n' \) | sudo bash
+//Faz a verificação do tamanho do arquivo
+    else if ($_UP['tamanho'] < $_FILES['imagem']['size']) {
+        echo "
+        <META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/informacao/area_info.php'>
+        <script type=\"text/javascript\">  alert(\"Arquivo muito grande.\"); </script>";
+    }
 
-
-
-
-
-
+//O arquivo passou em todas as verificações, hora de tentar move-lo para a pasta foto
+    else {
+        //Primeiro verifica se deve trocar o nome do arquivo
+//    if ($UP['renomeia'] === TRUE) {
+        //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão .jpg
+        $nome_final = "" . time() . $extensao;
+//    } else {
+//    mantem o nome original do arquivo
+//        $nome_final = $_FILES['imagem']['name'];
+//    }
+        //Verificar se é possivel mover o arquivo para a pasta escolhida
+        if (move_uploaded_file($_FILES['imagem']['tmp_name'], $_UP['pasta'] . $nome_final)) {
+            //Upload efetuado com sucesso, exibe a mensagem
+            mysqli_query($conexao, "insert into area_info (titulo,descricao,conteudo,capa,autor,dataa) values ('$titulo','$descricao','$conteudo',
+'$nome_final',$autor,'$date');");
+            echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/informacao/area_info.php'>";
+        } else {
+            //Upload não efetuado com sucesso, exibe a mensagem
+            echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/smrt/informacao/area_info.php'>
+                <script type=\"text/javascript\">
+                alert(\"Imagem não foi cadastrada com Sucesso.\");
+                </script>";
+        }
+    }
+}		

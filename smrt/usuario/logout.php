@@ -3,5 +3,5 @@
 include './autenticacao.php';
 
 deslogar();
-header("Location: ../index.php");
+header("Location: entrar.php");
 

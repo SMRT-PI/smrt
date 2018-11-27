@@ -96,7 +96,7 @@
 
                         <li class="navbar-nav dropdown ml-auto">
                             <a href="#" class="text-light nav-link m-0" data-toggle="dropdown">
-                                <img class="rounded-circle" src="/smrt/img/m1.jpg" width="40" height="40"> 
+                                <img class="rounded-circle" src="/smrt/img/perfil1.png" width="40" height="40"> 
                                 <strong><?= $_SESSION['nome'] ?> <?= $_SESSION['sobrenome'] ?> </strong>
                             </a>
                             <div class="dropdown-menu dropdown-menu-left m-0 bg-light py-1 text-center" aria-labelledby="navbarDropdown">

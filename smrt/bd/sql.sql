@@ -2,6 +2,7 @@ CREATE DATABASE smrt DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 use smrt;
 drop database smrt;
 
+
 -- USUÁRIO --
 create table usuario(
     id int primary key NOT NULL AUTO_INCREMENT,
@@ -44,6 +45,18 @@ create table bloqueio(
     dataa date
 );
 -- /BLOQUEIO --
+
+-- Area informativa --
+create table area_info(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    titulo varchar(400),
+    descricao varchar(600),
+    conteudo varchar(20000),
+    capa varchar(220),
+    autor integer references usario(id),
+    dataa datetime
+);
+
 
 -- MATÉRIA --
 create table materia(
@@ -122,16 +135,26 @@ create table denuncia_pub(
 -- 
 -- ALTER TABLE usuario ADD COLUMN ext VARCHAR(4) NULL AFTER email;
 
--- Area informativa --
-create table area_info(
-    id_info int PRIMARY KEY AUTO_INCREMENT,
-    titulo varchar(400),
-    descricao varchar(600),
-    conteudo varchar(20000),
-    imagem varchar(220),
-    autor integer references usario(id),
-    dataa datetime
-);
+
+select * from usuario;
+
+
+insert into area_info (titulo,descricao,conteudo,capa,autor,dataa) values ('Titulo Teste','Descricao teste','asdasdasd',
+'../img/pub1.jpg',1,'2018-11-27 13:30:17.000');
+
+insert into area_info (titulo,descricao,conteudo,capa,autor,dataa) values ('Titulo Teste','Descricao teste','asdasdasd',
+'../img/pub2.jpg',1,'2018-11-27 13:30:17.000');
+
+insert into area_info (titulo,descricao,conteudo,capa,autor,dataa) values ('Titulo Teste','Descricao teste','asdasdasd',
+'../img/pub3.jpg',1,'2018-11-27 13:30:17.000');
+
+insert into area_info (titulo,descricao,conteudo,capa,autor,dataa) values ('Titulo Teste','Descricao teste','asdasdasd',
+'../img/pub4.jpg',1,'2018-11-27 13:30:17.000');
+
+insert into area_info (titulo,descricao,conteudo,capa,autor,dataa) values ('Titulo Teste','Descricao teste','asdasdasd',
+'../img/pub5.jpg',1,'2018-11-27 13:30:17.000');
+
+
 -- /Area informativa --
 
 -- INSERTS --
@@ -218,7 +241,7 @@ insert into denuncia(denunciador, denunciado,dataa) values (2,16,'2018-09-28');
 insert into denuncia(denunciador, denunciado,dataa) values (3,16,'2018-09-28');
 -- INSERTS --
 
-insert into pub(legenda,imagem ,autor,dataa,lat,lng) VALUES ('PUB 1','../img/pub1.png',2,'2018-11-27 13:30:17.000',-28.472917,-48.995733);
+insert into pub(legenda,imagem ,autor,dataa,lat,lng) VALUES ('PUB 1','../img/pub1.jpg',2,'2018-11-27 13:30:17.000',-28.472917,-48.995733);
 insert into pub(legenda,imagem ,autor,dataa,lat,lng) VALUES ('PUB 2','../img/pub2.jpg',3,'2018-11-27 13:30:40.000',-28.474083,-48.999714);
 insert into pub(legenda,imagem ,autor,dataa,lat,lng) VALUES ('PUB 3','../img/pub3.jpg',4,'2018-11-27 13:31:10.000',-28.476279,-49.000498);
 insert into pub(legenda,imagem ,autor,dataa,lat,lng) VALUES ('PUB 4','../img/pub4.jpg',5,'2018-11-27 13:31:34.000',-28.485326,-49.026181);
