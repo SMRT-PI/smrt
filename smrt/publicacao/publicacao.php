@@ -19,10 +19,14 @@ require_once './form_inserir.php';
 if (mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
         $id = $linha['id_pub'];
-        $id_us = $linha['id'];
+        $id_us = 2;
+        echo $id_us;
+        
         $nome_denunciador = $_SESSION['nome'];
+        $nome_like = $_SESSION['nome'];
         $id_denunciado = $linha['autor'];
         $sobrenome_denunciador = $_SESSION['sobrenome'];
+        $sobrenome_like = $_SESSION['sobrenome'];
         $nome_denunciado = $linha['nome'];
         $sobrenome_denunciado = $linha['sobrenome'];
         ?>
@@ -99,15 +103,17 @@ if (mysqli_num_rows($resultado) > 0) {
                             $sql4 = "SELECT * FROM likes WHERE id_post = $id AND id_user = $id_us";
                             $query = mysqli_query($conexao, $sql4);
 
-                            if (mysqli_num_rows($query) == 0) {
+                            if (mysqli_num_rows($query) > 0) {
                                 while ($linha = mysqli_fetch_assoc($query)) {
                                     ?>
-                                    <div class = "col"><button class = "btn bg-transparent like" type = "button" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Curtir </button></div><span id = "likes_<?php $linha['id_pub']; ?>">(<?php $linha['likes']; ?>)</span>
-                                    <?php
-                                }
-                            } else {
-                                ?>
-                                <div class = "col"><button class = "btn bg-transparent like" type = "button" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Descurtir </button></div><span id = "likes_<?php $linha['id_pub']; ?>">(<?php $linha['likes']; ?>)</span>
+                            <div class = "col"><a class="btn bg-transparent like" href="../Like/denunciar.php?idus=<?= $id_us ?>
+                                                          &id_pub=<?= $id ?>&user_like=<?= $nome_like ?>&sobrenome_like=<?= $sobrenome_like ?>" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Curtir </a></div><span id = "likes_<?= $linha['id_pub']; ?>">(<?= $linha['likes']; ?>)</span>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+                                <div class = "col"><a class = "btn bg-transparent like" href="../Like/denunciar.php?idus=<?= $id_us ?>
+                                                          &id_pub=<?= $id ?>&user_like=<?= $nome_like ?>&sobrenome_like=<?= $sobrenome_like ?>" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Descurtir </a></div><span id = "likes_<?= $linha['id_pub']; ?>"><?= $linha['likes']; ?></span>
                             <?php } ?>
 
                             <div class = "col"><button class = "btn bg-transparent" type = "button" name = "botao"> Mapa </button></div>
