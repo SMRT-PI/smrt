@@ -20,8 +20,8 @@ if (mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
         $id = $linha['id_pub'];
         $id_us = $linha['id'];
-        echo $id_us;
-        
+        $id_like = $linha['id_like'];        
+
         $nome_denunciador = $_SESSION['nome'];
         $nome_like = $_SESSION['nome'];
         $id_denunciado = $linha['autor'];
@@ -30,6 +30,8 @@ if (mysqli_num_rows($resultado) > 0) {
         $sobrenome_like = $_SESSION['sobrenome'];
         $nome_denunciado = $linha['nome'];
         $sobrenome_denunciado = $linha['sobrenome'];
+        $like = "1";
+        $unlike = "2";
         ?>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -101,21 +103,24 @@ if (mysqli_num_rows($resultado) > 0) {
                     <div class="card-footer">
                         <div class="row text-center" id="headingOne">
                             <?php
-                            $sql4 = "SELECT * FROM likes WHERE id_post = $id AND id_user = $id_us";
-                            $query = mysqli_query($conexao, $sql4);
-
-                            if (mysqli_num_rows($query) > 0) {
-                                while ($linha = mysqli_fetch_assoc($query)) {
-                                    ?>
-                            <div class = "col"><a class="btn bg-transparent like" href="../Like/denunciar.php?id_us=<?= $id_us ?>
-                                                          &id_pub=<?= $id ?>&user_like=<?= $nome_like ?>&sobrenome_like=<?= $sobrenome_like ?>" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Curtir </a></div><span id = "likes_<?= $linha['id_pub']; ?>">(<?= $linha['likes']; ?>)</span>
-                                        <?php
-                                    }
-                                } else {
-                                    ?>
-                                <div class = "col"><a class = "btn bg-transparent like" href="../Like/denunciar.php?id_us=<?= $id_us ?>
-                                                          &id_pub=<?= $id ?>&user_like=<?= $nome_like ?>&sobrenome_like=<?= $sobrenome_like ?>" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Descurtir </a></div><span id = "likes_<?= $linha['id_pub']; ?>"><?= $linha['likes']; ?></span>
-                            <?php } ?>
+                            $sql_teste = "select * from likes";
+                            $teste = mysqli_query($conexao, $sql_teste);
+                            $linha_testei = mysqli_fetch_array($teste);
+                            
+                            $idlike = $linha_testei['id_like'];
+                            echo $idlike;
+//                            $sql4 = "SELECT * FROM likes WHERE id_post = $id AND id_user = $id_us";
+//                            $query = mysqli_query($conexao, $sql4);
+//
+                            
+                                    
+                            ?>
+                            <div class = "col"><a class="btn bg-transparent like" href="../Like/like.php?id_us=<?= $id_us ?>
+                                                  &id_pub=<?= $id ?>&user_like=<?= $nome_like ?>&sobrenome_like=<?= $sobrenome_like ?>" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Curtir </a></div>
+                                <?php       
+                                ?>
+                            <div class = "col"><a class = "btn bg-transparent like" href="../Like/unlike.php?id_like=<?= $idlike ?>" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Descurtir </a></div>
+                            <?php// }  ?>
 
                             <div class = "col"><button class = "btn bg-transparent" type = "button" name = "botao"> Mapa </button></div>
                             <div class = "col"><button class = "btn bg-transparent" data-toggle = "collapse" data-target = "#collapseOne" aria-expanded = "true" aria-controls = "collapseOne"> Comentar </button></div>

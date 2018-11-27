@@ -68,8 +68,10 @@ create table pub(
     dataa datetime,
     lat float,
     lng float,
-    likes int
+    likes integer references likes(id_like)
 );
+drop table pub 
+select * from pub
 -- /PUBLICACAO --
 
 -- COMENTARIO --
@@ -90,7 +92,7 @@ create table likes(
     nome varchar(220),
     sobrenome varchar(220)
 );
-
+select * from likes
 
 -- LIKE --
 
