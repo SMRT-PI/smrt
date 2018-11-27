@@ -4,7 +4,7 @@ drop database smrt;
 
 -- USUÁRIO --
 create table usuario(
-    id int PRIMARY KEY AUTO_INCREMENT,
+    id int primary key NOT NULL AUTO_INCREMENT,
     nome varchar(100),
     sobrenome varchar(100),
     senha varchar(100),
@@ -84,9 +84,9 @@ create table comentario(
 create table likes(
     id_like int PRIMARY KEY AUTO_INCREMENT,
     id_user int references usuario(id),
-    id_post int references pub(id),
-    dataa date
+    id_post int references pub(id)
 );
+
 -- LIKE --
 
 -- DENUNCIAR PUBLICACAO --

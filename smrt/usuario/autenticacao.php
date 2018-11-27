@@ -8,13 +8,15 @@ date_default_timezone_set("America/Sao_Paulo");
 
 $btnclick = 0;
 
-function logar($nome, $sobrenome, $email, $adm) {
+function logar($nome, $sobrenome, $email, $adm, $id) {
     $_SESSION['nome'] = $nome;
     $_SESSION['sobrenome'] = $sobrenome;
     $_SESSION['email'] = $email;
     $_SESSION['adm'] = $adm;
     $_SESSION['id'] = $id;
     iniciarTempoSessao();
+
+    echo 'rte';
 }
 
 function deslogar() {
