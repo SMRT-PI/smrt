@@ -1,6 +1,6 @@
 <?php
 require_once 'cabecalho.php';
-require_once 'usuario/autenticacao.php';
+//require_once 'usuario/autenticacao.php';
 require_once 'bd/conectar.php';
 require_once './alerta/alerta.php';
 ?>

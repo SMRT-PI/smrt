@@ -1,8 +1,8 @@
 CREATE DATABASE smrt DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 use smrt;
 drop database smrt;
-
-select * from pub
+drop table usuario;
+select * from usuario
 
 -- USUÁRIO --
 create table usuario(
@@ -12,14 +12,15 @@ create table usuario(
     senha varchar(100),
     adm boolean default FALSE,
     email varchar(100) unique,
+    sobre varchar(220),
+    experiencias varchar(220),
+    hobbies varchar(220),
+    endereco varchar(220),
+    cidade varchar(220),
+    estado varchar(220),
     foto varchar(220)
 );
---     sobre varchar(220),
---     experiencias varchar(220),
---     hobbies varchar(220),
---     endereco varchar(220),
---     cidade varchar(220),
---     estado varchar(220),
+--     
 -- /USUÁRIO --
 select count(id) from usuario where email='admin@gmail.com' and email!='admin@gmail.com';
 
@@ -143,8 +144,9 @@ create table area_info(
 
 -- INSERTS --
 
--- insert into usuario (nome, sobrenome ,email, senha, adm, sobre, experiencias, hobbies, endereco, cidade, estado, foto) values  ('admin', 'admin', 'admin@admin',md5('123'), TRUE, 'shuashuha', 'hsauhsau', 'hsuhuashusha', 'hsahsuahsu', 'shuahsuahsa', 'hsuahsuahs','foto.jpg');
-
+insert into usuario (nome, sobrenome ,email, senha, adm, sobre, experiencias, hobbies, endereco, cidade, estado, foto) values  ('admin', 'admin', 'admin@gmail.com',md5('12345678'), TRUE, 'shuashuha', 'hsauhsau', 'hsuhuashusha', 'hsahsuahsu', 'shuahsuahsa', 'hsuahsuahs','foto.jpg');
+select * from usuario;
+drop table usuario;
 insert into usuario (nome, sobrenome ,email, senha, adm) values  ('Admin', 'Admin', 'admin@gmail.com',md5('12345678'), TRUE);
 
 insert into usuario (nome, sobrenome ,email, senha) values  ('Alison', 'Araujo', 'alison@gmail.com',md5('12345678'));
