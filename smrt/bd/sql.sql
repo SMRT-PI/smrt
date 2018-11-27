@@ -19,6 +19,7 @@ create table usuario(
 --     cidade varchar(220),
 --     estado varchar(220),
 -- /USUÁRIO --
+select count(id) from usuario where email='admin@gmail.com' and email!='admin@gmail.com';
 
 -- ADMNISTRADOR --
 create table administrador(
