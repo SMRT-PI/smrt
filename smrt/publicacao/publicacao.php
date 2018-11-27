@@ -19,12 +19,13 @@ require_once './form_inserir.php';
 if (mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
         $id = $linha['id_pub'];
-        $id_us = 2;
+        $id_us = $linha['id'];
         echo $id_us;
         
         $nome_denunciador = $_SESSION['nome'];
         $nome_like = $_SESSION['nome'];
         $id_denunciado = $linha['autor'];
+        $id_autor_like = $linha['autor'];
         $sobrenome_denunciador = $_SESSION['sobrenome'];
         $sobrenome_like = $_SESSION['sobrenome'];
         $nome_denunciado = $linha['nome'];
@@ -106,13 +107,13 @@ if (mysqli_num_rows($resultado) > 0) {
                             if (mysqli_num_rows($query) > 0) {
                                 while ($linha = mysqli_fetch_assoc($query)) {
                                     ?>
-                            <div class = "col"><a class="btn bg-transparent like" href="../Like/denunciar.php?idus=<?= $id_us ?>
+                            <div class = "col"><a class="btn bg-transparent like" href="../Like/denunciar.php?id_us=<?= $id_us ?>
                                                           &id_pub=<?= $id ?>&user_like=<?= $nome_like ?>&sobrenome_like=<?= $sobrenome_like ?>" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Curtir </a></div><span id = "likes_<?= $linha['id_pub']; ?>">(<?= $linha['likes']; ?>)</span>
                                         <?php
                                     }
                                 } else {
                                     ?>
-                                <div class = "col"><a class = "btn bg-transparent like" href="../Like/denunciar.php?idus=<?= $id_us ?>
+                                <div class = "col"><a class = "btn bg-transparent like" href="../Like/denunciar.php?id_us=<?= $id_us ?>
                                                           &id_pub=<?= $id ?>&user_like=<?= $nome_like ?>&sobrenome_like=<?= $sobrenome_like ?>" id = "<?php echo $linha['id_pub']; ?>"><i class = "fa fa-thumbs-o-up"></i> Descurtir </a></div><span id = "likes_<?= $linha['id_pub']; ?>"><?= $linha['likes']; ?></span>
                             <?php } ?>
 

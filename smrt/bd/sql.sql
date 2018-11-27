@@ -2,6 +2,8 @@ CREATE DATABASE smrt DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 use smrt;
 drop database smrt;
 
+select * from pub
+
 -- USUÁRIO --
 create table usuario(
     id int primary key NOT NULL AUTO_INCREMENT,
@@ -84,8 +86,11 @@ create table comentario(
 create table likes(
     id_like int PRIMARY KEY AUTO_INCREMENT,
     id_user int references usuario(id),
-    id_post int references pub(id)
+    id_post int references pub(id),
+    nome varchar(220),
+    sobrenome varchar(220)
 );
+
 
 -- LIKE --
 
