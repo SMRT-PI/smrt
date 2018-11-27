@@ -1,8 +1,6 @@
 CREATE DATABASE smrt DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 use smrt;
 drop database smrt;
-drop table usuario;
-select * from usuario
 
 -- USUÁRIO --
 create table usuario(
@@ -19,10 +17,8 @@ create table usuario(
     cidade varchar(220),
     estado varchar(220),
     foto varchar(220)
-);
---     
+);  
 -- /USUÁRIO --
-select count(id) from usuario where email='admin@gmail.com' and email!='admin@gmail.com';
 
 -- ADMNISTRADOR --
 create table administrador(
@@ -71,8 +67,6 @@ create table pub(
     lng float,
     likes integer references likes(id_like)
 );
-drop table pub 
-select * from pub
 -- /PUBLICACAO --
 
 -- COMENTARIO --
@@ -93,8 +87,6 @@ create table likes(
     nome varchar(220),
     sobrenome varchar(220)
 );
-select * from likes
-
 -- LIKE --
 
 -- DENUNCIAR PUBLICACAO --
@@ -145,8 +137,6 @@ create table area_info(
 -- INSERTS --
 
 insert into usuario (nome, sobrenome ,email, senha, adm, sobre, experiencias, hobbies, endereco, cidade, estado, foto) values  ('admin', 'admin', 'admin@gmail.com',md5('12345678'), TRUE, 'shuashuha', 'hsauhsau', 'hsuhuashusha', 'hsahsuahsu', 'shuahsuahsa', 'hsuahsuahs','foto.jpg');
-select * from usuario;
-drop table usuario;
 insert into usuario (nome, sobrenome ,email, senha, adm) values  ('Admin', 'Admin', 'admin@gmail.com',md5('12345678'), TRUE);
 
 insert into usuario (nome, sobrenome ,email, senha) values  ('Alison', 'Araujo', 'alison@gmail.com',md5('12345678'));
@@ -227,3 +217,9 @@ insert into denuncia(denunciador, denunciado,dataa) values (1,16,'2018-09-28');
 insert into denuncia(denunciador, denunciado,dataa) values (2,16,'2018-09-28');
 insert into denuncia(denunciador, denunciado,dataa) values (3,16,'2018-09-28');
 -- INSERTS --
+
+insert into pub(legenda,imagem ,autor,dataa,lat,lng) VALUES ('PUB 1','../img/pub1.png',2,'2018-11-27 13:30:17.000',-28.472917,-48.995733);
+insert into pub(legenda,imagem ,autor,dataa,lat,lng) VALUES ('PUB 2','../img/pub2.jpg',3,'2018-11-27 13:30:40.000',-28.474083,-48.999714);
+insert into pub(legenda,imagem ,autor,dataa,lat,lng) VALUES ('PUB 3','../img/pub3.jpg',4,'2018-11-27 13:31:10.000',-28.476279,-49.000498);
+insert into pub(legenda,imagem ,autor,dataa,lat,lng) VALUES ('PUB 4','../img/pub4.jpg',5,'2018-11-27 13:31:34.000',-28.485326,-49.026181);
+insert into pub(legenda,imagem ,autor,dataa,lat,lng) VALUES ('PUB 5','../img/pub5.jpg',6,'2018-11-27 13:31:53.000',-28.483893,-49.016466);

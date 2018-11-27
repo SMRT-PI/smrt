@@ -5,8 +5,9 @@ require_once '../bd/conectar.php';
 
 $id = $_REQUEST['denunciado'];
 $data = (idate("Y") . "-" . idate("m") . "-" . idate("d"));
+$email = $_SESSION['email'];
 
-$sql_adm = "select * from usuario where email = $_SESSION[email]";
+$sql_adm = "select * from usuario where email = '$email'";
 $retorno_adm = mysqli_query($conexao, $sql_adm); //PEGA O USUÁRIO QUE ESTÁ REALIZANDO A OPERAÇÃO (ADMINISTRADOR);
 $adm_array = mysqli_fetch_array($retorno_adm);
 $adm = $adm_array['id'];
@@ -20,7 +21,7 @@ $bloqueado = mysqli_fetch_array($sql_bloqueado);
 if ($bloqueado['bloqueado'] == $id) {
     $desbloquear = mysqli_query($conexao, "delete from bloqueio where bloqueado = '$id'");
 } else {
-    $bloquear = mysqli_query($conexao, "insert into bloqueio (bloqueador, bloqueado, dataa) values ('$adm','$id','$data')");
+    $bloquear = mysqli_query($conexao, "insert into bloqueio (bloqueador, bloqueado, dataa) values ('$adm_array[id]','$id','$data')");
 }
 
 

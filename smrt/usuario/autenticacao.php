@@ -15,8 +15,6 @@ function logar($nome, $sobrenome, $email, $adm) {
     $_SESSION['adm'] = $adm;
     $_SESSION['id'] = $id;
     iniciarTempoSessao();
-
-    echo 'rte';
 }
 
 function deslogar() {
